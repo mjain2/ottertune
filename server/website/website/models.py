@@ -83,6 +83,12 @@ class KnobCatalog(BaseModel):
     tunable = models.BooleanField(verbose_name="tunable")
     resource = models.IntegerField(choices=KnobResourceType.choices(), default=4)
 
+class SessionKnob(BaseModel):
+    session = models.ForeignKey(Session)
+    knob = models.ForeignKey(KnobCatalog)
+    minval = models.CharField(max_length=32, null=True, verbose_name="minimum value")
+    maxval = models.CharField(max_length=32, null=True, verbose_name="maximum value")
+    tunable = models.BooleanField(verbose_name="tunable")
 
 MetricMeta = namedtuple('MetricMeta',
                         ['name', 'pprint', 'unit', 'short_unit', 'scale', 'improvement'])
@@ -176,7 +182,9 @@ class Hardware(BaseModel):
     additional_specs = models.TextField(null=True)
 
     def __unicode__(self):
-        return HardwareType.TYPE_NAMES[self.type]
+        if self.type in HardwareType.TYPE_NAMES.keys():
+            return HardwareType.TYPE_NAMES[self.type]
+        return 'CPU:{}, RAM:{}, Storage:{}'.format(self.cpu, self.memory, self.storage)
 
 
 class Session(BaseModel):

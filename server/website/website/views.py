@@ -281,6 +281,7 @@ def create_or_edit_session(request, project_id, session_id=''):
             session.save()
         else:
             # Update an existing session with the form contents
+            LOG.info('updating session %s with %s',session_id,str(request.POST))
             session = Session.objects.get(pk=session_id)
             form = SessionForm(request.POST, instance=session)
             if not form.is_valid():
@@ -289,6 +290,7 @@ def create_or_edit_session(request, project_id, session_id=''):
             if form.cleaned_data['gen_upload_code'] is True:
                 session.upload_code = MediaUtil.upload_code_generator()
             session.last_update = now()
+            form.save()
             session.save()
         return redirect(reverse('session', kwargs={'project_id': project_id,
                                                    'session_id': session.pk}))
@@ -304,8 +306,8 @@ def create_or_edit_session(request, project_id, session_id=''):
                 initial={
                     'dbms': DBMSCatalog.objects.get(
                         type=DBMSType.POSTGRES, version='9.6'),
-                    'hardware': Hardware.objects.get(
-                        type=HardwareType.EC2_M3XLARGE),
+                   # 'hardware': Hardware.objects.get(
+                   #     type=HardwareType.EC2_M3XLARGE),
                     'target_objective': 'throughput_txn_per_sec',
                 })
         context = {
