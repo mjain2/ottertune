@@ -83,13 +83,6 @@ class KnobCatalog(BaseModel):
     tunable = models.BooleanField(verbose_name="tunable")
     resource = models.IntegerField(choices=KnobResourceType.choices(), default=4)
 
-class SessionKnob(BaseModel):
-    session = models.ForeignKey(Session)
-    knob = models.ForeignKey(KnobCatalog)
-    minval = models.CharField(max_length=32, null=True, verbose_name="minimum value")
-    maxval = models.CharField(max_length=32, null=True, verbose_name="maximum value")
-    tunable = models.BooleanField(verbose_name="tunable")
-
 MetricMeta = namedtuple('MetricMeta',
                         ['name', 'pprint', 'unit', 'short_unit', 'scale', 'improvement'])
 
@@ -227,6 +220,12 @@ class Session(BaseModel):
             r.delete()
         super(Session, self).delete(using=DEFAULT_DB_ALIAS, keep_parents=False)
 
+class SessionKnob(BaseModel):
+    session = models.ForeignKey(Session)
+    knob = models.ForeignKey(KnobCatalog)
+    minval = models.CharField(max_length=32, null=True, verbose_name="minimum value")
+    maxval = models.CharField(max_length=32, null=True, verbose_name="maximum value")
+    tunable = models.BooleanField(verbose_name="tunable")
 
 class DataModel(BaseModel):
     session = models.ForeignKey(Session)

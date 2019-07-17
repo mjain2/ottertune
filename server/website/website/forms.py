@@ -101,3 +101,8 @@ class SessionForm(forms.ModelForm):
         labels = {
             'dbms': 'DBMS',
         }
+
+class EditKnobsForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        
+        super(EditKnobsForm, self).__init__(*args, **kwargs)

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+<form action="{% url 'edit_session_knobs' project.pk session.pk %}" method="POST">
+{% csrf_token %}
+    <table class="table table-striped table-bordered table-hover table-nonfluid">
+	<tr>
+            <td>Name</td>
+	    <td>Min</td>
+            <td>Max</td>
+            <td>Tunable</td>
+	</tr>
+        {% for knob in form %}	
+        <tr>
+            <td>{{ knob.name }}</td>
+            <td>{{ knob.min }}</td>
+            <td>{{ knob.max }}</td>
+            <td>{{ knob.tunable }}</td>
+        </tr>
+	{% endfor %}
+    </table>
+    <button class="btn btn-default" type="submit" name="id">Submit</button>
+    <a class="btn btn-default" href="{% url 'session' project.pk session.pk %}">Cancel</a>
+</form>
+</div>
+
+<script language="javascript">
+function show_content() {
+	console.log("In show_content()")
+	//$("#target_obj_row").toggle()
+}
+
+$(function() {
+	if ("{{ session }}" != "None") {
+	    $("#dbms_row").hide();
+	    $("#hardware_row").hide();
+	} else {
+		$("#upload_code_row").hide();
+	}
+	
+	/*if (document.getElementById('id_tuning_session').checked) {
+		$("#target_obj_row").show()
+	} else {
+		$("#target_obj_row").hide()
+	}*/
+});
+</script>
+
+{% endblock body %}

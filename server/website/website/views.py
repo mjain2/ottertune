@@ -317,6 +317,20 @@ def create_or_edit_session(request, project_id, session_id=''):
         }
         return render(request, 'edit_session.html', context)
 
+@login_required(login_url=reverse_lazy('login'))
+def edit_session_knobs(request, project_id, session_id):
+    project = get_object_or_404(Project, pk=project_id, user=request.user)
+    session = get_object_or_404(Session, pk=session_id, user=request.user)
+    if request.method == 'POST':
+
+        return redirect(reverse('session', kwargs={'project_id': project_id,
+                                                   'session_id': session.pk}))
+    else:
+        context = {
+            'project': project,
+            'session': session
+        }
+        return render(request, 'edit_session_knobs.html', context)
 
 @login_required(login_url=reverse_lazy('login'))
 def delete_session(request, project_id):

@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^projects/(?P<project_id>[0-9]+)/sessions/(?P<session_id>[0-9]+)/$', website_views.session_view, name='session'),
     url(r'^projects/(?P<project_id>[0-9]+)/sessions/new/$', website_views.create_or_edit_session, name='new_session'),
     url(r'^projects/(?P<project_id>[0-9]+)/sessions/(?P<session_id>[0-9]+)/edit/$', website_views.create_or_edit_session, name='edit_session'),
+    url(r'^projects/(?P<project_id>[0-9]+)/sessions/(?P<session_id>[0-9]+)/editKnobs/$', website_views.edit_session_knobs, name='edit_knobs'),
     url(r'^projects/(?P<project_id>[0-9]+)/sessions/delete/$', website_views.delete_session, name='delete_session'),
 
     # URLs for result views

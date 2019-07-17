@@ -22,15 +22,15 @@
             <td>{{ form.dbms }}</td>
         </tr>
 
-        <tr>
+        <tr id="cpu_row">
             <td>{{ form.cpu.label_tag }}</td>
             <td>{{ form.cpu }}</td>
         </tr>
-        <tr>
+        <tr id="memory_row">
             <td>{{ form.memory.label_tag }}</td>
             <td>{{ form.memory }}</td>
         </tr>
-        <tr>
+        <tr id="storage_row">
             <td>{{ form.storage.label_tag }}</td>
             <td>{{ form.storage }}</td>
         </tr>
@@ -66,7 +66,9 @@ function show_content() {
 $(function() {
 	if ("{{ session }}" != "None") {
 	    $("#dbms_row").hide();
-	    $("#hardware_row").hide();
+	    $("#cpu_row").hide();
+	    $("#memory_row").hide();
+	    $("#storage_row").hide();
 	} else {
 		$("#upload_code_row").hide();
 	}
