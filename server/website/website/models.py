@@ -226,6 +226,8 @@ class SessionKnob(BaseModel):
     minval = models.CharField(max_length=32, null=True, verbose_name="minimum value")
     maxval = models.CharField(max_length=32, null=True, verbose_name="maximum value")
     tunable = models.BooleanField(verbose_name="tunable")
+    def __unicode__(self):
+        return self.session.name+" "+self.knob.name
 
 class DataModel(BaseModel):
     session = models.ForeignKey(Session)

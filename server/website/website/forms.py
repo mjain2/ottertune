@@ -12,7 +12,7 @@ Created on Jul 25, 2017
 from django import forms
 from django.db.models import Max
 
-from .models import Session, Project, Hardware
+from .models import Session, Project, Hardware, SessionKnob
 
 import logging
 
@@ -102,7 +102,16 @@ class SessionForm(forms.ModelForm):
             'dbms': 'DBMS',
         }
 
-class EditKnobsForm(forms.Form):
+class SessionKnobForm(forms.ModelForm):
+    name = forms.CharField(max_length=128)
+
     def __init__(self, *args, **kwargs):
-        
-        super(EditKnobsForm, self).__init__(*args, **kwargs)
+        super(SessionKnobForm, self).__init__(*args, **kwargs)
+        self.fields['session'].required = False
+        self.fields['knob'].required = False
+        self.fields['name'].widget.attrs['readonly'] = True
+
+    class Meta:  # pylint: disable=old-style-class,no-init
+        model = SessionKnob
+        fields = ['session', 'knob', 'minval', 'maxval', 'tunable']
+
