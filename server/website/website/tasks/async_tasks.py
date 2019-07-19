@@ -16,7 +16,8 @@ from analysis.gp import GPRNP
 from analysis.gp_tf import GPRGD
 from analysis.preprocessing import Bin, DummyEncoder
 from analysis.constraints import ParamConstraintHelper
-from website.models import PipelineData, PipelineRun, Result, Workload, KnobCatalog, MetricCatalog
+from website.models import (PipelineData, PipelineRun, Result, Workload, KnobCatalog,
+                            MetricCatalog, SessionKnob)
 from website.parser import Parser
 from website.types import PipelineTaskType
 from website.utils import DataUtil, JSONUtil
@@ -99,8 +100,8 @@ def get_knobs_for_session(session):
     knobs = KnobCatalog.objects.filter(dbms=session.dbms)
     knob_dicts= list(knobs.values())
     for i in range(len(knob_dicts)):
-        if SessionKnobs.objects.filter(session=session, knob=knobs[i]).exists():
-            new_knob = SessionKnobs.objects.filter(session=session, knob=knobs[i])[0]
+        if SessionKnob.objects.filter(session=session, knob=knobs[i]).exists():
+            new_knob = SessionKnob.objects.filter(session=session, knob=knobs[i])[0]
             knob_dicts[i]["minval"]=new_knob.minval
             knob_dicts[i]["maxval"]=new_knob.maxval
             knob_dicts[i]["tunable"]=new_knob.tunable
@@ -120,13 +121,13 @@ def aggregate_target_results(result_id):
         result = Result.objects.filter(pk=result_id)
         knobs = get_knobs_for_session(newest_result.session)
         
-        knobs_ = KnobCatalog.objects.filter(dbms=result[0].dbms, tunable=True)
-        knobs_catalog = {k.name: k for k in knobs_}
-        knobs = {k: v for k, v in
-                 list(knobs_catalog.items())}
+        #knobs_ = KnobCatalog.objects.filter(dbms=result[0].dbms, tunable=True)
+        #knobs_catalog = {k.name: k for k in knobs_}
+        #knobs = {k: v for k, v in
+        #         list(knobs_catalog.items())}
         
         # generate a config randomly
-        random_knob_result = gen_random_data(knobs, newest_result.workload.hardware.memory)
+        random_knob_result = gen_random_data(knobs)#, newest_result.workload.hardware.memory)
         agg_data = DataUtil.aggregate_data(result)
         agg_data['newest_result_id'] = result_id
         agg_data['bad'] = True
@@ -147,45 +148,49 @@ def aggregate_target_results(result_id):
     return agg_data
 
 
-def gen_random_data(knobs, mem_max):
+def gen_random_data(knobs):#, mem_max):
     random_knob_result = {}
-    mem_max = int(mem_max * 1073741824)
-    used_mem = 0
-    memoryknobs = dict()
-    for name, metadata in list(knobs.items()):
-        if metadata.vartype == VarType.BOOL:
+    #mem_max = int(mem_max * 1073741824)
+    #used_mem = 0
+    #memoryknobs = dict()
+    for knob in knobs):
+        name = knob["name"]
+        if knob["vartype"] == VarType.BOOL:
             flag = random.randint(0, 1)
             if flag == 0:
                 random_knob_result[name] = False
             else:
                 random_knob_result[name] = True
-        elif metadata.vartype == VarType.ENUM:
-            enumvals = metadata.enumvals.split(',')
+        elif knob["vartype"] == VarType.ENUM:
+            enumvals = knob["enumvals"].split(',')
             enumvals_len = len(enumvals)
             rand_idx = random.randint(0, enumvals_len - 1)
             random_knob_result[name] = rand_idx
-        elif metadata.vartype == VarType.INTEGER:
-            random_knob_result[name] = random.randint(int(metadata.minval), int(metadata.maxval))
-            if metadata.resource == 1:
-                used_mem += random_knob_result[name]
-                memoryknobs[name] = metadata
-        elif metadata.vartype == VarType.REAL:
+        elif knob["vartype"] == VarType.INTEGER:
+            random_knob_result[name] = random.randint(int(knob["minval"]), int(knob["maxval"]))
+            #if knob["resource"] == 1:
+            #    used_mem += random_knob_result[name]
+            #    memoryknobs[name] = metadata
+        elif knob["vartype"] == VarType.REAL:
             random_knob_result[name] = random.uniform(
-                float(metadata.minval), float(metadata.maxval))
-        elif metadata.vartype == VarType.STRING:
+                float(knob["minval"]), float(knob["maxval"]))
+        elif knob["vartype"] == VarType.STRING:
             random_knob_result[name] = "None"
-        elif metadata.vartype == VarType.TIMESTAMP:
+        elif knob["vartype"] == VarType.TIMESTAMP:
             random_knob_result[name] = "None"
         else:
             raise Exception(
                 'Unknown variable type: {}'.format(metadata.vartype))
 
+    '''
     while used_mem > mem_max:  # Ensures that the memory configuration is valid for postgres
         used_mem = 0
         for name, metadata in list(memoryknobs.items()):
             n = random_knob_result[name] = random.randint(int(metadata.minval),
                                                           min(mem_max, int(metadata.maxval)))
             used_mem += n
+    '''
+
     return random_knob_result
 
 @task(base=ConfigurationRecommendation, name='configuration_recommendation')
