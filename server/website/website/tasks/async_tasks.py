@@ -153,7 +153,7 @@ def gen_random_data(knobs):#, mem_max):
     #mem_max = int(mem_max * 1073741824)
     #used_mem = 0
     #memoryknobs = dict()
-    for knob in knobs):
+    for knob in knobs:
         name = knob["name"]
         if knob["vartype"] == VarType.BOOL:
             flag = random.randint(0, 1)
