@@ -106,7 +106,6 @@ def get_knobs_for_session(session):
             knob_dicts[i]["maxval"]=new_knob.maxval
             knob_dicts[i]["tunable"]=new_knob.tunable
     knob_dicts = list(filter(lambda knob: knob["tunable"], knob_dicts))
-    LOG.info("knob_dicts:"+str(knob_dicts))
     return knob_dicts
 
 
@@ -195,8 +194,6 @@ def gen_random_data(knobs):#, mem_max):
 
 @task(base=ConfigurationRecommendation, name='configuration_recommendation')
 def configuration_recommendation(target_data):
-    f = open("/home/arifiorino/out.txt", "w")
-
     LOG.info('configuration_recommendation called')
     latest_pipeline_run = PipelineRun.objects.get_latest()
 
@@ -215,7 +212,6 @@ def configuration_recommendation(target_data):
         pipeline_run=latest_pipeline_run,
         workload=mapped_workload,
         task_type=PipelineTaskType.KNOB_DATA)
-    f.write('workload_knob_data: '+str(workload_knob_data.data))
     workload_knob_data = JSONUtil.loads(workload_knob_data.data)
     workload_metric_data = PipelineData.objects.get(
         pipeline_run=latest_pipeline_run,
@@ -247,7 +243,6 @@ def configuration_recommendation(target_data):
         pipeline_run=latest_pipeline_run,
         workload=mapped_workload,
         task_type=PipelineTaskType.RANKED_KNOBS)
-    f.write('\n\nranked_knobs: '+str(ranked_knobs.data))
     ranked_knobs = JSONUtil.loads(ranked_knobs.data)[:IMPORTANT_KNOB_NUMBER]
     ranked_knob_idxs = [i for i, cl in enumerate(X_columnlabels) if cl in ranked_knobs]
     X_workload = X_workload[:, ranked_knob_idxs]
@@ -295,7 +290,6 @@ def configuration_recommendation(target_data):
 
     # Combine target & workload Xs for preprocessing
     X_matrix = np.vstack([X_target, X_workload])
-    f.write("\n\nX_matrix:"+str(X_matrix))
 
     # Dummy encode categorial variables
     categorical_info = DataUtil.dummy_encoder_helper(X_columnlabels,
@@ -305,7 +299,6 @@ def configuration_recommendation(target_data):
                                  categorical_info['cat_columnlabels'],
                                  categorical_info['noncat_columnlabels'])
     X_matrix = dummy_encoder.fit_transform(X_matrix)
-    f.write("\n\ncategorical_info:"+str(categorical_info))
 
     # below two variables are needed for correctly determing max/min on dummies
     binary_index_set = set(categorical_info['binary_vars'])
@@ -387,9 +380,6 @@ def configuration_recommendation(target_data):
         X_min[i] = col_min
         X_max[i] = col_max
         X_samples[:, i] = np.random.rand(num_samples) * (col_max - col_min) + col_min
-    f.write("\n\nX_min:"+str(X_min))
-    f.write("\n\nX_max:"+str(X_max))
-
 
     # Maximize the throughput, moreisbetter
     # Use gradient descent to minimize -throughput
@@ -452,7 +442,6 @@ def configuration_recommendation(target_data):
     conf_map_res['status'] = 'good'
     conf_map_res['recommendation'] = conf_map
     conf_map_res['info'] = 'INFO: training data size is {}'.format(X_scaled.shape[0])
-    f.close()
     return conf_map_res
 
 
