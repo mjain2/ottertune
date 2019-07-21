@@ -360,6 +360,7 @@ def configuration_recommendation(target_data):
         X_default[i] = k.default
 
     X_default_scaled = X_scaler.transform(X_default.reshape(1, X_default.shape[0]))[0]
+    session_knobs = get_knobs_for_session(newest_result.session)
 
     # Determine min/max for knob values
     for i in range(X_scaled.shape[1]):
@@ -369,9 +370,15 @@ def configuration_recommendation(target_data):
         else:
             col_min = X_scaled[:, i].min()
             col_max = X_scaled[:, i].max()
+            for knob in session_knobs:
+                if X_columnlabels[i] == knob.name:
+                    col_min = knob.minval
+                    col_max = knob.maxval
+'''
             if X_columnlabels[i] in knobs_mem_catalog:
                 X_mem[0][i] = mem_max * 1024 * 1024 * 1024  # mem_max GB
                 col_max = min(col_max, X_scaler.transform(X_mem)[0][i])
+'''
 
             # Set min value to the default value
             # FIXME: support multiple methods can be selected by users
