@@ -240,8 +240,8 @@ def session_view(request, project_id, session_id):
     metric_meta = MetricCatalog.objects.get_metric_meta(session.dbms, session.target_objective)
 
     knobs = SessionKnob.objects.get_knobs_for_session(session)
-    knobs = knobs.filter(lambda knob:knob.tunable)
-    knob_names = knobs.map(lambda knob:knob["name"])
+    knobs = list(filter(lambda knob:knob["tunable"], knobs))
+    knob_names = list(map(lambda knob:knob["name"], knobs))
 
     form_labels = Session.get_labels()
     form_labels['title'] = "Session Info"
@@ -909,12 +909,14 @@ def get_timeline_data(request):
             data_package['timelines'].append(data)
 
     knobs = SessionKnob.objects.get_knobs_for_session(session)
-    knobs = knobs.filter(lambda knob:knob.tunable)
-    knob_names = knobs.map(lambda knob:knob["name"])
+    knobs = list(filter(lambda knob:knob["tunable"], knobs))
+    knob_names = list(map(lambda knob:knob["name"], knobs))
     knobs = request.GET.get('knb', ','.join(knob_names)).split(',')
+    knobs = list(filter(lambda knob:knob != "none", knobs))
+    LOG.info(str(knobs));
     for knob in knobs:
         data = {
-            'units': KnobCatalog.objects.filter(name=knob)[0].unit,
+            'units': KnobUnitType.TYPE_NAMES[KnobCatalog.objects.filter(name=knob)[0].unit],
             'data': [],
             'knob': knob,
         }
@@ -928,7 +930,6 @@ def get_timeline_data(request):
                 str(res.pk)
             ])
         data_package['knobtimelines'].append(data)
-
     return HttpResponse(JSONUtil.dumps(data_package), content_type='application/json')
 
 

@@ -63,7 +63,7 @@ function renderPlot(data, div_id) {
 }
 
 function renderKnobPlot(data, div_id) {
-    plotdata=data.data;
+    plotdata=[data.data];
 
     $("#" + div_id).html('<div id="' + div_id + '_plot"></div><div id="plotdescription"></div>');
 
