@@ -96,7 +96,7 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
 
 
 def get_knobs_for_session(session):
-    # Returns a dict of the knob
+    # Returns a list of knob dictionaries for the session
     knobs = KnobCatalog.objects.filter(dbms=session.dbms)
     knob_dicts= list(knobs.values())
     for i in range(len(knob_dicts)):
