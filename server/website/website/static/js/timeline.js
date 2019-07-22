@@ -62,6 +62,44 @@ function renderPlot(data, div_id) {
     $.jqplot(div_id + '_plot',  plotdata, plotoptions);
 }
 
+function renderKnobPlot(data, div_id) {
+    plotdata=data.data;
+
+    $("#" + div_id).html('<div id="' + div_id + '_plot"></div><div id="plotdescription"></div>');
+
+    var plotoptions = {
+        title: {text: data.knob, fontSize: '1.1em'},
+        series: [{"label":"Hello"}],
+        axes:{
+        yaxis:{
+            label: data.units,
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+            min: 0,
+            autoscale: true,
+        },
+        xaxis:{
+            renderer: (shouldPlotEquidistant()) ? $.jqplot.CategoryAxisRenderer : $.jqplot.DateAxisRenderer,
+            label: 'Date',
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+            tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+            tickOptions:{formatString:'%#m/%#d %H:%M', angle:-40},
+            autoscale: true,
+            rendererOptions:{sortMergedLabels:true}
+        }
+        },
+        legend: {show: true, location: 'nw'},
+        highlighter: {
+            show: true,
+            tooltipLocation: 'nw',
+            yvalues: 2,
+            formatString:'<table class="jqplot-highlighter"><tr><td>date:</td><td>%s</td></tr> <tr><td>result:</td><td>%s</td></tr></table>'
+        },
+        cursor: {show: true, zoom:true, showTooltip:false, clickReset:true}
+    };
+    //Render plot
+    $.jqplot(div_id + '_plot',  plotdata, plotoptions);
+}
+
 function renderMiniplot(plotid, data) {
     var plotdata = [], series = [];
 
@@ -131,6 +169,12 @@ function render(data) {
             var plotid = "plot_" + i;
             $("#plotgrid").append('<div id="' + plotid + '" class="plotcontainer"></div>');
             renderPlot(data.timelines[metric], plotid);
+            i = i + 1;
+        }
+        for (var knob in data.knobtimelines) {
+            var plotid = "plot_" + i;
+            $("#plotgrid").append('<div id="' + plotid + '" class="plotcontainer"></div>');
+            renderKnobPlot(data.knobtimelines[knob], plotid);
             i = i + 1;
         }
     }
@@ -204,6 +248,7 @@ function getConfiguration() {
         wkld: $("input[name='workload']:checked").val(),
         spe: readCheckbox("input[name^='specific']:checked"),
         met: readCheckbox("input[name='metric']:checked"),
+        knb: readCheckbox("input[name='knob']:checked"),
         nres: $("#results_per_page option:selected").val(),
         eq: $("#equidistant").is(':checked') ? "on" : "off"
     };

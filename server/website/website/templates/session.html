@@ -127,6 +127,28 @@
         </table>
     </div>
 </div>
+<div id="knob">
+    <div><h4>Plot Knobs</h4></div>
+    <div class="checkbox boxbody">
+        <table id="knobtable">
+            <thead style="display:none;">
+                <tr>
+                    <th>Knobs</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for knob_name in knob_names %}
+                <tr>
+                    <td style="background-color: white">
+                    <input type="checkbox" name="knob" value="{{ knob_name }}" > {{ knob_name }}
+                    </td>
+                </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
+    </div>
+</div>
 </div>
 
 <div class="col-md-9">
@@ -216,6 +238,7 @@ $(function() {
         equidistant: "{{ default_equidistant }}",
         additional: [{% for filter in filters %} "{{ filter.field }}", {% endfor %}],
         metrics: [{% for metric in default_metrics %}"{{ metric }}", {% endfor %}]
+        knobs: [{% for knob in knobs %}"{{ knob }}", {% endfor %}]
     });
 });
 
