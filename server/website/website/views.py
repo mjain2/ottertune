@@ -37,7 +37,7 @@ from .types import (DBMSType, HardwareType, KnobUnitType, MetricType,
 from .utils import JSONUtil, LabelUtil, MediaUtil, TaskUtil
 from .settings import TIME_ZONE
 
-from SetDefaultKnobs.py import setDefaultKnobs
+from .SetDefaultKnobs import setDefaultKnobs
 
 LOG = logging.getLogger(__name__)
 

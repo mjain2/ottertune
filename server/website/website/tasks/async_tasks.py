@@ -356,10 +356,10 @@ def configuration_recommendation(target_data):
             col_min = X_scaled[:, i].min()
             col_max = X_scaled[:, i].max()
             for knob in session_knobs:
-                if X_columnlabels[i] == knob.name:
-                    X_mem[0][i] = knob.minval
+                if X_columnlabels[i] == knob["name"]:
+                    X_mem[0][i] = knob["minval"]
                     col_min = X_scaler.transform(X_mem)[0][i]
-                    X_mem[0][i] = knob.maxval
+                    X_mem[0][i] = knob["maxval"]
                     col_max = X_scaler.transform(X_mem)[0][i]
 #            if X_columnlabels[i] in knobs_mem_catalog:
 #                X_mem[0][i] = mem_max * 1024 * 1024 * 1024  # mem_max GB
