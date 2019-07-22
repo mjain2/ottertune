@@ -94,21 +94,6 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
         result.next_configuration = JSONUtil.dumps(retval)
         result.save()
 
-
-def get_knobs_for_session(session):
-    # Returns a list of knob dictionaries for the session
-    knobs = KnobCatalog.objects.filter(dbms=session.dbms)
-    knob_dicts= list(knobs.values())
-    for i in range(len(knob_dicts)):
-        if SessionKnob.objects.filter(session=session, knob=knobs[i]).exists():
-            new_knob = SessionKnob.objects.filter(session=session, knob=knobs[i])[0]
-            knob_dicts[i]["minval"]=new_knob.minval
-            knob_dicts[i]["maxval"]=new_knob.maxval
-            knob_dicts[i]["tunable"]=new_knob.tunable
-    knob_dicts = list(filter(lambda knob: knob["tunable"], knob_dicts))
-    return knob_dicts
-
-
 @task(base=AggregateTargetResults, name='aggregate_target_results')
 def aggregate_target_results(result_id):
     # Check that we've completed the background tasks at least once. We need
@@ -118,7 +103,7 @@ def aggregate_target_results(result_id):
     newest_result = Result.objects.get(pk=result_id)
     if latest_pipeline_run is None or newest_result.session.tuning_session == 'randomly_generate':
         result = Result.objects.filter(pk=result_id)
-        knobs = get_knobs_for_session(newest_result.session)
+        knobs = SessionKnob.objects.get_knobs_for_session(newest_result.session)
         
         #knobs_ = KnobCatalog.objects.filter(dbms=result[0].dbms, tunable=True)
         #knobs_catalog = {k.name: k for k in knobs_}
@@ -360,7 +345,7 @@ def configuration_recommendation(target_data):
         X_default[i] = k.default
 
     X_default_scaled = X_scaler.transform(X_default.reshape(1, X_default.shape[0]))[0]
-    session_knobs = get_knobs_for_session(newest_result.session)
+    session_knobs = SessionKnob.objects.get_knobs_for_session(newest_result.session)
 
     # Determine min/max for knob values
     for i in range(X_scaled.shape[1]):

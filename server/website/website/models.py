@@ -226,6 +226,21 @@ class SessionKnob(BaseModel):
     minval = models.CharField(max_length=32, null=True, verbose_name="minimum value")
     maxval = models.CharField(max_length=32, null=True, verbose_name="maximum value")
     tunable = models.BooleanField(verbose_name="tunable")
+
+    @staticmethod
+    def get_knobs_for_session(session):
+            # Returns a dict of the knob
+        knobs = KnobCatalog.objects.filter(dbms=session.dbms)
+        knob_dicts= list(knobs.values())
+        for i in range(len(knob_dicts)):
+            if SessionKnob.objects.filter(session=session, knob=knobs[i]).exists():
+                new_knob = SessionKnob.objects.filter(session=session, knob=knobs[i])[0]
+                knob_dicts[i]["minval"]=new_knob.minval
+                knob_dicts[i]["maxval"]=new_knob.maxval
+                knob_dicts[i]["tunable"]=new_knob.tunable
+        knob_dicts = list(filter(lambda knob: knob["tunable"], knob_dicts))
+        return knob_dicts
+
     def __unicode__(self):
         return self.session.name+" "+self.knob.name
 
