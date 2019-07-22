@@ -39,6 +39,8 @@ from .settings import TIME_ZONE
 
 from .SetDefaultKnobs import setDefaultKnobs
 
+LOG = logging.getLogger(__name__)
+
 # For the html template to access dict object
 @register.filter
 def get_item(dictionary, key):
@@ -284,6 +286,7 @@ def create_or_edit_session(request, project_id, session_id=''):
             session.last_update = ts
             session.upload_code = MediaUtil.upload_code_generator()
             session.save()
+            setDefaultKnobs(session)
         else:
             # Update an existing session with the form contents
             LOG.info('updating session %s with %s',session_id,str(request.POST))
