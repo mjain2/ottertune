@@ -37,8 +37,7 @@ from .types import (DBMSType, HardwareType, KnobUnitType, MetricType,
 from .utils import JSONUtil, LabelUtil, MediaUtil, TaskUtil
 from .settings import TIME_ZONE
 
-LOG = logging.getLogger(__name__)
-
+from .SetDefaultKnobs import setDefaultKnobs
 
 # For the html template to access dict object
 @register.filter
