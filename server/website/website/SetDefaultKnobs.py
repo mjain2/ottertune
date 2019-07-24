@@ -26,5 +26,6 @@ def setKnobTuningRange(session, knobName, minval, maxval):
 def setDefaultKnobs(session):
     if session.dbms.type==DBMSType.POSTGRES and session.dbms.version=='9.6':
         turnKnobsOff(session, [])
-        #setKnobTuningRange(session, "", session.hardware.RAM * 2)
+#        setKnobTuningRange(session, "global.shared_buffers", session.hardware.RAM * .2,
+#                            session.hardware.RAM * .8)
 
