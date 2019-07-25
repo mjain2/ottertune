@@ -99,9 +99,11 @@ def aggregate_target_results(result_id):
     # Check that we've completed the background tasks at least once. We need
     # this data in order to make a configuration recommendation (until we
     # implement a sampling technique to generate new training data).
-    latest_pipeline_run = PipelineRun.objects.get_latest()
     newest_result = Result.objects.get(pk=result_id)
-    if latest_pipeline_run is None or newest_result.session.tuning_session == 'randomly_generate':
+    has_pipeline_data = PipelineData.objects.filter(workload=newest_result.workload).exists()
+    if not has_pipeline_data:
+        LOG.info("Background tasks haven't ran for this workload yet, picking random data.")
+    if not has_pipeline_data or newest_result.session.tuning_session == 'randomly_generate':
         result = Result.objects.filter(pk=result_id)
         knobs_ = KnobCatalog.objects.filter(dbms=result[0].dbms, tunable=True)
         knobs_catalog = {k.name: k for k in knobs_}
@@ -579,5 +581,6 @@ def map_workload(target_data):
             best_workload_name = workload_name
         scores_info[workload_id] = (workload_name, similarity_score)
     target_data['mapped_workload'] = (best_workload_id, best_workload_name, best_score)
+    
     target_data['scores'] = scores_info
     return target_data

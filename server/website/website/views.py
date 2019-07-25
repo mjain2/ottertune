@@ -32,7 +32,7 @@ from .parser import Parser
 from .tasks import (aggregate_target_results, map_workload,
                     configuration_recommendation)
 from .types import (DBMSType, HardwareType, KnobUnitType, MetricType,
-                    TaskType, VarType)
+                    TaskType, VarType, WorkloadStatusType)
 from .utils import JSONUtil, LabelUtil, MediaUtil, TaskUtil
 from .settings import TIME_ZONE
 
@@ -455,6 +455,10 @@ def handle_result_files(session, files):
         session, dbms, workload, knob_data, metric_data,
         start_time, end_time, observation_time)
     result.save()
+
+    # Workload is now modified so backgroundTasks can make calculationw
+    workload.status = WorkloadStatusType.MODIFIED
+    workload.save()
 
     # Save all original data
     backup_data = BackupData.objects.create(
