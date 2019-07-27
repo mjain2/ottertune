@@ -93,6 +93,27 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
         result.next_configuration = JSONUtil.dumps(retval)
         result.save()
 
+def clean_knob_data(knob_matrix, knob_labels, dbms):
+    # Makes sure that all knobs in the dbms are included in the knob_matrix and knob_labels
+    knob_cat = [k.name for k in KnobCatalog.objects.filter(dbms=dbms, tunable=True)]
+    matrix = np.array(knob_matrix)
+    missing_columns = set(knob_cat) - set(knob_labels)
+    unused_columns = set(knob_labels) - set(knob_cat)
+    # If columns are missing from the matrix
+    if missing_columns:
+        for knob in missing_columns:
+            knob_object = KnobCatalog.objects.get(dbms=dbms, name=knob, tunable=True)
+            index = knob_cat.index(knob)
+            matrix = np.insert(matrix, index, knob_object.default, axis=1)
+            knob_labels.insert(index, knob)
+    # If they are useless columns in the matrix
+    if unused_columns:
+        indexes = [i for i, n in enumerate(knob_labels) if n in unused_columns]
+        # Delete unused columns
+        matrix = np.delete(matrix, indexes, 1)
+        for i in indexes:
+            del knob_labels[i]
+    return matrix, knob_labels
 
 @task(base=AggregateTargetResults, name='aggregate_target_results')
 def aggregate_target_results(result_id):
@@ -200,8 +221,12 @@ def configuration_recommendation(target_data):
         task_type=PipelineTaskType.METRIC_DATA)
     workload_metric_data = JSONUtil.loads(workload_metric_data.data)
 
-    X_workload = np.array(workload_knob_data['data'])
-    X_columnlabels = np.array(workload_knob_data['columnlabels'])
+    cleaned_workload_knob_data = clean_knob_data(workload_knob_data["data"],
+                                                 workload_knob_data["columnlabels"],
+                                                 mapped_workload.dbms)
+
+    X_workload = np.array(cleaned_workload_knob_data[0])
+    X_columnlabels = np.array(cleaned_workload_knob_data[1])
     y_workload = np.array(workload_metric_data['data'])
     y_columnlabels = np.array(workload_metric_data['columnlabels'])
     rowlabels_workload = np.array(workload_metric_data['rowlabels'])
@@ -477,6 +502,9 @@ def map_workload(target_data):
 
         # Load knob & metric data for this workload
         knob_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.KNOB_DATA)
+        knob_data["data"], knob_data["columnlabels"] = clean_knob_data(knob_data["data"],
+                                                                       knob_data["columnlabels"],
+                                                                       target_workload.dbms)
 
         metric_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.METRIC_DATA)
         X_matrix = np.array(knob_data["data"])
@@ -584,3 +612,4 @@ def map_workload(target_data):
     
     target_data['scores'] = scores_info
     return target_data
+#
