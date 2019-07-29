@@ -6,13 +6,14 @@
 import copy
 import numpy as np
 from django.test import TestCase, override_settings
-
-from website.models import Workload, PipelineRun, PipelineData, Result
+from django.db import transaction
+from website.models import (Workload, PipelineRun, PipelineData,
+                            Result, Session, DBMSCatalog, Hardware)
 from website.tasks.periodic_tasks import (run_background_tasks,
                                           aggregate_data,
                                           run_workload_characterization,
                                           run_knob_identification)
-from website.types import PipelineTaskType
+from website.types import PipelineTaskType, WorkloadStatusType
 
 CELERY_TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
 
@@ -21,10 +22,73 @@ CELERY_TEST_RUNNER = 'djcelery.contrib.test_runner.CeleryTestSuiteRunner'
 class BackgroundTestCase(TestCase):
 
     fixtures = ['test_website.json']
+    serialized_rollback = True
 
     def testNoError(self):
         result = run_background_tasks.delay()
         self.assertTrue(result.successful())
+
+    def testProcessedWorkloadStatus(self):
+        before_workloads = Workload.objects.filter(status=WorkloadStatusType.MODIFIED)
+        run_background_tasks.delay()
+        for w in before_workloads:
+            self.assertEqual(w.status, WorkloadStatusType.PROCESSED)
+
+    def testNoModifiedWorkload(self):
+        # First Execution of Modified Workloads
+        run_background_tasks.delay()
+        first_pipeline_run = PipelineRun.objects.get_latest()
+        # Second Execution with no modified workloads
+        run_background_tasks.delay()
+        second_pipeline_run = PipelineRun.objects.get_latest()
+        # Check that the BG task has not run
+        self.assertEqual(first_pipeline_run.start_time, second_pipeline_run.start_time)
+
+    # Test that an empty workload is ignored by the BG task
+    def testEmptyWorkload(self):
+        with transaction.atomic():
+            # Create empty workload
+            empty_workload = Workload.objects.create_workload(dbms=DBMSCatalog.objects.get(pk=1),
+                                                              hardware=Hardware.objects.get(pk=1),
+                                                              name="empty_workload")
+
+            result = run_background_tasks.delay()
+        # Check that BG task successfully finished
+        self.assertTrue(result.successful())
+        # Check that the empty workload is still in MODIFIED Status
+        self.assertEqual(empty_workload.status, 1)
+        pipeline_data = PipelineData.objects.filter(pipeline_run=PipelineRun.objects.get_latest())
+        # Check that the empty workload is not in the pipeline datas
+        self.assertNotIn(empty_workload.pk, pipeline_data.values_list('workload_id', flat=True))
+
+    # Test that a workload that contain only one knob configuration will be ignored by the BG task
+    def testUniqueKnobConfigurationWorkload(self):
+        # Get workload to copy data from
+        origin_workload = Workload.objects.get(pk=1)
+        origin_session = Session.objects.get(pk=1)
+        # Create empty workload
+        fix_workload = Workload.objects.create_workload(dbms=origin_workload.dbms,
+                                                        hardware=origin_workload.hardware,
+                                                        name="fixed_knob_workload")
+
+        fix_knob_data = Result.objects.filter(workload=origin_workload,
+                                              session=origin_session)[0].knob_data
+        # Add 5 Result with the same Knob Configuration
+        for res in Result.objects.filter(workload=origin_workload, session=origin_session)[:5]:
+            Result.objects.create_result(res.session, res.dbms, fix_workload,
+                                         fix_knob_data, res.metric_data,
+                                         res.observation_start_time,
+                                         res.observation_end_time,
+                                         res.observation_time)
+
+        result = run_background_tasks.delay()
+        # Check that BG task successfully finished
+        self.assertTrue(result.successful())
+        # Check that the empty workload is still in MODIFIED Status
+        self.assertEqual(fix_workload.status, 1)
+        pipeline_data = PipelineData.objects.filter(pipeline_run=PipelineRun.objects.get_latest())
+        # Check that the empty workload is not in the pipeline datas
+        self.assertNotIn(fix_workload.pk, pipeline_data.values_list('workload_id', flat=True))
 
     def testNoWorkloads(self):
         # delete any existing workloads
