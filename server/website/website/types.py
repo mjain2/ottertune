@@ -82,6 +82,7 @@ class VarType(BaseType):
         TIMESTAMP: 'TIMESTAMP',
     }
 
+
 class WorkloadStatusType(BaseType):
     MODIFIED = 1
     PROCESSING = 2
@@ -92,6 +93,7 @@ class WorkloadStatusType(BaseType):
         PROCESSING: 'PROCESSING',
         PROCESSED: 'PROCESSED'
     }
+
 
 class TaskType(BaseType):
     PREPROCESS = 1

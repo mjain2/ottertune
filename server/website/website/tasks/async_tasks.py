@@ -93,6 +93,7 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
         result.next_configuration = JSONUtil.dumps(retval)
         result.save()
 
+
 def clean_knob_data(knob_matrix, knob_labels, dbms):
     # Makes sure that all knobs in the dbms are included in the knob_matrix and knob_labels
     knob_cat = [k.name for k in KnobCatalog.objects.filter(dbms=dbms, tunable=True)]
@@ -114,6 +115,7 @@ def clean_knob_data(knob_matrix, knob_labels, dbms):
         for i in indexes:
             del knob_labels[i]
     return matrix, knob_labels
+
 
 @task(base=AggregateTargetResults, name='aggregate_target_results')
 def aggregate_target_results(result_id):
@@ -609,7 +611,7 @@ def map_workload(target_data):
             best_workload_name = workload_name
         scores_info[workload_id] = (workload_name, similarity_score)
     target_data['mapped_workload'] = (best_workload_id, best_workload_name, best_score)
-    
+
     target_data['scores'] = scores_info
     return target_data
 #
