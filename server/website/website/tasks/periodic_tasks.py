@@ -54,7 +54,7 @@ def run_background_tasks():
             continue
 
         # Check that there are enough results in the workload
-        if wkld_results.count() < MIN_WORKLOAD_RESULTS_COUNT:
+        if wkld_results.count() <= MIN_WORKLOAD_RESULTS_COUNT:
             LOG.info("Not enough results in workload "+str(workload.id)+ " (only "+\
                      str(wkld_results.count())+").")
             continue
