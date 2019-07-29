@@ -26,6 +26,7 @@ LOG = get_task_logger(__name__)
 # Only process workload containing this minimum amount of results
 MIN_WORKLOAD_RESULTS_COUNT = 5
 
+
 # Run the background tasks every 5 minutes
 @periodic_task(run_every=300, name="run_background_tasks")
 def run_background_tasks():
@@ -55,19 +56,18 @@ def run_background_tasks():
 
         # Check that there are enough results in the workload
         if wkld_results.count() <= MIN_WORKLOAD_RESULTS_COUNT:
-            LOG.info("Not enough results in workload "+str(workload.id)+ " (only "+\
-                     str(wkld_results.count())+").")
+            LOG.info("Not enough results in workload " + str(workload.id) + " (only " +
+                     str(wkld_results.count()) + ").")
             continue
 
         workload.status = WorkloadStatusType.PROCESSING
         workload.save()
 
-
-        LOG.info("Aggregating data for workload "+str(workload.id))
+        LOG.info("Aggregating data for workload " + str(workload.id))
         # Aggregate the knob & metric data for this workload
         knob_data, metric_data = aggregate_data(wkld_results)
-        LOG.info("knob_data: "+str(knob_data))
-        LOG.info("metric_data: "+str(metric_data))
+        LOG.info("knob_data: " + str(knob_data))
+        LOG.info("metric_data: " + str(metric_data))
 
         # Knob_data and metric_data are 2D numpy arrays. Convert them into a
         # JSON-friendly (nested) lists and then save them as new PipelineData
@@ -95,9 +95,9 @@ def run_background_tasks():
         # Execute the Workload Characterization task to compute the list of
         # pruned metrics for this workload and save them in a new PipelineData
         # object.
-        LOG.info("Pruning metrics for workload "+str(workload.id))
+        LOG.info("Pruning metrics for workload " + str(workload.id))
         pruned_metrics = run_workload_characterization(metric_data=metric_data)
-        LOG.info("pruned_metrics: "+str(pruned_metrics))
+        LOG.info("pruned_metrics: " + str(pruned_metrics))
         pruned_metrics_entry = PipelineData(pipeline_run=pipeline_run_obj,
                                             task_type=PipelineTaskType.PRUNED_METRICS,
                                             workload=workload,
@@ -117,11 +117,11 @@ def run_background_tasks():
         # Execute the Knob Identification task to compute an ordered list of knobs
         # ranked by their impact on the DBMS's performance. Save them in a new
         # PipelineData object.
-        LOG.info("Ranking knobs for workload "+str(workload.id))
+        LOG.info("Ranking knobs for workload " + str(workload.id))
         ranked_knobs = run_knob_identification(knob_data=knob_data,
                                                metric_data=pruned_metric_data,
                                                dbms=workload.dbms)
-        LOG.info("ranked_knobs: "+str(ranked_knobs))
+        LOG.info("ranked_knobs: " + str(ranked_knobs))
         ranked_knobs_entry = PipelineData(pipeline_run=pipeline_run_obj,
                                           task_type=PipelineTaskType.RANKED_KNOBS,
                                           workload=workload,
