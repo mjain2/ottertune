@@ -8,12 +8,12 @@ import os
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
-from website.models import Result
+from website.models import Result, Workload
 from website.settings import PROJECT_ROOT
 
 from .utils import (TEST_BASIC_SESSION_ID, TEST_BASIC_SESSION_UPLOAD_CODE,
                     TEST_PASSWORD, TEST_TUNING_SESSION_ID, TEST_TUNING_SESSION_UPLOAD_CODE,
-                    TEST_USERNAME)
+                    TEST_USERNAME, TEST_WORKLOAD_ID)
 
 
 class UploadResultsTests(TestCase):
@@ -76,6 +76,14 @@ class UploadResultsTests(TestCase):
         response = self.client.get(form_addr)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Request type was not POST")
+
+    def test_set_modified_workload_on_upload(self):
+        workload0 = Workload.objects.get(pk=TEST_WORKLOAD_ID)
+        workload0.status = 3
+        workload0.save()
+        self.upload_to_session_ok(TEST_BASIC_SESSION_ID, TEST_BASIC_SESSION_UPLOAD_CODE)
+        status = Workload.objects.get(pk=TEST_WORKLOAD_ID).status
+        self.assertEqual(status, 1)
 
     def test_upload_to_basic_session_ok(self):
         self.upload_to_session_ok(TEST_BASIC_SESSION_ID, TEST_BASIC_SESSION_UPLOAD_CODE)
