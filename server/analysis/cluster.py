@@ -646,7 +646,6 @@ class DetK(KSelection):
                 fs[i] = sks[i] / (alpha[K] * sks[i - 1])
         self.clusters_ = np.array(sorted(cluster_map.keys()))
         self.optimal_num_clusters_ = self.clusters_[np.argmin(fs)]
-        LOGGER.info("Found optimal number of clusters: " + str(self.optimal_num_clusters_) + ".")
         self.fs_ = fs
         return self
 
