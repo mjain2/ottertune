@@ -125,7 +125,7 @@ def aggregate_target_results(result_id):
     newest_result = Result.objects.get(pk=result_id)
     has_pipeline_data = PipelineData.objects.filter(workload=newest_result.workload).exists()
     if not has_pipeline_data:
-        LOG.info("Background tasks haven't ran for this workload yet, picking random data.")
+        LOG.debug("Background tasks haven't ran for this workload yet, picking random data.")
     if not has_pipeline_data or newest_result.session.tuning_session == 'randomly_generate':
         result = Result.objects.filter(pk=result_id)
         knobs_ = KnobCatalog.objects.filter(dbms=result[0].dbms, tunable=True)
