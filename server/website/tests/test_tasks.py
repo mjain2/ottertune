@@ -74,7 +74,7 @@ class BackgroundTestCase(TestCase):
         fix_knob_data = Result.objects.filter(workload=origin_workload,
                                               session=origin_session)[0].knob_data
         # Add 5 Result with the same Knob Configuration
-        for res in Result.objects.filter(workload=origin_workload, session=origin_session)[:5]:
+        for res in Result.objects.filter(workload=origin_workload, session=origin_session)[:4]:
             Result.objects.create_result(res.session, res.dbms, fix_workload,
                                          fix_knob_data, res.metric_data,
                                          res.observation_start_time,
