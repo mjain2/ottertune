@@ -28,4 +28,3 @@ def setDefaultKnobs(session):
         turnKnobsOff(session, [])
 #        setKnobTuningRange(session, "global.shared_buffers", session.hardware.RAM * .2,
 #                            session.hardware.RAM * .8)
-
