@@ -94,16 +94,23 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
         result.next_configuration = JSONUtil.dumps(retval)
         result.save()
 
-def clean_knob_data(knob_matrix, knob_labels, dbms):
+def clean_knob_data(knob_matrix, knob_labels, session):
     # Makes sure that all knobs in the dbms are included in the knob_matrix and knob_labels
-    knob_cat = [k.name for k in KnobCatalog.objects.filter(dbms=dbms, tunable=True)]
+    knob_cat = SessionKnob.objects.get_knobs_for_session(session)
+    knob_cat = filter(lambda knob:knob["tunable"], knob_cat)
+    knob_cat = list(map(lambda knob:knob["name"], knob_cat))
+    LOG.info("knob_cat:%s", str(knob_cat))
+    LOG.info("knob_labels:%s", str(knob_labels))
+    #knob_cat = [k.name for k in KnobCatalog.objects.filter(dbms=dbms, tunable=True)]
     matrix = np.array(knob_matrix)
     missing_columns = set(knob_cat) - set(knob_labels)
+    LOG.info("missing_columns:%s", str(missing_columns))
     unused_columns = set(knob_labels) - set(knob_cat)
+    LOG.info("unused_columns:%s", str(unused_columns))
     # If columns are missing from the matrix
     if missing_columns:
         for knob in missing_columns:
-            knob_object = KnobCatalog.objects.get(dbms=dbms, name=knob, tunable=True)
+            knob_object = KnobCatalog.objects.get(dbms=session.dbms, name=knob, tunable=True)
             index = knob_cat.index(knob)
             matrix = np.insert(matrix, index, knob_object.default, axis=1)
             knob_labels.insert(index, knob)
@@ -112,7 +119,7 @@ def clean_knob_data(knob_matrix, knob_labels, dbms):
         indexes = [i for i, n in enumerate(knob_labels) if n in unused_columns]
         # Delete unused columns
         matrix = np.delete(matrix, indexes, 1)
-        for i in indexes:
+        for i in sorted(indexes, reverse=True):
             del knob_labels[i]
     return matrix, knob_labels
 
@@ -228,12 +235,14 @@ def configuration_recommendation(target_data):
         task_type=PipelineTaskType.METRIC_DATA)
     workload_metric_data = JSONUtil.loads(workload_metric_data.data)
 
+    newest_result = Result.objects.get(pk=target_data['newest_result_id'])
     cleaned_workload_knob_data = clean_knob_data(workload_knob_data["data"],
                                                  workload_knob_data["columnlabels"],
-                                                 mapped_workload.dbms)
+                                                 newest_result.session)
 
     X_workload = np.array(cleaned_workload_knob_data[0])
     X_columnlabels = np.array(cleaned_workload_knob_data[1])
+    LOG.debug("X_columnlabels:"+str(target_data['X_columnlabels']))
     y_workload = np.array(workload_metric_data['data'])
     y_columnlabels = np.array(workload_metric_data['columnlabels'])
     rowlabels_workload = np.array(workload_metric_data['rowlabels'])
@@ -517,7 +526,7 @@ def map_workload(target_data):
         knob_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.KNOB_DATA)
         knob_data["data"], knob_data["columnlabels"] = clean_knob_data(knob_data["data"],
                                                                        knob_data["columnlabels"],
-                                                                       target_workload.dbms)
+                                                                       newest_result.session)
 
         metric_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.METRIC_DATA)
         X_matrix = np.array(knob_data["data"])

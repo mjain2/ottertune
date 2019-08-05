@@ -8,7 +8,7 @@ from .types import DBMSType
 
 def turnKnobsOff(session, knobNames):
     for knobName in knobNames:
-        knob = KnobCatalog.filter(dbms=session.dbms, name=knobName)
+        knob = KnobCatalog.objects.filter(dbms=session.dbms, name=knobName).first()
         SessionKnob.objects.create(session=session,
                                    knob=knob,
                                    minval=knob.minval,
@@ -16,7 +16,7 @@ def turnKnobsOff(session, knobNames):
                                    tunable=False)
 
 def setKnobTuningRange(session, knobName, minval, maxval):
-    knob = KnobCatalog.filter(dbms=session.dbms, name=knobName)
+    knob = KnobCatalog.objects.filter(dbms=session.dbms, name=knobName).first()
     SessionKnob.objects.create(session=session,
                                knob=knob,
                                minval=minval,
