@@ -83,6 +83,18 @@ class VarType(BaseType):
     }
 
 
+class WorkloadStatusType(BaseType):
+    MODIFIED = 1
+    PROCESSING = 2
+    PROCESSED = 3
+
+    TYPE_NAMES = {
+        MODIFIED: 'MODIFIED',
+        PROCESSING: 'PROCESSING',
+        PROCESSED: 'PROCESSED'
+    }
+
+
 class TaskType(BaseType):
     PREPROCESS = 1
     RUN_WM = 2
