@@ -94,11 +94,11 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
         result.next_configuration = JSONUtil.dumps(retval)
         result.save()
 
+
 def clean_knob_data(knob_matrix, knob_labels, session):
     # Makes sure that all knobs in the dbms are included in the knob_matrix and knob_labels
     knob_cat = SessionKnob.objects.get_knobs_for_session(session)
-    knob_cat = filter(lambda knob:knob["tunable"], knob_cat)
-    knob_cat = list(map(lambda knob:knob["name"], knob_cat))
+    knob_cat = [knob["name"] for knob in knob_cat if knob["tunable"]]
     matrix = np.array(knob_matrix)
     missing_columns = set(knob_cat) - set(knob_labels)
     unused_columns = set(knob_labels) - set(knob_cat)
@@ -120,28 +120,6 @@ def clean_knob_data(knob_matrix, knob_labels, session):
             del knob_labels[i]
     return matrix, knob_labels
 
-def clean_knob_data(knob_matrix, knob_labels, dbms):
-    # Makes sure that all knobs in the dbms are included in the knob_matrix and knob_labels
-    knob_cat = [k.name for k in KnobCatalog.objects.filter(dbms=dbms, tunable=True)]
-    matrix = np.array(knob_matrix)
-    missing_columns = set(knob_cat) - set(knob_labels)
-    unused_columns = set(knob_labels) - set(knob_cat)
-    # If columns are missing from the matrix
-    if missing_columns:
-        for knob in missing_columns:
-            knob_object = KnobCatalog.objects.get(dbms=dbms, name=knob, tunable=True)
-            index = knob_cat.index(knob)
-            matrix = np.insert(matrix, index, knob_object.default, axis=1)
-            knob_labels.insert(index, knob)
-    # If they are useless columns in the matrix
-    if unused_columns:
-        indexes = [i for i, n in enumerate(knob_labels) if n in unused_columns]
-        # Delete unused columns
-        matrix = np.delete(matrix, indexes, 1)
-        for i in indexes:
-            del knob_labels[i]
-    return matrix, knob_labels
-
 
 @task(base=AggregateTargetResults, name='aggregate_target_results')
 def aggregate_target_results(result_id):
@@ -155,14 +133,9 @@ def aggregate_target_results(result_id):
     if not has_pipeline_data or newest_result.session.tuning_session == 'randomly_generate':
         result = Result.objects.filter(pk=result_id)
         knobs = SessionKnob.objects.get_knobs_for_session(newest_result.session)
-        
-        #knobs_ = KnobCatalog.objects.filter(dbms=result[0].dbms, tunable=True)
-        #knobs_catalog = {k.name: k for k in knobs_}
-        #knobs = {k: v for k, v in
-        #         list(knobs_catalog.items())}
-        
+
         # generate a config randomly
-        random_knob_result = gen_random_data(knobs)#, newest_result.workload.hardware.memory)
+        random_knob_result = gen_random_data(knobs)
         agg_data = DataUtil.aggregate_data(result)
         agg_data['newest_result_id'] = result_id
         agg_data['bad'] = True
@@ -216,9 +189,10 @@ def gen_random_data(knobs):
             random_knob_result[name] = "None"
         else:
             raise Exception(
-                'Unknown variable type: {}'.format(metadata.vartype))
+                'Unknown variable type: {}'.format(knob["vartype"]))
 
     return random_knob_result
+
 
 @task(base=ConfigurationRecommendation, name='configuration_recommendation')
 def configuration_recommendation(target_data):
@@ -380,22 +354,11 @@ def configuration_recommendation(target_data):
     X_samples = np.empty((num_samples, X_scaled.shape[1]))
     X_min = np.empty(X_scaled.shape[1])
     X_max = np.empty(X_scaled.shape[1])
-    knobs_mem = KnobCatalog.objects.filter(
-        dbms=newest_result.session.dbms, tunable=True, resource=1)
-    knobs_mem_catalog = {k.name: k for k in knobs_mem}
-    mem_max = newest_result.workload.hardware.memory
-    X_mem = np.zeros([1, X_scaled.shape[1]])
-    X_default = np.empty(X_scaled.shape[1])
+    X_scaler = np.zeros([1, X_scaled.shape[1]])
 
-    # Get default knob values
-    for i, k_name in enumerate(X_columnlabels):
-        k = KnobCatalog.objects.filter(dbms=newest_result.session.dbms, name=k_name)[0]
-        X_default[i] = k.default
-
-    X_default_scaled = X_scaler.transform(X_default.reshape(1, X_default.shape[0]))[0]
     session_knobs = SessionKnob.objects.get_knobs_for_session(newest_result.session)
 
-    # Determine min/max for knob values
+    # Set min/max for knob values
     for i in range(X_scaled.shape[1]):
         if i < total_dummies or i in binary_index_set:
             col_min = 0
@@ -405,20 +368,13 @@ def configuration_recommendation(target_data):
             col_max = X_scaled[:, i].max()
             for knob in session_knobs:
                 if X_columnlabels[i] == knob["name"]:
-                    X_mem[0][i] = knob["minval"]
-                    col_min = X_scaler.transform(X_mem)[0][i]
-                    X_mem[0][i] = knob["maxval"]
-                    col_max = X_scaler.transform(X_mem)[0][i]
-#            if X_columnlabels[i] in knobs_mem_catalog:
-#                X_mem[0][i] = mem_max * 1024 * 1024 * 1024  # mem_max GB
-#                col_max = min(col_max, X_scaler.transform(X_mem)[0][i])
-#            # Set min value to the default value
-#            # FIXME: support multiple methods can be selected by users
-#            col_min = X_default_scaled[i]
+                    X_scaler[0][i] = knob["minval"]
+                    col_min = X_scaler.transform(X_scaler)[0][i]
+                    X_scaler[0][i] = knob["maxval"]
+                    col_max = X_scaler.transform(X_scaler)[0][i]
         X_min[i] = col_min
         X_max[i] = col_max
         X_samples[:, i] = np.random.rand(num_samples) * (col_max - col_min) + col_min
-
 
     # Maximize the throughput, moreisbetter
     # Use gradient descent to minimize -throughput
@@ -537,11 +493,7 @@ def map_workload(target_data):
         knob_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.KNOB_DATA)
         knob_data["data"], knob_data["columnlabels"] = clean_knob_data(knob_data["data"],
                                                                        knob_data["columnlabels"],
-<<<<<<< HEAD
                                                                        newest_result.session)
-=======
-                                                                       target_workload.dbms)
->>>>>>> upstream/master
 
         metric_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.METRIC_DATA)
         X_matrix = np.array(knob_data["data"])

@@ -52,8 +52,10 @@ class SessionAdmin(admin.ModelAdmin):
 class SessionKnobAdmin(admin.ModelAdmin):
     list_display = ('knob', 'session', 'minval', 'maxval', 'tunable')
 
+
 class HardwareAdmin(admin.ModelAdmin):
     list_display = ('cpu', 'memory', 'storage')
+
 
 class KnobDataAdmin(BaseAdmin):
     list_display = ['name', 'dbms_info', 'creation_time']

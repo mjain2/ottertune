@@ -201,7 +201,12 @@ class SessionViewsTests(TestCase):
                                                     'session_id': TEST_BASIC_SESSION_ID})
         post_data = {
             'name': 'new_session_name',
+            'description': 'testing create basic session...',
             'tuning_session': 'tuning_session',
+            'cpu': '2',
+            'memory': '16.0',
+            'storage': '32',
+            'dbms': 1,
             'target_objective': 'throughput_txn_per_sec'
         }
         response = self.client.post(form_addr, post_data, follow=True)
@@ -226,7 +231,7 @@ class SessionViewsTests(TestCase):
             'tunable': 'on'
         }
         response = self.client.post(form_addr, post_data, follow=True)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 204)
 
     def test_delete_zero_sessions(self):
         form_addr = reverse('delete_session', kwargs={'project_id': TEST_PROJECT_ID})
@@ -252,7 +257,9 @@ class SessionViewsTests(TestCase):
                 'name': 'session_{}'.format(i),
                 'description': "",
                 'tuning_session': 'no_tuning_session',
-                'hardware': 16,
+                'cpu': '2',
+                'memory': '16.0',
+                'storage': '32',
                 'dbms': 1,
                 'target_objective': 'throughput_txn_per_sec'
             }
