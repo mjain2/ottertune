@@ -158,7 +158,9 @@ class SessionViewsTests(TestCase):
             'name': 'test_create_basic_session',
             'description': 'testing create basic session...',
             'tuning_session': 'no_tuning_session',
-            'hardware': 16,
+            'cpu': '2',
+            'memory': '16.0',
+            'storage': '32',
             'dbms': 1
         }
         response = self.client.post(form_addr, post_data, follow=True)
@@ -174,7 +176,9 @@ class SessionViewsTests(TestCase):
             'name': 'test_create_basic_session',
             'description': 'testing create basic session...',
             'tuning_session': 'tuning_session',
-            'hardware': 16,
+            'cpu': '2',
+            'memory': '16.0',
+            'storage': '32',
             'dbms': 1,
             'target_objective': 'throughput_txn_per_sec'
         }
@@ -198,8 +202,6 @@ class SessionViewsTests(TestCase):
         post_data = {
             'name': 'new_session_name',
             'tuning_session': 'tuning_session',
-            'hardware': 18,
-            'dbms': 1,
             'target_objective': 'throughput_txn_per_sec'
         }
         response = self.client.post(form_addr, post_data, follow=True)
@@ -207,6 +209,24 @@ class SessionViewsTests(TestCase):
         self.assertRedirects(response, reverse('session',
                                                kwargs={'project_id': TEST_PROJECT_ID,
                                                        'session_id': TEST_BASIC_SESSION_ID}))
+
+    def test_edit_all_knobs_ok(self):
+        response = self.client.get(reverse('edit_knobs',
+                                           kwargs={'project_id': TEST_PROJECT_ID,
+                                                   'session_id': TEST_BASIC_SESSION_ID}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_edit_knob_ok(self):
+        form_addr = reverse('edit_knobs', kwargs={'project_id': TEST_PROJECT_ID,
+                                                  'session_id': TEST_BASIC_SESSION_ID})
+        post_data = {
+            'name': 'global.wal_writer_delay',
+            'minval': '1',
+            'maxval': '1000',
+            'tunable': 'on'
+        }
+        response = self.client.post(form_addr, post_data, follow=True)
+        self.assertEqual(response.status_code, 200)
 
     def test_delete_zero_sessions(self):
         form_addr = reverse('delete_session', kwargs={'project_id': TEST_PROJECT_ID})

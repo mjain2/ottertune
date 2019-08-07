@@ -99,14 +99,11 @@ def clean_knob_data(knob_matrix, knob_labels, session):
     knob_cat = SessionKnob.objects.get_knobs_for_session(session)
     knob_cat = filter(lambda knob:knob["tunable"], knob_cat)
     knob_cat = list(map(lambda knob:knob["name"], knob_cat))
-    LOG.info("knob_cat:%s", str(knob_cat))
-    LOG.info("knob_labels:%s", str(knob_labels))
-    #knob_cat = [k.name for k in KnobCatalog.objects.filter(dbms=dbms, tunable=True)]
     matrix = np.array(knob_matrix)
     missing_columns = set(knob_cat) - set(knob_labels)
-    LOG.info("missing_columns:%s", str(missing_columns))
     unused_columns = set(knob_labels) - set(knob_cat)
-    LOG.info("unused_columns:%s", str(unused_columns))
+    LOG.debug("clean_knob_data added %d knobs and removed %d knobs.", len(missing_columns),
+              len(unused_columns))
     # If columns are missing from the matrix
     if missing_columns:
         for knob in missing_columns:
@@ -160,14 +157,18 @@ def aggregate_target_results(result_id):
     agg_data = DataUtil.aggregate_data(target_results)
     agg_data['newest_result_id'] = result_id
     agg_data['bad'] = False
+
+    # Clean knob data
+    cleaned_agg_data = clean_knob_data(agg_data['X_matrix'], agg_data['X_columnlabels'],
+                                       newest_result.session)
+    agg_data['X_matrix'] = np.array(cleaned_agg_data[0])
+    agg_data['X_columnlabels'] = np.array(cleaned_agg_data[1])
+
     return agg_data
 
 
-def gen_random_data(knobs):#, mem_max):
+def gen_random_data(knobs):
     random_knob_result = {}
-    #mem_max = int(mem_max * 1073741824)
-    #used_mem = 0
-    #memoryknobs = dict()
     for knob in knobs:
         name = knob["name"]
         if knob["vartype"] == VarType.BOOL:
@@ -183,9 +184,6 @@ def gen_random_data(knobs):#, mem_max):
             random_knob_result[name] = rand_idx
         elif knob["vartype"] == VarType.INTEGER:
             random_knob_result[name] = random.randint(int(knob["minval"]), int(knob["maxval"]))
-            #if knob["resource"] == 1:
-            #    used_mem += random_knob_result[name]
-            #    memoryknobs[name] = metadata
         elif knob["vartype"] == VarType.REAL:
             random_knob_result[name] = random.uniform(
                 float(knob["minval"]), float(knob["maxval"]))
@@ -196,15 +194,6 @@ def gen_random_data(knobs):#, mem_max):
         else:
             raise Exception(
                 'Unknown variable type: {}'.format(metadata.vartype))
-
-    '''
-    while used_mem > mem_max:  # Ensures that the memory configuration is valid for postgres
-        used_mem = 0
-        for name, metadata in list(memoryknobs.items()):
-            n = random_knob_result[name] = random.randint(int(metadata.minval),
-                                                          min(mem_max, int(metadata.maxval)))
-            used_mem += n
-    '''
 
     return random_knob_result
 
@@ -242,7 +231,6 @@ def configuration_recommendation(target_data):
 
     X_workload = np.array(cleaned_workload_knob_data[0])
     X_columnlabels = np.array(cleaned_workload_knob_data[1])
-    LOG.debug("X_columnlabels:"+str(target_data['X_columnlabels']))
     y_workload = np.array(workload_metric_data['data'])
     y_columnlabels = np.array(workload_metric_data['columnlabels'])
     rowlabels_workload = np.array(workload_metric_data['rowlabels'])
