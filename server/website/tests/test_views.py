@@ -201,7 +201,7 @@ class SessionViewsTests(TestCase):
                                                     'session_id': TEST_BASIC_SESSION_ID})
         post_data = {
             'name': 'new_session_name',
-            'description': 'testing create basic session...',
+            'description': 'testing edit basic session...',
             'tuning_session': 'tuning_session',
             'cpu': '2',
             'memory': '16.0',
