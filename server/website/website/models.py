@@ -10,8 +10,8 @@ from django.core.validators import validate_comma_separated_integer_list
 from django.db import models, DEFAULT_DB_ALIAS
 from django.utils.timezone import now
 
-from .types import (DBMSType, LabelStyleType, MetricType, HardwareType,
-                    KnobUnitType, PipelineTaskType, VarType, KnobResourceType,
+from .types import (DBMSType, LabelStyleType, MetricType, KnobUnitType,
+                    PipelineTaskType, VarType, KnobResourceType,
                     WorkloadStatusType)
 
 
@@ -167,7 +167,7 @@ class Project(BaseModel):
 
 
 class Hardware(BaseModel):
-    type = models.IntegerField(choices=HardwareType.choices())
+    type = models.IntegerField()
     name = models.CharField(max_length=32)
     cpu = models.IntegerField()
     memory = models.FloatField()
@@ -177,8 +177,6 @@ class Hardware(BaseModel):
     additional_specs = models.TextField(null=True)
 
     def __unicode__(self):
-        if self.type in HardwareType.TYPE_NAMES:
-            return HardwareType.TYPE_NAMES[self.type]
         return 'CPU:{}, RAM:{}, Storage:{}'.format(self.cpu, self.memory, self.storage)
 
 

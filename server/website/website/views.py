@@ -336,7 +336,7 @@ def edit_knobs(request, project_id, session_id):
         instance.save()
         return HttpResponse(status=204)
     else:
-        knobs = KnobCatalog.objects.filter(dbms=session.dbms).order_by('tunable').reverse()
+        knobs = KnobCatalog.objects.filter(dbms=session.dbms).order_by('-tunable')
         forms = []
         for knob in knobs:
             knob_values = model_to_dict(knob)
