@@ -71,6 +71,8 @@ class SessionForm(forms.ModelForm):
             model.hardware.save()
         else:
             last_type = Hardware.objects.aggregate(Max('type'))['type__max']
+            if last_type is None:
+                last_type = 0
             model.hardware = Hardware.objects.create(type=last_type + 1,
                                                      name='New Hardware',
                                                      cpu=cpu2,

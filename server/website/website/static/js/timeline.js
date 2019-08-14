@@ -69,7 +69,7 @@ function renderKnobPlot(data, div_id) {
 
     var plotoptions = {
         title: {text: data.knob, fontSize: '1.1em'},
-        series: [{"label":"Hello"}],
+        //series: [{"label":"Hello"}],
         axes:{
         yaxis:{
             label: data.units,
