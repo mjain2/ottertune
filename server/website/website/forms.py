@@ -14,9 +14,6 @@ from django.db.models import Max
 
 from .models import Session, Project, Hardware, SessionKnob
 
-import logging
-
-logger = logging.getLogger(__name__)
 
 class NewResultForm(forms.Form):
     upload_code = forms.CharField(max_length=30)
@@ -59,7 +56,7 @@ class SessionForm(forms.ModelForm):
         self.fields['cpu'].initial = 2
         self.fields['memory'].initial = 16.0
         self.fields['storage'].initial = 32
-    
+
     def save(self, commit=True):
         model = super(SessionForm, self).save(commit=False)
 
@@ -73,8 +70,8 @@ class SessionForm(forms.ModelForm):
             model.hardware.storage = storage2
             model.hardware.save()
         else:
-            lastType = Hardware.objects.aggregate(Max('type'))['type__max']
-            model.hardware = Hardware.objects.create(type=lastType+1,
+            last_type = Hardware.objects.aggregate(Max('type'))['type__max']
+            model.hardware = Hardware.objects.create(type=last_type + 1,
                                                      name='New Hardware',
                                                      cpu=cpu2,
                                                      memory=memory2,
@@ -90,8 +87,8 @@ class SessionForm(forms.ModelForm):
     class Meta:  # pylint: disable=old-style-class,no-init
         model = Session
 
-        #'hardware',  
-        fields = ('name', 'description', 'tuning_session', 'dbms', 'cpu', 'memory', 'storage', 'target_objective')
+        fields = ('name', 'description', 'tuning_session', 'dbms', 'cpu', 'memory', 'storage',
+                  'target_objective')
 
         widgets = {
             'name': forms.TextInput(attrs={'required': True}),
@@ -101,6 +98,7 @@ class SessionForm(forms.ModelForm):
         labels = {
             'dbms': 'DBMS',
         }
+
 
 class SessionKnobForm(forms.ModelForm):
     name = forms.CharField(max_length=128)
@@ -114,4 +112,3 @@ class SessionKnobForm(forms.ModelForm):
     class Meta:  # pylint: disable=old-style-class,no-init
         model = SessionKnob
         fields = ['session', 'knob', 'minval', 'maxval', 'tunable']
-

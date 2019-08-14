@@ -10,8 +10,8 @@ from django.core.validators import validate_comma_separated_integer_list
 from django.db import models, DEFAULT_DB_ALIAS
 from django.utils.timezone import now
 
-from .types import (DBMSType, LabelStyleType, MetricType, HardwareType,
-                    KnobUnitType, PipelineTaskType, VarType, KnobResourceType,
+from .types import (DBMSType, LabelStyleType, MetricType, KnobUnitType,
+                    PipelineTaskType, VarType, KnobResourceType,
                     WorkloadStatusType)
 
 
@@ -83,6 +83,7 @@ class KnobCatalog(BaseModel):
     context = models.CharField(max_length=32)
     tunable = models.BooleanField(verbose_name="tunable")
     resource = models.IntegerField(choices=KnobResourceType.choices(), default=4)
+
 
 MetricMeta = namedtuple('MetricMeta',
                         ['name', 'pprint', 'unit', 'short_unit', 'scale', 'improvement'])
@@ -166,7 +167,7 @@ class Project(BaseModel):
 
 
 class Hardware(BaseModel):
-    type = models.IntegerField(choices=HardwareType.choices())
+    type = models.IntegerField()
     name = models.CharField(max_length=32)
     cpu = models.IntegerField()
     memory = models.FloatField()
@@ -176,8 +177,6 @@ class Hardware(BaseModel):
     additional_specs = models.TextField(null=True)
 
     def __unicode__(self):
-        if self.type in HardwareType.TYPE_NAMES.keys():
-            return HardwareType.TYPE_NAMES[self.type]
         return 'CPU:{}, RAM:{}, Storage:{}'.format(self.cpu, self.memory, self.storage)
 
 
@@ -221,23 +220,25 @@ class Session(BaseModel):
             r.delete()
         super(Session, self).delete(using=DEFAULT_DB_ALIAS, keep_parents=False)
 
+
 class SessionKnobManager(models.Manager):
     @staticmethod
     def get_knobs_for_session(session):
             # Returns a dict of the knob
         knobs = KnobCatalog.objects.filter(dbms=session.dbms)
-        knob_dicts= list(knobs.values())
-        for i in range(len(knob_dicts)):
+        knob_dicts = list(knobs.values())
+        for i, _ in enumerate(knob_dicts):
             if SessionKnob.objects.filter(session=session, knob=knobs[i]).exists():
                 new_knob = SessionKnob.objects.filter(session=session, knob=knobs[i])[0]
-                knob_dicts[i]["minval"]=new_knob.minval
-                knob_dicts[i]["maxval"]=new_knob.maxval
-                knob_dicts[i]["tunable"]=new_knob.tunable
-        knob_dicts = list(filter(lambda knob: knob["tunable"], knob_dicts))
+                knob_dicts[i]["minval"] = new_knob.minval
+                knob_dicts[i]["maxval"] = new_knob.maxval
+                knob_dicts[i]["tunable"] = new_knob.tunable
+        knob_dicts = [knob for knob in knob_dicts if knob["tunable"]]
         return knob_dicts
 
     def __unicode__(self):
-        return self.session.name+" "+self.knob.name
+        return self.session.name + " " + self.knob.name
+
 
 class SessionKnob(BaseModel):
     objects = SessionKnobManager()
@@ -246,6 +247,7 @@ class SessionKnob(BaseModel):
     minval = models.CharField(max_length=32, null=True, verbose_name="minimum value")
     maxval = models.CharField(max_length=32, null=True, verbose_name="maximum value")
     tunable = models.BooleanField(verbose_name="tunable")
+
 
 class DataModel(BaseModel):
     session = models.ForeignKey(Session)

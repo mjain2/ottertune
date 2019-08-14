@@ -26,18 +26,18 @@ from django.forms.models import model_to_dict
 from pytz import timezone
 
 from .forms import NewResultForm, ProjectForm, SessionForm, SessionKnobForm
-from .models import (BackupData, DBMSCatalog, Hardware, KnobCatalog,
-                     KnobData, MetricCatalog, MetricData, MetricManager,
-                     Project, Result, Session, Workload, SessionKnob)
+from .models import (BackupData, DBMSCatalog, KnobCatalog, KnobData, MetricCatalog,
+                     MetricData, MetricManager, Project, Result, Session, Workload,
+                     SessionKnob)
 from .parser import Parser
 from .tasks import (aggregate_target_results, map_workload,
                     configuration_recommendation)
-from .types import (DBMSType, HardwareType, KnobUnitType, MetricType,
+from .types import (DBMSType, KnobUnitType, MetricType,
                     TaskType, VarType, WorkloadStatusType)
 from .utils import JSONUtil, LabelUtil, MediaUtil, TaskUtil
 from .settings import TIME_ZONE
 
-from .SetDefaultKnobs import setDefaultKnobs
+from .set_default_knobs import set_default_knobs
 
 LOG = logging.getLogger(__name__)
 
@@ -286,10 +286,9 @@ def create_or_edit_session(request, project_id, session_id=''):
             session.last_update = ts
             session.upload_code = MediaUtil.upload_code_generator()
             session.save()
-            setDefaultKnobs(session)
+            set_default_knobs(session)
         else:
             # Update an existing session with the form contents
-            LOG.info('updating session %s with %s',session_id,str(request.POST))
             session = Session.objects.get(pk=session_id)
             form = SessionForm(request.POST, instance=session)
             if not form.is_valid():
@@ -314,8 +313,6 @@ def create_or_edit_session(request, project_id, session_id=''):
                 initial={
                     'dbms': DBMSCatalog.objects.get(
                         type=DBMSType.POSTGRES, version='9.6'),
-                   # 'hardware': Hardware.objects.get(
-                   #     type=HardwareType.EC2_M3XLARGE),
                     'target_objective': 'throughput_txn_per_sec',
                 })
         context = {
@@ -325,6 +322,7 @@ def create_or_edit_session(request, project_id, session_id=''):
         }
         return render(request, 'edit_session.html', context)
 
+
 @login_required(login_url=reverse_lazy('login'))
 def edit_knobs(request, project_id, session_id):
     project = get_object_or_404(Project, pk=project_id, user=request.user)
@@ -333,7 +331,7 @@ def edit_knobs(request, project_id, session_id):
         form = SessionKnobForm(request.POST)
         if not form.is_valid():
             return render(request, 'edit_knobs.html',
-                        {'project': project, 'session':session, 'form': form})
+                          {'project': project, 'session': session, 'form': form})
         instance = form.instance
         instance.session = session
         instance.knob = KnobCatalog.objects.filter(dbms=session.dbms,
@@ -342,22 +340,23 @@ def edit_knobs(request, project_id, session_id):
         instance.save()
         return HttpResponse(status=204)
     else:
-        knobs = KnobCatalog.objects.filter(dbms=session.dbms).order_by('tunable').reverse()
+        knobs = KnobCatalog.objects.filter(dbms=session.dbms).order_by('-tunable')
         forms = []
         for knob in knobs:
-            knobValues = model_to_dict(knob)
+            knob_values = model_to_dict(knob)
             if SessionKnob.objects.filter(session=session, knob=knob).exists():
-                newKnob = SessionKnob.objects.filter(session=session, knob=knob)[0]
-                knobValues["minval"] = newKnob.minval
-                knobValues["maxval"] = newKnob.maxval
-                knobValues["tunable"] = newKnob.tunable
-            forms.append(SessionKnobForm(initial=knobValues))
+                new_knob = SessionKnob.objects.filter(session=session, knob=knob)[0]
+                knob_values["minval"] = new_knob.minval
+                knob_values["maxval"] = new_knob.maxval
+                knob_values["tunable"] = new_knob.tunable
+            forms.append(SessionKnobForm(initial=knob_values))
         context = {
             'project': project,
             'session': session,
             'forms': forms
         }
         return render(request, 'edit_knobs.html', context)
+
 
 @login_required(login_url=reverse_lazy('login'))
 def delete_session(request, project_id):

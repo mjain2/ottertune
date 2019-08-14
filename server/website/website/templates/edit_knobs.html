@@ -4,6 +4,7 @@
 
 {% block body %}
 <div class="container">
+    <caption><h4>Edit Knobs</h4></caption>
     <table class="table table-striped table-bordered table-hover table-nonfluid"
            style="display:block; overflow-y:scroll; height:500px">
         <tr>
@@ -35,20 +36,6 @@ function show_content() {
 	//$("#target_obj_row").toggle()
 }
 
-$(function() {
-	if ("{{ session }}" != "None") {
-	    $("#dbms_row").hide();
-	    $("#hardware_row").hide();
-	} else {
-		$("#upload_code_row").hide();
-	}
-	
-	/*if (document.getElementById('id_tuning_session').checked) {
-		$("#target_obj_row").show()
-	} else {
-		$("#target_obj_row").hide()
-	}*/
-});
 </script>
 
 {% endblock body %}
