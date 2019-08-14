@@ -287,6 +287,7 @@ function initializeSite(event) {
     $("input[name^='specific']"   ).on('change', updateUrl);
     $("select[name^='additional']").bind('change', updateUrl);
     $("input[name='metric']"   ).on('click', updateUrl);
+    $("input[name='knob']"   ).on('click', updateUrl);
     $("#equidistant"              ).bind('change', updateUrl);
     
 }
