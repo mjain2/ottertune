@@ -21,7 +21,7 @@
             <td style="vertical-align:middle"><input type="checkbox" name="sessions" value="{{ session.pk }}" /></td>
             <td style="vertical-align:middle"><a href="{% url 'session' project.pk session.pk %}">{{ session.name }}</a></td>
             <td style="vertical-align:middle">{{ session.dbms.full_name }}</td>
-            <td style="vertical-align:middle">{{ session.hardware.name }}</td>
+            <td style="vertical-align:middle">{{ session.hardware }}</td>
             <td style="vertical-align:middle">{{ session.tuning_session }}</td>
             <td style="vertical-align:middle">{{ session.creation_time }}</td>
             <td style="vertical-align:middle">{{ session.last_update }}</td>

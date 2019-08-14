@@ -22,19 +22,22 @@ from django.urls import reverse, reverse_lazy
 from django.utils.datetime_safe import datetime
 from django.utils.timezone import now
 from django.views.decorators.csrf import csrf_exempt
+from django.forms.models import model_to_dict
 from pytz import timezone
 
-from .forms import NewResultForm, ProjectForm, SessionForm
-from .models import (BackupData, DBMSCatalog, Hardware, KnobCatalog,
-                     KnobData, MetricCatalog, MetricData, MetricManager,
-                     Project, Result, Session, Workload)
+from .forms import NewResultForm, ProjectForm, SessionForm, SessionKnobForm
+from .models import (BackupData, DBMSCatalog, KnobCatalog, KnobData, MetricCatalog,
+                     MetricData, MetricManager, Project, Result, Session, Workload,
+                     SessionKnob)
 from .parser import Parser
 from .tasks import (aggregate_target_results, map_workload,
                     configuration_recommendation)
-from .types import (DBMSType, HardwareType, KnobUnitType, MetricType,
+from .types import (DBMSType, KnobUnitType, MetricType,
                     TaskType, VarType, WorkloadStatusType)
 from .utils import JSONUtil, LabelUtil, MediaUtil, TaskUtil
 from .settings import TIME_ZONE
+
+from .set_default_knobs import set_default_knobs
 
 LOG = logging.getLogger(__name__)
 
@@ -279,6 +282,7 @@ def create_or_edit_session(request, project_id, session_id=''):
             session.last_update = ts
             session.upload_code = MediaUtil.upload_code_generator()
             session.save()
+            set_default_knobs(session)
         else:
             # Update an existing session with the form contents
             session = Session.objects.get(pk=session_id)
@@ -289,6 +293,7 @@ def create_or_edit_session(request, project_id, session_id=''):
             if form.cleaned_data['gen_upload_code'] is True:
                 session.upload_code = MediaUtil.upload_code_generator()
             session.last_update = now()
+            form.save()
             session.save()
         return redirect(reverse('session', kwargs={'project_id': project_id,
                                                    'session_id': session.pk}))
@@ -304,8 +309,6 @@ def create_or_edit_session(request, project_id, session_id=''):
                 initial={
                     'dbms': DBMSCatalog.objects.get(
                         type=DBMSType.POSTGRES, version='9.6'),
-                    'hardware': Hardware.objects.get(
-                        type=HardwareType.EC2_M3XLARGE),
                     'target_objective': 'throughput_txn_per_sec',
                 })
         context = {
@@ -314,6 +317,41 @@ def create_or_edit_session(request, project_id, session_id=''):
             'form': form,
         }
         return render(request, 'edit_session.html', context)
+
+
+@login_required(login_url=reverse_lazy('login'))
+def edit_knobs(request, project_id, session_id):
+    project = get_object_or_404(Project, pk=project_id, user=request.user)
+    session = get_object_or_404(Session, pk=session_id, user=request.user)
+    if request.method == 'POST':
+        form = SessionKnobForm(request.POST)
+        if not form.is_valid():
+            return render(request, 'edit_knobs.html',
+                          {'project': project, 'session': session, 'form': form})
+        instance = form.instance
+        instance.session = session
+        instance.knob = KnobCatalog.objects.filter(dbms=session.dbms,
+                                                   name=form.cleaned_data["name"])[0]
+        SessionKnob.objects.filter(session=instance.session, knob=instance.knob).delete()
+        instance.save()
+        return HttpResponse(status=204)
+    else:
+        knobs = KnobCatalog.objects.filter(dbms=session.dbms).order_by('-tunable')
+        forms = []
+        for knob in knobs:
+            knob_values = model_to_dict(knob)
+            if SessionKnob.objects.filter(session=session, knob=knob).exists():
+                new_knob = SessionKnob.objects.filter(session=session, knob=knob)[0]
+                knob_values["minval"] = new_knob.minval
+                knob_values["maxval"] = new_knob.maxval
+                knob_values["tunable"] = new_knob.tunable
+            forms.append(SessionKnobForm(initial=knob_values))
+        context = {
+            'project': project,
+            'session': session,
+            'forms': forms
+        }
+        return render(request, 'edit_knobs.html', context)
 
 
 @login_required(login_url=reverse_lazy('login'))

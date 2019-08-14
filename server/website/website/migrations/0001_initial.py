@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
             name='Hardware',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type', models.IntegerField(choices=[(1, b'generic'), (2, b't2.nano'), (3, b't2.micro'), (4, b't2.small'), (5, b't2.medium'), (6, b't2.large'), (7, b't2.xlarge'), (8, b't2.2xlarge'), (9, b'm4.large'), (10, b'm4.xlarge'), (11, b'm4.2xlarge'), (12, b'm4.4xlarge'), (13, b'm4.10xlarge'), (14, b'm4.16xlarge'), (15, b'm3.medium'), (16, b'm3.large'), (17, b'm3.xlarge'), (18, b'm3.2xlarge'), (19, b'c4.large'), (20, b'c4.xlarge'), (21, b'c4.2xlarge'), (22, b'c4.4xlarge'), (23, b'c4.8xlarge'), (24, b'c3.large'), (25, b'c3.xlarge'), (26, b'c3.2xlarge'), (27, b'c3.4xlarge'), (28, b'c3.8xlarge'), (29, b'p2.xlarge'), (30, b'p2.8xlarge'), (31, b'p2.16xlarge'), (32, b'g2.2xlarge'), (33, b'g2.8xlarge'), (34, b'x1.16large'), (35, b'x1.32xlarge'), (36, b'r4.large'), (37, b'r4.xlarge'), (38, b'r4.2xlarge'), (39, b'r4.4xlarge'), (40, b'r4.8xlarge'), (41, b'r4.16xlarge'), (42, b'r3.large'), (43, b'r3.xlarge'), (44, b'r3.2xlarge'), (45, b'r3.4xlarge'), (46, b'r3.8xlarge'), (47, b'i3.large'), (48, b'i3.xlarge'), (49, b'i3.2xlarge'), (50, b'i3.4xlarge'), (51, b'i3.8xlarge'), (52, b'i3.16large'), (53, b'd2.xlarge'), (54, b'd2.2xlarge'), (55, b'd2.4xlarge'), (56, b'd2.8xlarge'), (57, b'f1.2xlarge'), (58, b'f1.16xlarge')])),
+                ('type', models.IntegerField()),
                 ('name', models.CharField(max_length=32)),
                 ('cpu', models.IntegerField()),
                 ('memory', models.FloatField()),
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
                 ('enumvals', models.TextField(null=True, verbose_name=b'valid values')),
                 ('context', models.CharField(max_length=32)),
                 ('tunable', models.BooleanField(verbose_name=b'tunable')),
-                ('resource', models.IntegerField(choices=[(1, b'Memory'), (2, b'CPU'), (3, b'Stroage'), (4, b'Other')], default=4)),
+                ('resource', models.IntegerField(choices=[(1, b'Memory'), (2, b'CPU'), (3, b'Storage'), (4, b'Other')], default=4)),
                 ('dbms', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='website.DBMSCatalog')),
             ],
             options={

@@ -9,7 +9,8 @@ from djcelery.models import TaskMeta
 from .models import (BackupData, DBMSCatalog, KnobCatalog,
                      KnobData, MetricCatalog, MetricData,
                      PipelineData, PipelineRun, Project,
-                     Result, Session, Workload)
+                     Result, Session, Workload, Hardware,
+                     SessionKnob)
 
 
 class BaseAdmin(admin.ModelAdmin):
@@ -46,6 +47,14 @@ class ProjectAdmin(admin.ModelAdmin):
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('name', 'user', 'last_update', 'creation_time')
     list_display_links = ('name',)
+
+
+class SessionKnobAdmin(admin.ModelAdmin):
+    list_display = ('knob', 'session', 'minval', 'maxval', 'tunable')
+
+
+class HardwareAdmin(admin.ModelAdmin):
+    list_display = ('cpu', 'memory', 'storage')
 
 
 class KnobDataAdmin(BaseAdmin):
@@ -131,3 +140,5 @@ admin.site.register(BackupData, BackupDataAdmin)
 admin.site.register(PipelineData, PipelineDataAdmin)
 admin.site.register(PipelineRun, PipelineRunAdmin)
 admin.site.register(Workload, WorkloadAdmin)
+admin.site.register(SessionKnob, SessionKnobAdmin)
+admin.site.register(Hardware, HardwareAdmin)

@@ -6,7 +6,9 @@
 
 <div id="session" class="container">
 <table class="table table-striped table-bordered table-condensed table-hover">
-    <caption><h4>{{ labels.title }} (<a href="{% url 'edit_session' project.pk session.pk %}">edit</a>)</h4></caption>
+    <caption><h4>{{ labels.title }} (<a href="{% url 'edit_session' project.pk session.pk %}">edit</a>)
+		    (<a href="{% url 'edit_knobs' project.pk session.pk %}">edit knobs</a>)
+	    </h4></caption>
     <tbody>
     <tr>
         <td><div class="text-right">{{ labels.name }}</div></td>
@@ -28,7 +30,7 @@
     </tr>
     <tr>
         <td><div class="text-right">{{ labels.hardware }}</div></td>
-        <td>{{ session.hardware.name }}</td>
+        <td>{{ session.hardware }}</td>
     </tr>
     <tr>
         <td><div class="text-right">{{ labels.creation_time }}</div></td>
