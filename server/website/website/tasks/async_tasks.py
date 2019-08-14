@@ -354,7 +354,7 @@ def configuration_recommendation(target_data):
     X_samples = np.empty((num_samples, X_scaled.shape[1]))
     X_min = np.empty(X_scaled.shape[1])
     X_max = np.empty(X_scaled.shape[1])
-    X_scaler = np.zeros([1, X_scaled.shape[1]])
+    X_scaler_matrix = np.zeros([1, X_scaled.shape[1]])
 
     session_knobs = SessionKnob.objects.get_knobs_for_session(newest_result.session)
 
@@ -368,10 +368,10 @@ def configuration_recommendation(target_data):
             col_max = X_scaled[:, i].max()
             for knob in session_knobs:
                 if X_columnlabels[i] == knob["name"]:
-                    X_scaler[0][i] = knob["minval"]
-                    col_min = X_scaler.transform(X_scaler)[0][i]
-                    X_scaler[0][i] = knob["maxval"]
-                    col_max = X_scaler.transform(X_scaler)[0][i]
+                    X_scaler_matrix[0][i] = knob["minval"]
+                    col_min = X_scaler.transform(X_scaler_matrix)[0][i]
+                    X_scaler_matrix[0][i] = knob["maxval"]
+                    col_max = X_scaler.transform(X_scaler_matrix)[0][i]
         X_min[i] = col_min
         X_max[i] = col_max
         X_samples[:, i] = np.random.rand(num_samples) * (col_max - col_min) + col_min
