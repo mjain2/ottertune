@@ -41,6 +41,7 @@ from .set_default_knobs import set_default_knobs
 
 LOG = logging.getLogger(__name__)
 
+
 # For the html template to access dict object
 @register.filter
 def get_item(dictionary, key):
@@ -240,8 +241,7 @@ def session_view(request, project_id, session_id):
     metric_meta = MetricCatalog.objects.get_metric_meta(session.dbms, session.target_objective)
 
     knobs = SessionKnob.objects.get_knobs_for_session(session)
-    knobs = list(filter(lambda knob:knob["tunable"], knobs))
-    knob_names = list(map(lambda knob:knob["name"], knobs))
+    knob_names = [knob["name"] for knob in knobs if knob["tunable"]]
 
     form_labels = Session.get_labels()
     form_labels['title'] = "Session Info"
@@ -912,11 +912,10 @@ def get_timeline_data(request):
             data_package['timelines'].append(data)
 
     knobs = SessionKnob.objects.get_knobs_for_session(session)
-    knobs = list(filter(lambda knob:knob["tunable"], knobs))
-    knob_names = list(map(lambda knob:knob["name"], knobs))
+    knob_names = [knob["name"] for knob in knobs if knob["tunable"]]
     knobs = request.GET.get('knb', ','.join(knob_names)).split(',')
-    knobs = list(filter(lambda knob:knob != "none", knobs))
-    LOG.info(str(knobs));
+    knobs = [knob for knob in knobs if knob != "none"]
+    LOG.debug("Knobs plotted: %s", str(knobs))
     for knob in knobs:
         data = {
             'units': KnobUnitType.TYPE_NAMES[KnobCatalog.objects.filter(name=knob)[0].unit],
