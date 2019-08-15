@@ -240,6 +240,9 @@ def session_view(request, project_id, session_id):
     default_metrics = MetricCatalog.objects.get_default_metrics(session.target_objective)
     metric_meta = MetricCatalog.objects.get_metric_meta(session.dbms, session.target_objective)
 
+    knobs = SessionKnob.objects.get_knobs_for_session(session)
+    knob_names = [knob["name"] for knob in knobs if knob["tunable"]]
+
     form_labels = Session.get_labels()
     form_labels['title'] = "Session Info"
     context = {
@@ -255,6 +258,7 @@ def session_view(request, project_id, session_id):
         'metrics': list(metric_meta.keys()),
         'metric_meta': metric_meta,
         'default_metrics': default_metrics,
+        'knob_names': knob_names,
         'filters': [],
         'session': session,
         'results': results,
@@ -814,6 +818,7 @@ def get_timeline_data(request):
     data_package = {
         'error': 'None',
         'timelines': [],
+        'knobtimelines': [],
         'columnnames': columnnames,
     }
 
@@ -906,6 +911,27 @@ def get_timeline_data(request):
 
             data_package['timelines'].append(data)
 
+    knobs = SessionKnob.objects.get_knobs_for_session(session)
+    knob_names = [knob["name"] for knob in knobs if knob["tunable"]]
+    knobs = request.GET.get('knb', ','.join(knob_names)).split(',')
+    knobs = [knob for knob in knobs if knob != "none"]
+    LOG.debug("Knobs plotted: %s", str(knobs))
+    for knob in knobs:
+        data = {
+            'units': KnobUnitType.TYPE_NAMES[KnobCatalog.objects.filter(name=knob)[0].unit],
+            'data': [],
+            'knob': knob,
+        }
+        for res in results:
+            knob_data = JSONUtil.loads(res.knob_data.data)
+            data['data'].append([
+                res.observation_end_time.astimezone(timezone(TIME_ZONE)).
+                strftime("%m-%d-%y %H:%M"),
+                knob_data[knob],
+                "",
+                str(res.pk)
+            ])
+        data_package['knobtimelines'].append(data)
     return HttpResponse(JSONUtil.dumps(data_package), content_type='application/json')
 
 
