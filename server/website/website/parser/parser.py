@@ -14,6 +14,7 @@ from website.models import DBMSCatalog
 from website.types import DBMSType
 
 from .myrocks import MyRocks56Parser
+from .mysql import MySql57Parser
 from .postgres import Postgres96Parser, PostgresOldParser
 from .oracle import Oracle19Parser
 
@@ -39,7 +40,9 @@ class Parser(object):
                 DBMSCatalog.objects.get(
                     type=DBMSType.MYROCKS, version='5.6').pk: MyRocks56Parser(),
                 DBMSCatalog.objects.get(
-                    type=DBMSType.ORACLE, version='19.0.0.0.0').pk: Oracle19Parser()
+                    type=DBMSType.ORACLE, version='19.0.0.0.0').pk: Oracle19Parser(),
+                DBMSCatalog.objects.get(
+                    type=DBMSType.MYSQL, version='5.7').pk: MySql57Parser()
             }
         try:
             if dbms_id is None:

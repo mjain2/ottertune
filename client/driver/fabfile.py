@@ -70,6 +70,8 @@ def restart_database():
         cmd = 'sudo service postgresql restart'
     elif CONF['database_type'] == 'oracle':
         cmd = 'sh oracleScripts/shutdownOracle.sh && sh oracleScripts/startupOracle.sh'
+    elif CONF['database_type'] == 'mysql':
+        cmd = 'sudo /etc/init.d/mysql restart'
     else:
         raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
@@ -80,6 +82,8 @@ def drop_database():
     if CONF['database_type'] == 'postgres':
         cmd = "PGPASSWORD={} dropdb -e --if-exists {} -U {}".\
               format(CONF['password'], CONF['database_name'], CONF['username'])
+    elif CONF['database_type'] == 'mysql':
+        cmd = "mysqladmin -u{} -p{} -f drop {}".format(CONF['username'],CONF['password'],CONF['database_name'])
     else:
         raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
@@ -90,6 +94,8 @@ def create_database():
     if CONF['database_type'] == 'postgres':
         cmd = "PGPASSWORD={} createdb -e {} -U {}".\
               format(CONF['password'], CONF['database_name'], CONF['username'])
+    elif CONF['database_type'] == 'mysql':
+        cmd = "mysqladmin -u{} -p{} -f create {}".format(CONF['username'],CONF['password'],CONF['database_name'])
     else:
         raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
@@ -156,7 +162,7 @@ def save_dbms_result():
 
 @task
 def free_cache():
-    cmd = 'sync; sudo bash -c "echo 1 > /proc/sys/vm/drop_caches"'
+    cmd = '' #sync; sudo bash -c "echo 1 > /proc/sys/vm/drop_caches"'
     local(cmd)
 
 
@@ -206,6 +212,8 @@ def dump_database():
                                                                        CONF['username'],
                                                                        CONF['database_name'],
                                                                        db_file_path)
+        elif CONF['database_type'] == 'mysql':
+            cmd = 'mysql -u{} -p{} {} > {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
         else:
             raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
         local(cmd)
@@ -225,6 +233,8 @@ def restore_database():
         create_database()
         cmd = 'PGPASSWORD={} pg_restore -U {} -n public -j 8 -F c -d {} {}'.\
               format(CONF['password'], CONF['username'], CONF['database_name'], db_file_path)
+    elif CONF['database_type'] == 'mysql':
+        cmd = 'mysql -u{} -p{} {} < {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
     else:
         raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     LOG.info('Start restoring database')
@@ -270,9 +280,11 @@ def lhs_samples(count=10):
 def loop():
 
     # free cache
+    LOG.info('freeing cache')
     free_cache()
 
     # remove oltpbench log and controller log
+    LOG.info('cleaning logs')
     clean_logs()
 
     # restart database

@@ -14,6 +14,7 @@ import time
 import logging
 import json
 import urllib.request
+from urllib.error import HTTPError
 
 # Logging
 LOG = logging.getLogger(__name__)
@@ -33,7 +34,13 @@ def main():
     timer = 0
     start = time.time()
     while True:
-        response = urllib.request.urlopen(request).read().decode()
+        response = "test"
+        try:
+            response = urllib.request.urlopen(request).read().decode()
+        except HTTPError as e:
+            content = e.read()
+            LOG.info(content)
+            LOG.info(e)
         if 'Fail' in response:
             LOG.info('Tuning failed\n')
             break

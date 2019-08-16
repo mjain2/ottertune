@@ -3,8 +3,8 @@
 # Variables
 DBHOST=localhost
 DBNAME=ottertune
-DBUSER=dbuser
-DBPASSWD=test123
+DBUSER=root
+DBPASSWD=Experiment123
 
 LOG=/vagrant/vm_build.log
 REPOPATH=/ottertune

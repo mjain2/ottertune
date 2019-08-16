@@ -1,0 +1,137 @@
+[
+    {
+        "name": "innodb_buffer_pool_size",
+        "tuning_range": {
+            "minval": 5242880,
+            "maxval": 18446744073709551615
+        },
+        "default": 134217728,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_thread_sleep_delay",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000000
+        },
+        "default": 10000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_log_file_size",
+        "tuning_range": {
+            "minval": 4194304,
+            "maxval": 549755813888
+        },
+        "default": 50331648,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_thread_concurrency",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_max_dirty_pages_pct_lwm",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 99.99
+        },
+        "default": 0,
+        "type": "numeric"
+    },
+    {
+        "name": "innodb_read_ahead_threshold",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 64
+        },
+        "default": 56,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_adaptive_max_sleep_delay",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000000
+        },
+        "default": 150000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_buffer_pool_instances",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 64
+        },
+        "default": 8,
+        "type": "integer"
+    },
+    {
+        "name": "thread_cache_size",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 16384
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "key_buffer_size",
+        "tuning_range": {
+            "minval": 8,
+            "maxval": 4294967295
+        },
+        "default": 8388608,
+        "type": "integer"
+    },
+    {
+        "name": "max_binlog_size",
+        "tuning_range": {
+            "minval": 4096,
+            "maxval": 1073741824
+        },
+        "default": 1073741824,
+        "type": "integer"
+    },
+    {
+        "name": "read_buffer_size",
+        "tuning_range": {
+            "minval": 8200,
+            "maxval": 2147479552
+        },
+        "default": 131072,
+        "type": "integer"
+    },
+    {
+        "name": "join_buffer_size",
+        "tuning_range": {
+            "minval": 128,
+            "maxval": 4294967295
+        },
+        "default": 262144,
+        "type": "integer"
+    },
+    {
+        "name": "sort_buffer_size",
+        "tuning_range": {
+            "minval": 32768,
+            "maxval": 4294967295
+        },
+        "default": 262144,
+        "type": "integer"
+    },
+    {
+        "name": "table_open_cache",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 524288
+        },
+        "default": 2000,
+        "type": "integer"
+    }
+]

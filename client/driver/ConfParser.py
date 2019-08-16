@@ -47,6 +47,18 @@ def change_oracle_conf(recommendation, oracle_conf):
     for (knob_name, knob_value) in list(recommendation.items()):
         oracle_conf.write(str(knob_name) + " = " + str(knob_value).strip('B') + "\n")
 
+def change_mysql_conf(recommendation, mysql_conf):
+    lines = mysql_conf.readlines()
+    settings_idx = lines.index("# Add settings for extensions here\n")
+    mysql_conf.seek(0)
+    mysql_conf.truncate(0)
+
+    lines = lines[0:(settings_idx + 1)]
+    for line in lines:
+        mysql_conf.write(line)
+
+    for (knob_name, knob_value) in list(recommendation.items()):
+        mysql_conf.write(str(knob_name) + " = " + str(knob_value) + "\n")
 
 def main():
     if len(sys.argv) != 4:
@@ -61,6 +73,8 @@ def main():
             change_postgres_conf(recommendation, cur_config)
         elif database_type == 'oracle':
             change_oracle_conf(recommendation, cur_config)
+        elif database_type == 'mysql':
+            change_mysql_conf(recommendation,cur_config)
         else:
             raise Exception("Database Type {} Not Implemented !".format(database_type))
 
