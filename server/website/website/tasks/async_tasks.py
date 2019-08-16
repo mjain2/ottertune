@@ -16,7 +16,8 @@ from analysis.gp import GPRNP
 from analysis.gp_tf import GPRGD
 from analysis.preprocessing import Bin, DummyEncoder
 from analysis.constraints import ParamConstraintHelper
-from website.models import PipelineData, PipelineRun, Result, Workload, KnobCatalog, MetricCatalog
+from website.models import (PipelineData, PipelineRun, Result, Workload, KnobCatalog,
+                            MetricCatalog, SessionKnob)
 from website.parser import Parser
 from website.types import PipelineTaskType
 from website.utils import DataUtil, JSONUtil
@@ -94,16 +95,19 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
         result.save()
 
 
-def clean_knob_data(knob_matrix, knob_labels, dbms):
+def clean_knob_data(knob_matrix, knob_labels, session):
     # Makes sure that all knobs in the dbms are included in the knob_matrix and knob_labels
-    knob_cat = [k.name for k in KnobCatalog.objects.filter(dbms=dbms, tunable=True)]
+    knob_cat = SessionKnob.objects.get_knobs_for_session(session)
+    knob_cat = [knob["name"] for knob in knob_cat if knob["tunable"]]
     matrix = np.array(knob_matrix)
     missing_columns = set(knob_cat) - set(knob_labels)
     unused_columns = set(knob_labels) - set(knob_cat)
+    LOG.debug("clean_knob_data added %d knobs and removed %d knobs.", len(missing_columns),
+              len(unused_columns))
     # If columns are missing from the matrix
     if missing_columns:
         for knob in missing_columns:
-            knob_object = KnobCatalog.objects.get(dbms=dbms, name=knob, tunable=True)
+            knob_object = KnobCatalog.objects.get(dbms=session.dbms, name=knob, tunable=True)
             index = knob_cat.index(knob)
             matrix = np.insert(matrix, index, knob_object.default, axis=1)
             knob_labels.insert(index, knob)
@@ -112,7 +116,7 @@ def clean_knob_data(knob_matrix, knob_labels, dbms):
         indexes = [i for i, n in enumerate(knob_labels) if n in unused_columns]
         # Delete unused columns
         matrix = np.delete(matrix, indexes, 1)
-        for i in indexes:
+        for i in sorted(indexes, reverse=True):
             del knob_labels[i]
     return matrix, knob_labels
 
@@ -128,12 +132,10 @@ def aggregate_target_results(result_id):
         LOG.debug("Background tasks haven't ran for this workload yet, picking random data.")
     if not has_pipeline_data or newest_result.session.tuning_session == 'randomly_generate':
         result = Result.objects.filter(pk=result_id)
-        knobs_ = KnobCatalog.objects.filter(dbms=result[0].dbms, tunable=True)
-        knobs_catalog = {k.name: k for k in knobs_}
-        knobs = {k: v for k, v in
-                 list(knobs_catalog.items())}
+        knobs = SessionKnob.objects.get_knobs_for_session(newest_result.session)
+
         # generate a config randomly
-        random_knob_result = gen_random_data(knobs, newest_result.workload.hardware.memory)
+        random_knob_result = gen_random_data(knobs)
         agg_data = DataUtil.aggregate_data(result)
         agg_data['newest_result_id'] = result_id
         agg_data['bad'] = True
@@ -151,48 +153,44 @@ def aggregate_target_results(result_id):
     agg_data = DataUtil.aggregate_data(target_results)
     agg_data['newest_result_id'] = result_id
     agg_data['bad'] = False
+
+    # Clean knob data
+    cleaned_agg_data = clean_knob_data(agg_data['X_matrix'], agg_data['X_columnlabels'],
+                                       newest_result.session)
+    agg_data['X_matrix'] = np.array(cleaned_agg_data[0])
+    agg_data['X_columnlabels'] = np.array(cleaned_agg_data[1])
+
     return agg_data
 
 
-def gen_random_data(knobs, mem_max):
+def gen_random_data(knobs):
     random_knob_result = {}
-    mem_max = int(mem_max * 1073741824)
-    used_mem = 0
-    memoryknobs = dict()
-    for name, metadata in list(knobs.items()):
-        if metadata.vartype == VarType.BOOL:
+    for knob in knobs:
+        name = knob["name"]
+        if knob["vartype"] == VarType.BOOL:
             flag = random.randint(0, 1)
             if flag == 0:
                 random_knob_result[name] = False
             else:
                 random_knob_result[name] = True
-        elif metadata.vartype == VarType.ENUM:
-            enumvals = metadata.enumvals.split(',')
+        elif knob["vartype"] == VarType.ENUM:
+            enumvals = knob["enumvals"].split(',')
             enumvals_len = len(enumvals)
             rand_idx = random.randint(0, enumvals_len - 1)
             random_knob_result[name] = rand_idx
-        elif metadata.vartype == VarType.INTEGER:
-            random_knob_result[name] = random.randint(int(metadata.minval), int(metadata.maxval))
-            if metadata.resource == 1:
-                used_mem += random_knob_result[name]
-                memoryknobs[name] = metadata
-        elif metadata.vartype == VarType.REAL:
+        elif knob["vartype"] == VarType.INTEGER:
+            random_knob_result[name] = random.randint(int(knob["minval"]), int(knob["maxval"]))
+        elif knob["vartype"] == VarType.REAL:
             random_knob_result[name] = random.uniform(
-                float(metadata.minval), float(metadata.maxval))
-        elif metadata.vartype == VarType.STRING:
+                float(knob["minval"]), float(knob["maxval"]))
+        elif knob["vartype"] == VarType.STRING:
             random_knob_result[name] = "None"
-        elif metadata.vartype == VarType.TIMESTAMP:
+        elif knob["vartype"] == VarType.TIMESTAMP:
             random_knob_result[name] = "None"
         else:
             raise Exception(
-                'Unknown variable type: {}'.format(metadata.vartype))
+                'Unknown variable type: {}'.format(knob["vartype"]))
 
-    while used_mem > mem_max:  # Ensures that the memory configuration is valid for postgres
-        used_mem = 0
-        for name, metadata in list(memoryknobs.items()):
-            n = random_knob_result[name] = random.randint(int(metadata.minval),
-                                                          min(mem_max, int(metadata.maxval)))
-            used_mem += n
     return random_knob_result
 
 
@@ -223,9 +221,10 @@ def configuration_recommendation(target_data):
         task_type=PipelineTaskType.METRIC_DATA)
     workload_metric_data = JSONUtil.loads(workload_metric_data.data)
 
+    newest_result = Result.objects.get(pk=target_data['newest_result_id'])
     cleaned_workload_knob_data = clean_knob_data(workload_knob_data["data"],
                                                  workload_knob_data["columnlabels"],
-                                                 mapped_workload.dbms)
+                                                 newest_result.session)
 
     X_workload = np.array(cleaned_workload_knob_data[0])
     X_columnlabels = np.array(cleaned_workload_knob_data[1])
@@ -355,21 +354,11 @@ def configuration_recommendation(target_data):
     X_samples = np.empty((num_samples, X_scaled.shape[1]))
     X_min = np.empty(X_scaled.shape[1])
     X_max = np.empty(X_scaled.shape[1])
-    knobs_mem = KnobCatalog.objects.filter(
-        dbms=newest_result.session.dbms, tunable=True, resource=1)
-    knobs_mem_catalog = {k.name: k for k in knobs_mem}
-    mem_max = newest_result.workload.hardware.memory
-    X_mem = np.zeros([1, X_scaled.shape[1]])
-    X_default = np.empty(X_scaled.shape[1])
+    X_scaler_matrix = np.zeros([1, X_scaled.shape[1]])
 
-    # Get default knob values
-    for i, k_name in enumerate(X_columnlabels):
-        k = KnobCatalog.objects.filter(dbms=newest_result.session.dbms, name=k_name)[0]
-        X_default[i] = k.default
+    session_knobs = SessionKnob.objects.get_knobs_for_session(newest_result.session)
 
-    X_default_scaled = X_scaler.transform(X_default.reshape(1, X_default.shape[0]))[0]
-
-    # Determine min/max for knob values
+    # Set min/max for knob values
     for i in range(X_scaled.shape[1]):
         if i < total_dummies or i in binary_index_set:
             col_min = 0
@@ -377,14 +366,12 @@ def configuration_recommendation(target_data):
         else:
             col_min = X_scaled[:, i].min()
             col_max = X_scaled[:, i].max()
-            if X_columnlabels[i] in knobs_mem_catalog:
-                X_mem[0][i] = mem_max * 1024 * 1024 * 1024  # mem_max GB
-                col_max = min(col_max, X_scaler.transform(X_mem)[0][i])
-
-            # Set min value to the default value
-            # FIXME: support multiple methods can be selected by users
-            col_min = X_default_scaled[i]
-
+            for knob in session_knobs:
+                if X_columnlabels[i] == knob["name"]:
+                    X_scaler_matrix[0][i] = knob["minval"]
+                    col_min = X_scaler.transform(X_scaler_matrix)[0][i]
+                    X_scaler_matrix[0][i] = knob["maxval"]
+                    col_max = X_scaler.transform(X_scaler_matrix)[0][i]
         X_min[i] = col_min
         X_max[i] = col_max
         X_samples[:, i] = np.random.rand(num_samples) * (col_max - col_min) + col_min
@@ -506,7 +493,7 @@ def map_workload(target_data):
         knob_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.KNOB_DATA)
         knob_data["data"], knob_data["columnlabels"] = clean_knob_data(knob_data["data"],
                                                                        knob_data["columnlabels"],
-                                                                       target_workload.dbms)
+                                                                       newest_result.session)
 
         metric_data = load_data_helper(pipeline_data, unique_workload, PipelineTaskType.METRIC_DATA)
         X_matrix = np.array(knob_data["data"])

@@ -12,11 +12,24 @@
     },
     {
         "fields": { 
+            "type": 1, 
+            "name": "New Hardware", 
+	    "cpu": 4,
+	    "memory": 16.0,
+	    "storage": "32",
+	    "storage_type": "",
+	    "additional_specs": ""
+        }, 
+        "model": "website.Hardware",
+        "pk": 1
+    },
+    {
+        "fields": { 
             "user": 1, 
             "name": "basic_session", 
             "description": "(no tuning)",
             "dbms": 1,
-            "hardware": 16,
+            "hardware": 1,
             "project": 1,
             "upload_code": "1234567890",
             "tuning_session": "no_tuning_session",
@@ -34,7 +47,7 @@
             "name": "tuning_session", 
             "description": "",
             "dbms": 1,
-            "hardware": 16,
+            "hardware": 1,
             "project": 1,
             "upload_code": "0987654321",
             "tuning_session": "tuning_session",
