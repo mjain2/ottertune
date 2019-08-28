@@ -433,7 +433,8 @@ def handle_result_files(session, files):
     # Load the contents of the controller's summary file
     summary = JSONUtil.loads(files['summary'])
     dbms_type = DBMSType.type(summary['database_type'])
-    dbms_version = summary['database_version']  # TODO: fix parse_version_string
+    # dbms_version = summary['database_version']  # TODO: fix parse_version_string
+    dbms_version = Parser.parse_version_string_mysql(dbms_type,summary['database_version']) # TODO: moljain currently created own parser for mysql specifically
     workload_name = summary['workload_name']
     observation_time = summary['observation_time']
     start_time = datetime.fromtimestamp(
@@ -452,7 +453,7 @@ def handle_result_files(session, files):
                             'alpha-numeric, underscore(_) and hyphen(-)')
 
     try:
-        # Check that we support this DBMS and version
+        # Check that we support this DBMS and version        
         dbms = DBMSCatalog.objects.get(
             type=dbms_type, version=dbms_version)
     except ObjectDoesNotExist:
@@ -481,6 +482,8 @@ def handle_result_files(session, files):
         dbms.pk, JSONUtil.loads(files['metrics_after']))
     metric_dict = Parser.calculate_change_in_metrics(
         dbms.pk, initial_metric_dict, final_metric_dict)
+    # LOG.info(initial_metric_dict)
+    # LOG.info(metric_dict)
     initial_metric_diffs.extend(final_metric_diffs)
     numeric_metric_dict = Parser.convert_dbms_metrics(
         dbms.pk, metric_dict, observation_time, session.target_objective)

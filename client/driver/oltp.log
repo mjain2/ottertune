@@ -1,4 +1,4 @@
-18:27:46,580 (DBWorkload.java:267) INFO  - ======================================================================
+22:37:33,805 (DBWorkload.java:267) INFO  - ======================================================================
 
 Benchmark:     TPCC {com.oltpbenchmark.benchmarks.tpcc.TPCCBenchmark}
 Configuration: /mnt/d/Ottertune/oltpbench/config/tpcc_config_mysql.xml
@@ -8,76 +8,82 @@ URL:           jdbc:mysql://localhost:3306/tpcc
 Isolation:     TRANSACTION_SERIALIZABLE
 Scale Factor:  2.0
 
-18:27:46,583 (DBWorkload.java:268) INFO  - ======================================================================
-18:27:46,680 (DBWorkload.java:827) INFO  - Creating 2 virtual terminals...
-Fri Aug 16 18:27:46 GMT 2019 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
-Fri Aug 16 18:27:46 GMT 2019 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
-18:27:46,973 (DBWorkload.java:832) INFO  - Launching the TPCC Benchmark with 1 Phase...
-18:27:47,015 (ThreadBench.java:341) INFO  - [0;1mPHASE START[0;0m :: [Workload=TPCC] [Serial=false] [Time=5] [WarmupTime=0] [Rate=10000] [Arrival=REGULAR] [Ratios=[45.0, 43.0, 4.0, 4.0, 4.0]] [ActiveWorkers=2]
-18:27:47,019 (ThreadBench.java:492) INFO  - [0;1mMEASURE[0;0m :: Warmup complete, starting measurements.
-java.lang.RuntimeException: Unexpected fatal, error in 'TPCCWorker<001>' when executing 'NewOrder/01' [MYSQL]
-	at com.oltpbenchmark.api.Worker.doWork(Worker.java:544)
-	at com.oltpbenchmark.api.Worker.run(Worker.java:296)
-	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: No operations allowed after connection closed.
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
-	at com.mysql.jdbc.Util.getInstance(Util.java:408)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:919)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:898)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:887)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:861)
-	at com.mysql.jdbc.ConnectionImpl.throwConnectionClosedException(ConnectionImpl.java:1192)
-	at com.mysql.jdbc.ConnectionImpl.checkClosed(ConnectionImpl.java:1187)
-	at com.mysql.jdbc.ConnectionImpl.rollback(ConnectionImpl.java:4534)
-	at com.oltpbenchmark.api.Worker.doWork(Worker.java:428)
-	... 2 more
-Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+22:37:33,807 (DBWorkload.java:268) INFO  - ======================================================================
+22:37:33,840 (DBWorkload.java:827) INFO  - Creating 2 virtual terminals...
+Tue Aug 27 22:37:34 GMT 2019 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+Tue Aug 27 22:37:34 GMT 2019 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+22:37:34,368 (DBWorkload.java:832) INFO  - Launching the TPCC Benchmark with 1 Phase...
+22:37:34,408 (ThreadBench.java:341) INFO  - [0;1mPHASE START[0;0m :: [Workload=TPCC] [Serial=false] [Time=5] [WarmupTime=0] [Rate=10000] [Arrival=REGULAR] [Ratios=[45.0, 43.0, 4.0, 4.0, 4.0]] [ActiveWorkers=2]
+22:37:34,413 (ThreadBench.java:492) INFO  - [0;1mMEASURE[0;0m :: Warmup complete, starting measurements.
+22:37:39,415 (ThreadBench.java:447) INFO  - [0;1mTERMINATE[0;0m :: Waiting for all terminals to finish ..
+Tue Aug 27 22:37:39 GMT 2019 WARN: Caught while disconnecting...
 
-The last packet successfully received from the server was 19 milliseconds ago.  The last packet sent successfully to the server was 19 milliseconds ago.
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
-	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:990)
-	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3562)
-	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3462)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3905)
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2495)
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1903)
-	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2124)
-	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:1801)
-	at com.mysql.jdbc.PreparedStatement.executeBatchInternal(PreparedStatement.java:1307)
-	at com.mysql.jdbc.StatementImpl.executeBatch(StatementImpl.java:970)
-	at com.oltpbenchmark.benchmarks.tpcc.procedures.NewOrder.newOrderTransaction(NewOrder.java:392)
-	at com.oltpbenchmark.benchmarks.tpcc.procedures.NewOrder.run(NewOrder.java:158)
-	at com.oltpbenchmark.benchmarks.tpcc.TPCCWorker.executeWork(TPCCWorker.java:74)
-	at com.oltpbenchmark.api.Worker.doWork(Worker.java:386)
-	... 2 more
-Caused by: java.io.EOFException: Can not read response from server. Expected to read 4 bytes, read 0 bytes before connection was unexpectedly lost.
-	at com.mysql.jdbc.MysqlIO.readFully(MysqlIO.java:3014)
-	at com.mysql.jdbc.MysqlIO.reuseAndReadPacket(MysqlIO.java:3472)
-	... 16 more
-java.lang.RuntimeException: Unexpected fatal, error in 'TPCCWorker<000>' when executing 'NewOrder/01' [MYSQL]
-	at com.oltpbenchmark.api.Worker.doWork(Worker.java:544)
-	at com.oltpbenchmark.api.Worker.run(Worker.java:296)
+EXCEPTION STACK TRACE:
+
+
+
+** BEGIN NESTED EXCEPTION ** 
+
+javax.net.ssl.SSLException
+MESSAGE: closing inbound before receiving peer's close_notify
+
+STACKTRACE:
+
+javax.net.ssl.SSLException: closing inbound before receiving peer's close_notify
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:133)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:307)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:263)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:254)
+	at java.base/sun.security.ssl.SSLSocketImpl.shutdownInput(SSLSocketImpl.java:645)
+	at java.base/sun.security.ssl.SSLSocketImpl.shutdownInput(SSLSocketImpl.java:624)
+	at com.mysql.jdbc.MysqlIO.quit(MysqlIO.java:2249)
+	at com.mysql.jdbc.ConnectionImpl.realClose(ConnectionImpl.java:4232)
+	at com.mysql.jdbc.ConnectionImpl.close(ConnectionImpl.java:1472)
+	at com.oltpbenchmark.api.Worker.tearDown(Worker.java:579)
+	at com.oltpbenchmark.api.Worker.run(Worker.java:352)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: No operations allowed after connection closed.
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
-	at com.mysql.jdbc.Util.getInstance(Util.java:408)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:919)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:898)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:887)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:861)
-	at com.mysql.jdbc.ConnectionImpl.throwConnectionClosedException(ConnectionImpl.java:1192)
-	at com.mysql.jdbc.ConnectionImpl.checkClosed(ConnectionImpl.java:1187)
+
+
+** END NESTED EXCEPTION **
+
+22:37:39,419 (ThreadBench.java:508) INFO  - Attempting to stop worker threads and collect measurements
+
+Tue Aug 27 22:37:39 GMT 2019 WARN: Caught while disconnecting...
+
+EXCEPTION STACK TRACE:
+
+
+
+** BEGIN NESTED EXCEPTION ** 
+
+javax.net.ssl.SSLException
+MESSAGE: closing inbound before receiving peer's close_notify
+
+STACKTRACE:
+
+javax.net.ssl.SSLException: closing inbound before receiving peer's close_notify
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:133)
+	at java.base/sun.security.ssl.Alert.createSSLException(Alert.java:117)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:307)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:263)
+	at java.base/sun.security.ssl.TransportContext.fatal(TransportContext.java:254)
+	at java.base/sun.security.ssl.SSLSocketImpl.shutdownInput(SSLSocketImpl.java:645)
+	at java.base/sun.security.ssl.SSLSocketImpl.shutdownInput(SSLSocketImpl.java:624)
+	at com.mysql.jdbc.MysqlIO.quit(MysqlIO.java:2249)
+	at com.mysql.jdbc.ConnectionImpl.realClose(ConnectionImpl.java:4232)
+	at com.mysql.jdbc.ConnectionImpl.close(ConnectionImpl.java:1472)
+	at com.oltpbenchmark.api.Worker.tearDown(Worker.java:579)
+	at com.oltpbenchmark.api.Worker.run(Worker.java:352)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+
+
+** END NESTED EXCEPTION **
+
+
+22:37:39,433 (ThreadBench.java:247) INFO  - Starting WatchDogThread
+22:37:39,452 (DBWorkload.java:838) INFO  - ======================================================================
+22:37:39,460 (DBWorkload.java:839) INFO  - Rate limited reqs/s: Results(nanoSeconds=5000009500, measuredRequests=522) = 104.39980164037688 requests/sec
+22:37:39,474 (DBWorkload.java:693) INFO  - Output Raw data into file: results/outputfile.12.csv
+22:37:39,517 (DBWorkload.java:750) INFO  - Output throughput samples into file: results/outputfile.12.res
+22:37:39,517 (DBWorkload.java:753) INFO  - Grouped into Buckets of 5 seconds

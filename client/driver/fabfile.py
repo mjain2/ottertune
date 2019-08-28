@@ -83,7 +83,7 @@ def drop_database():
         cmd = "PGPASSWORD={} dropdb -e --if-exists {} -U {}".\
               format(CONF['password'], CONF['database_name'], CONF['username'])
     elif CONF['database_type'] == 'mysql':
-        cmd = "mysqladmin -u{} -p{} -f drop {}".format(CONF['username'],CONF['password'],CONF['database_name'])
+        cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock drop {}".format(CONF['username'],CONF['password'],CONF['database_name'])
     else:
         raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
@@ -95,7 +95,7 @@ def create_database():
         cmd = "PGPASSWORD={} createdb -e {} -U {}".\
               format(CONF['password'], CONF['database_name'], CONF['username'])
     elif CONF['database_type'] == 'mysql':
-        cmd = "mysqladmin -u{} -p{} -f create {}".format(CONF['username'],CONF['password'],CONF['database_name'])
+        cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock create {}".format(CONF['username'],CONF['password'],CONF['database_name'])
     else:
         raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
@@ -213,7 +213,7 @@ def dump_database():
                                                                        CONF['database_name'],
                                                                        db_file_path)
         elif CONF['database_type'] == 'mysql':
-            cmd = 'mysql -u{} -p{} {} > {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
+            cmd = 'mysqldump -u {} -p{} {} > {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
         else:
             raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
         local(cmd)
@@ -234,6 +234,7 @@ def restore_database():
         cmd = 'PGPASSWORD={} pg_restore -U {} -n public -j 8 -F c -d {} {}'.\
               format(CONF['password'], CONF['username'], CONF['database_name'], db_file_path)
     elif CONF['database_type'] == 'mysql':
+        db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
         cmd = 'mysql -u{} -p{} {} < {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
     else:
         raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))

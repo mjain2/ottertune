@@ -9,7 +9,7 @@ Created on Dec 12, 2017
 @author: dvanaken
 '''
 
-
+import logging
 from website.models import DBMSCatalog
 from website.types import DBMSType
 
@@ -18,6 +18,7 @@ from .mysql import MySql57Parser
 from .postgres import Postgres96Parser, PostgresOldParser
 from .oracle import Oracle19Parser
 
+LOG = logging.getLogger(__name__)
 
 class Parser(object):
 
@@ -61,6 +62,15 @@ class Parser(object):
                     return v.parse_version_string(version_string)
                 except AttributeError:
                     pass
+        return None
+
+    @staticmethod
+    def parse_version_string_mysql(dbms_type, version_string):
+        if (dbms_type == DBMSType.MYSQL):
+            try:
+                return MySql57Parser().parse_version_string(version_string)
+            except AttributeError:
+                pass
         return None
 
     @staticmethod

@@ -42,7 +42,7 @@
             "maxval": 99.99
         },
         "default": 0,
-        "type": "numeric"
+        "type": "float"
     },
     {
         "name": "innodb_read_ahead_threshold",

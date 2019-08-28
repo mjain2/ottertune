@@ -49,10 +49,11 @@ def change_oracle_conf(recommendation, oracle_conf):
 
 def change_mysql_conf(recommendation, mysql_conf):
     lines = mysql_conf.readlines()
-    settings_idx = lines.index("# Add settings for extensions here\n")
+    settings_idx = lines.index("!includedir /etc/mysql/mysql.conf.d/\n")
     mysql_conf.seek(0)
     mysql_conf.truncate(0)
 
+    mysql_conf.write("[mysqld]\n")
     lines = lines[0:(settings_idx + 1)]
     for line in lines:
         mysql_conf.write(line)

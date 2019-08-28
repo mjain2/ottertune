@@ -3,6 +3,7 @@
 #
 # Copyright (c) 2017-18, Carnegie Mellon University Database Group
 #
+import logging
 from collections import namedtuple, OrderedDict
 
 from django.contrib.auth.models import User
@@ -14,6 +15,7 @@ from .types import (DBMSType, LabelStyleType, MetricType, KnobUnitType,
                     PipelineTaskType, VarType, KnobResourceType,
                     WorkloadStatusType)
 
+LOG = logging.getLogger(__name__)
 
 class BaseModel(models.Model):
 
@@ -125,6 +127,8 @@ class MetricManager(models.Manager):
     def get_metric_meta(dbms, target_objective=None):
         numeric_metric_names = MetricCatalog.objects.filter(
             dbms=dbms, metric_type=MetricType.COUNTER).values_list('name', flat=True)
+        LOG.info("numeric_metric_names")
+        LOG.info(numeric_metric_names)
         numeric_metrics = {}
         for metname in numeric_metric_names:
             numeric_metrics[metname] = MetricMeta(

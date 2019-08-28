@@ -56,4 +56,3 @@ class Migration(migrations.Migration):
     except ProgrammingError as err:
         LOG.warning("Error applying migration '0002_enable_compression'... Skipping")
         operations = []
-

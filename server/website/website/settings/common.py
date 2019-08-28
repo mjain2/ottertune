@@ -58,7 +58,7 @@ except OSError:  # Invalid permissions
 # DEBUG CONFIGURATION
 # ==============================================
 
-DEBUG = False
+DEBUG = True
 TEST_RUNNER = 'tests.runner.BaseRunner'
 INTERNAL_IPS = ['127.0.0.1']
 

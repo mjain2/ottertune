@@ -2173,7 +2173,7 @@
             "name": "session_variables.innodb_disk_buffer_pool_filename",
             "minval": null,
             "default": "C:\\\\work\\\\diskcache.data",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "restart",
@@ -2629,7 +2629,7 @@
             "name": "session_variables.innodb_ft_server_stopword_table",
             "minval": null,
             "default": "",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "dynamic",
@@ -2686,7 +2686,7 @@
             "name": "session_variables.innodb_ft_user_stopword_table",
             "minval": null,
             "default": "",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "dynamic",
@@ -3009,7 +3009,7 @@
             "name": "session_variables.innodb_monitor_disable",
             "minval": null,
             "default": "",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "dynamic",
@@ -3028,7 +3028,7 @@
             "name": "session_variables.innodb_monitor_enable",
             "minval": null,
             "default": "",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "dynamic",
@@ -3047,7 +3047,7 @@
             "name": "session_variables.innodb_monitor_reset",
             "minval": null,
             "default": "",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "dynamic",
@@ -3066,7 +3066,7 @@
             "name": "session_variables.innodb_monitor_reset_all",
             "minval": null,
             "default": "",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "dynamic",
@@ -3693,7 +3693,7 @@
             "name": "session_variables.innodb_temp_data_file_path",
             "minval": null,
             "default": "C:\\\\temp\\\\ibtmp1:12M:autoextend",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "restart",
@@ -3750,7 +3750,7 @@
             "name": "session_variables.innodb_tmpdir",
             "minval": null,
             "default": "",
-            "tunable": true,
+            "tunable": false,
             "enumvals": null,
             "vartype": 1,
             "context": "dynamic",
@@ -5472,348 +5472,348 @@
         "model": "website.KnobCatalog"
     },
     {
-        "category": "",
-        "maxval": null,
-        "dbms": 1,
-        "name": "session_variables.performance_schema",
-        "minval": null,
-        "default": "ON",
-        "tunable": true,
-        "enumvals": "ON,OFF",
-        "vartype": 4,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The value of this variable is ON or OFF to indicate whether the Performance Schema is enabled."
+        "fields": {
+            "category": "",
+            "maxval": null,
+            "dbms": 1,
+            "name": "session_variables.performance_schema",
+            "minval": null,
+            "default": "ON",
+            "tunable": true,
+            "enumvals": "ON,OFF",
+            "vartype": 4,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The value of this variable is ON or OFF to indicate whether the Performance Schema is enabled."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": null,
-        "dbms": 1,
-        "name": "session_variables.performance_schema_az_digest_exclude_user",
-        "minval": null,
-        "default": "azure_superuser",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 1,
-        "context": "dynamic",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "Only for internal use. The user whose statements will not be summarized in table az_events_statements_summary_by_digest."
+    {
+        "fields": {
+            "category": "",
+            "maxval": null,
+            "dbms": 1,
+            "name": "session_variables.performance_schema_az_digest_exclude_user",
+            "minval": null,
+            "default": "azure_superuser",
+            "tunable": false,
+            "enumvals": null,
+            "vartype": 1,
+            "context": "dynamic",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "Only for internal use. The user whose statements will not be summarized in table az_events_statements_summary_by_digest."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "1-1048576",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_az_digests_size",
-        "minval": "",
-        "default": "512",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of rows in the az_events_statements_summary_by_digest table. If this maximum is exceeded such that a digest cannot be instrumented, the Performance Schema increments the Performance_schema_az_digest_lost status variable."
+    {
+        "fields": {
+            "category": "",
+            "maxval": "1-1048576",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_az_digests_size",
+            "minval": "",
+            "default": "512",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of rows in the az_events_statements_summary_by_digest table. If this maximum is exceeded such that a digest cannot be instrumented, the Performance Schema increments the Performance_schema_az_digest_lost status variable."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "1048576",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_az_max_sql_text_length",
-        "minval": "0",
-        "default": "1024",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of bytes used to store SQL statements in the QUERY_SAMPLE_TEXT column of the az_events_statements_summary_by_digest event."
+    {
+        "fields": {
+            "category": "",
+            "maxval": "1048576",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_az_max_sql_text_length",
+            "minval": "0",
+            "default": "1024",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of bytes used to store SQL statements in the QUERY_SAMPLE_TEXT column of the az_events_statements_summary_by_digest event."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": null,
-        "dbms": 1,
-        "name": "session_variables.performance_schema_consumer_az_statements_digest",
-        "minval": null,
-        "default": "OFF",
-        "tunable": true,
-        "enumvals": "ON,OFF",
-        "vartype": 4,
-        "context": "dynamic",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "Store digest info into table az_events_statements_summary_by_digest or not."
+    {
+        "fields": {
+            "category": "",
+            "maxval": null,
+            "dbms": 1,
+            "name": "session_variables.performance_schema_consumer_az_statements_digest",
+            "minval": null,
+            "default": "OFF",
+            "tunable": true,
+            "enumvals": "ON,OFF",
+            "vartype": 4,
+            "context": "dynamic",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "Store digest info into table az_events_statements_summary_by_digest or not."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": null,
-        "dbms": 1,
-        "name": "session_variables.performance_schema_expand_query_sample",
-        "minval": null,
-        "default": "OFF",
-        "tunable": true,
-        "enumvals": "ON,OFF",
-        "vartype": 4,
-        "context": "dynamic",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "Expand prepared statements or store user variables used in the query to table az_events_statements_summary_by_digest."
+    {
+        "fields": {
+            "category": "",
+            "maxval": null,
+            "dbms": 1,
+            "name": "session_variables.performance_schema_expand_query_sample",
+            "minval": null,
+            "default": "OFF",
+            "tunable": true,
+            "enumvals": "ON,OFF",
+            "vartype": 4,
+            "context": "dynamic",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "Expand prepared statements or store user variables used in the query to table az_events_statements_summary_by_digest."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_cond_classes",
-        "minval": "0",
-        "default": "80",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of condition instruments. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_cond_classes",
+            "minval": "0",
+            "default": "80",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of condition instruments. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "1048576",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_digest_sample_age",
-        "minval": "0",
-        "default": "60",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "dynamic",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "This variable affects statement sampling for the az_events_statements_summary_by_digest table."
+    {
+        "fields": {
+            "category": "",
+            "maxval": "1048576",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_digest_sample_age",
+            "minval": "0",
+            "default": "60",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "dynamic",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "This variable affects statement sampling for the az_events_statements_summary_by_digest table."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_file_classes",
-        "minval": "0",
-        "default": "80",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of file instruments. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_file_classes",
+            "minval": "0",
+            "default": "80",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of file instruments. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "1048576",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_file_handles",
-        "minval": "0",
-        "default": "32768",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of opened file objects. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "1048576",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_file_handles",
+            "minval": "0",
+            "default": "32768",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of opened file objects. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "1024",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_memory_classes",
-        "minval": "0",
-        "default": "320",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of memory instruments."
+    {
+        "fields": {
+            "category": "",
+            "maxval": "1024",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_memory_classes",
+            "minval": "0",
+            "default": "320",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of memory instruments."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_mutex_classes",
-        "minval": "0",
-        "default": "200",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of mutex instruments. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_mutex_classes",
+            "minval": "0",
+            "default": "200",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of mutex instruments. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_rwlock_classes",
-        "minval": "0",
-        "default": "40",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of rwlock instruments. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_rwlock_classes",
+            "minval": "0",
+            "default": "40",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of rwlock instruments. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_socket_classes",
-        "minval": "0",
-        "default": "10",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of socket instruments. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_socket_classes",
+            "minval": "0",
+            "default": "10",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of socket instruments. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "1048576",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_sql_text_length",
-        "minval": "0",
-        "default": "1024",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of bytes used to store SQL statements in the SQL_TEXT column"
+    {
+        "fields": {
+            "category": "",
+            "maxval": "1048576",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_sql_text_length",
+            "minval": "0",
+            "default": "1024",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of bytes used to store SQL statements in the SQL_TEXT column"
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_stage_classes",
-        "minval": "0",
-        "default": "150",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of stage instruments. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_stage_classes",
+            "minval": "0",
+            "default": "150",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of stage instruments. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_statement_stack",
-        "minval": "1",
-        "default": "10",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum depth of nested stored program calls for which the Performance Schema maintains statistics."
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_statement_stack",
+            "minval": "1",
+            "default": "10",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum depth of nested stored program calls for which the Performance Schema maintains statistics."
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
-        "category": "",
-        "maxval": "256",
-        "dbms": 1,
-        "name": "session_variables.performance_schema_max_thread_classes",
-        "minval": "0",
-        "default": "50",
-        "tunable": true,
-        "enumvals": null,
-        "vartype": 2,
-        "context": "restart",
-        "scope": "global",
-        "summary": "",
-        "unit": 3,
-        "description": "The maximum number of thread instruments. "
+    {
+        "fields": {
+            "category": "",
+            "maxval": "256",
+            "dbms": 1,
+            "name": "session_variables.performance_schema_max_thread_classes",
+            "minval": "0",
+            "default": "50",
+            "tunable": true,
+            "enumvals": null,
+            "vartype": 2,
+            "context": "restart",
+            "scope": "global",
+            "summary": "",
+            "unit": 3,
+            "description": "The maximum number of thread instruments. "
+        },
+        "model": "website.KnobCatalog"
     },
-    "model": "website.KnobCatalog"
-},
-{
-    "fields": {
+    {
         "fields": {
             "category": "",
             "maxval": "null",

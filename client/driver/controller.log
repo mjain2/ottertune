@@ -5,10 +5,20 @@ Daemon will be stopped at the end of the build stopping after processing
 > Task :classes UP-TO-DATE
 
 > Task :run
-18:27:32,714 (Main.java:103) INFO  - Experiment time is set to: -1
-18:27:32,725 (Main.java:109) INFO  - Experiment output directory is set to: output/
-18:27:33,626 (Main.java:160) INFO  - Output the process pid to pid.txt
-18:27:47,733 (Main.java:167) INFO  - First collection of metrics before experiment
-18:27:48,060 (Main.java:193) INFO  - Starting the experiment ...
-[thread 1679 also had an error]#
-[thread 1696 also had an error][thread 1694 also had an error][thread 1695 also had an error]
+22:37:31,698 (Main.java:103) INFO  - Experiment time is set to: -1
+22:37:31,705 (Main.java:109) INFO  - Experiment output directory is set to: output/
+22:37:32,505 (MySQLCollector.java:55) ERROR - Error while collecting DB parameters: Native table 'performance_schema'.'session_variables' has the wrong structure
+22:37:32,533 (Main.java:160) INFO  - Output the process pid to pid.txt
+22:37:34,520 (Main.java:167) INFO  - First collection of metrics before experiment
+22:37:34,814 (Main.java:193) INFO  - Starting the experiment ...
+22:37:39,572 (Main.java:207) INFO  - Done running the experiment
+22:37:39,589 (Main.java:234) INFO  - Second collection of metrics after experiment
+22:37:39,593 (MySQLCollector.java:55) ERROR - Error while collecting DB parameters: Native table 'performance_schema'.'session_variables' has the wrong structure
+22:37:39,864 (Main.java:258) WARN  - Failed to upload results from the controller
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 6.0.
+Use '--warning-mode all' to show the individual deprecation warnings.
+See https://docs.gradle.org/5.5.1/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 41s
+2 actionable tasks: 1 executed, 1 up-to-date

@@ -26,7 +26,6 @@ def upload(datadir, upload_code, url):
     response = requests.post(url,
                              files=params,
                              data={'upload_code': upload_code})
-    LOG.info(response.content)
 
 
 def main():

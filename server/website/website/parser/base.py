@@ -10,24 +10,32 @@ Created on Dec 12, 2017
 
 Parser interface.
 '''
-
+import logging
 from abc import ABCMeta, abstractmethod, abstractproperty
 from collections import OrderedDict
 
 from website.models import KnobCatalog, MetricCatalog
 from website.types import BooleanType, MetricType, VarType
 
+LOG = logging.getLogger(__name__)
 
 # pylint: disable=no-self-use
 class BaseParser(object, metaclass=ABCMeta):
 
     def __init__(self, dbms_id):
         self.dbms_id_ = dbms_id
-        knobs = KnobCatalog.objects.filter(dbms__pk=self.dbms_id_)
+        
+        if (self.dbms_id_ == 6):
+            # this is mysql! let's load mysql specific things
+            knobs = KnobCatalog.objects.filter(dbms__pk=1)    
+            metrics = MetricCatalog.objects.filter(dbms__pk=1)
+        else:
+            knobs = KnobCatalog.objects.filter(dbms__pk=self.dbms_id_)      
+            metrics = MetricCatalog.objects.filter(dbms__pk=self.dbms_id_)
+
         self.knob_catalog_ = {k.name: k for k in knobs}
         self.tunable_knob_catalog_ = {k: v for k, v in
-                                      list(self.knob_catalog_.items()) if v.tunable is True}
-        metrics = MetricCatalog.objects.filter(dbms__pk=self.dbms_id_)
+                                      list(self.knob_catalog_.items()) if v.tunable is True}    
         self.metric_catalog_ = {m.name: m for m in metrics}
         self.numeric_metric_catalog_ = {m: v for m, v in
                                         list(self.metric_catalog_.items()) if
@@ -86,6 +94,7 @@ class BaseParser(object, metaclass=ABCMeta):
         try:
             return int(int_value)
         except ValueError:
+            LOG.info("reaching error with converting integer: {}".format(int_value))
             return int(float(int_value))
 
     def convert_real(self, real_value, metadata):

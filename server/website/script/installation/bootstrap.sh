@@ -6,8 +6,8 @@ DBNAME=ottertune
 DBUSER=root
 DBPASSWD=Experiment123
 
-LOG=/vagrant/vm_build.log
-REPOPATH=/ottertune
+LOG=./mjLog/test.log
+REPOPATH=/mnt/d/Ottertune/ottertune
 SETTINGSPATH=$REPOPATH/server/website/website/settings
 
 # Clear old log contents
@@ -30,7 +30,7 @@ apt-get -y install mysql-server >> $LOG 2>&1
 
 # Setup MySQL
 echo -e "\n--- Setting up the MySQL user and database ---\n"
-mysql -uroot -p$DBPASSWD -e "CREATE DATABASE IF NOT EXISTS $DBNAME" >> /vagrant/vm_build.log 2>&1
+mysql -uroot -p$DBPASSWD -e "CREATE DATABASE IF NOT EXISTS $DBNAME" >> $LOG 2>&1
 mysql -uroot -p$DBPASSWD -e "GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'localhost' IDENTIFIED BY '$DBPASSWD'" >> $LOG 2>&1
 mysql -uroot -p$DBPASSWD -e "GRANT ALL PRIVILEGES ON test_$DBNAME.* TO '$DBUSER'@'localhost' IDENTIFIED BY '$DBPASSWD'" >> $LOG 2>&1
 
