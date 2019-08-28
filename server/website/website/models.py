@@ -127,8 +127,6 @@ class MetricManager(models.Manager):
     def get_metric_meta(dbms, target_objective=None):
         numeric_metric_names = MetricCatalog.objects.filter(
             dbms=dbms, metric_type=MetricType.COUNTER).values_list('name', flat=True)
-        LOG.info("numeric_metric_names")
-        LOG.info(numeric_metric_names)
         numeric_metrics = {}
         for metname in numeric_metric_names:
             numeric_metrics[metname] = MetricMeta(
