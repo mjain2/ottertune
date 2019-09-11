@@ -102,3 +102,10 @@ out/
 # Text editor configs #
 #######################
 .vimrc
+
+# moljain MySQL #
+#######################
+pid.txt
+configs/*
+client/driver/controller.log
+client/driver/oltp.log
