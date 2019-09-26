@@ -121,7 +121,8 @@ class MetricManager(models.Manager):
 
     @staticmethod
     def get_default_objective_function():
-        return MetricManager.THROUGHPUT
+        return MetricManager.LATENCY_99
+        #return MetricManager.THROUGHPUT
 
     @staticmethod
     def get_metric_meta(dbms, target_objective=None):

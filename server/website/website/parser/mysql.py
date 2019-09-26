@@ -58,10 +58,10 @@ class MySqlParser(BaseParser):
 
     @property
     def transactions_counter(self):
-        return 'session_status.questions'
+        return 'session_status.queries'
 
     def latency_timer(self):
-        return 'session_status.questions'
+        return 'session_status.queries'
 
     def convert_integer(self, int_value, metadata):
         converted = None

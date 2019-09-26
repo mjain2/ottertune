@@ -956,7 +956,7 @@
             "dbms": 1,
             "name": "session_variables.eq_range_index_dive_limit",
             "minval": "0",
-            "default": "10",
+            "default": "200",
             "tunable": true,
             "enumvals": "null",
             "vartype": 2,
@@ -1864,11 +1864,11 @@
     {
         "fields": {
             "category": "",
-            "maxval": "3758096384",
+            "maxval": "8053063680",
             "dbms": 1,
             "name": "session_variables.innodb_buffer_pool_size",
             "minval": "134217728",
-            "default": "134217728",
+            "default": "8053063680",
             "tunable": true,
             "enumvals": null,
             "vartype": 2,
@@ -2662,7 +2662,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "640000000",
+            "maxval": "1280000000",
             "dbms": 1,
             "name": "session_variables.innodb_ft_total_cache_size",
             "minval": "32000000",
@@ -3859,7 +3859,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "268435455",
+            "maxval": "536870912",
             "dbms": 1,
             "name": "session_variables.join_buffer_size",
             "minval": "128",
@@ -4547,7 +4547,7 @@
             "dbms": 1,
             "name": "session_variables.max_allowed_packet",
             "minval": "1024",
-            "default": "4194304",
+            "default": "536870912",
             "tunable": true,
             "enumvals": "null",
             "vartype": 2,
@@ -4638,11 +4638,11 @@
     {
         "fields": {
             "category": "",
-            "maxval": "300",
+            "maxval": "625",
             "dbms": 1,
             "name": "session_variables.max_connections",
             "minval": "10",
-            "default": "300",
+            "default": "625",
             "tunable": true,
             "enumvals": "null",
             "vartype": 2,
@@ -4650,7 +4650,7 @@
             "scope": "global",
             "summary": "",
             "unit": 3,
-            "description": "The maximum permitted number of simultaneous client connections. By default, this is 151. See Section\u00a0B.5.2.7, \u201cToo many connections\u201d, for more information."
+            "description": "The maximum permitted number of simultaneous client connections. By default, this is 625. See Section\u00a0B.5.2.7, \u201cToo many connections\u201d, for more information."
         },
         "model": "website.KnobCatalog"
     },
@@ -5873,7 +5873,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "16777216",
+            "maxval": "33554432",
             "dbms": 1,
             "name": "session_variables.query_cache_limit",
             "minval": "0",
@@ -5892,7 +5892,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "16384",
+            "maxval": "32768",
             "dbms": 1,
             "name": "session_variables.query_cache_min_res_unit",
             "minval": "512",
@@ -5911,7 +5911,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "16777216",
+            "maxval": "33554432",
             "dbms": 1,
             "name": "session_variables.query_cache_size",
             "minval": "0",
@@ -5968,7 +5968,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "16384",
+            "maxval": "32768",
             "dbms": 1,
             "name": "session_variables.query_prealloc_size",
             "minval": "8192",
@@ -6025,7 +6025,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "16384",
+            "maxval": "32768",
             "dbms": 1,
             "name": "session_variables.range_alloc_block_size",
             "minval": "4096",
@@ -6899,7 +6899,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "4194304",
+            "maxval": "8388608",
             "dbms": 1,
             "name": "session_variables.sort_buffer_size",
             "minval": "32768",
@@ -7450,11 +7450,11 @@
     {
         "fields": {
             "category": "",
-            "maxval": "20000",
+            "maxval": "40000",
             "dbms": 1,
             "name": "session_variables.table_open_cache",
             "minval": "1",
-            "default": "2000",
+            "default": "2500",
             "tunable": true,
             "enumvals": "null",
             "vartype": 2,
@@ -7602,7 +7602,7 @@
     {
         "fields": {
             "category": "",
-            "maxval": "67108864",
+            "maxval": "134217728",
             "dbms": 1,
             "name": "session_variables.tmp_table_size",
             "minval": "1024",

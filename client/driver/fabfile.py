@@ -18,6 +18,7 @@ import glob
 from multiprocessing import Process
 from fabric.api import (env, local, task, lcd)
 from fabric.state import output as fabric_output
+from azure import Azure
 
 LOG = logging.getLogger()
 LOG.setLevel(logging.DEBUG)
@@ -37,13 +38,14 @@ fabric_output.update({
 })
 
 # intervals of restoring the databse
-RELOAD_INTERVAL = 10
+RELOAD_INTERVAL = 25
 # maximum disk usage
 MAX_DISK_USAGE = 90
 
 with open('driver_config.json', 'r') as f:
     CONF = json.load(f)
 
+my_azure_provider = Azure(CONF['azure_region'], CONF['azure_subscription'], CONF['azure_resource_group'])
 
 @task
 def check_disk_usage():
@@ -66,38 +68,55 @@ def check_memory_usage():
 
 @task
 def restart_database():
-    if CONF['database_type'] == 'postgres':
-        cmd = 'sudo service postgresql restart'
-    elif CONF['database_type'] == 'oracle':
-        cmd = 'sh oracleScripts/shutdownOracle.sh && sh oracleScripts/startupOracle.sh'
-    elif CONF['database_type'] == 'mysql':
-        cmd = 'sudo /etc/init.d/mysql restart'
+    if CONF['azure_enabled'] == True:
+        LOG.info("Azure is enabled, logging in to drop database:")
+        my_azure_provider.login()   
+        my_azure_provider.restart_server(CONF['database_type'],CONF['azure_server_name'])
+        LOG.info("Restarted server.")
     else:
-        raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
-    local(cmd)
+        if CONF['database_type'] == 'postgres':
+            cmd = 'sudo service postgresql restart'
+        elif CONF['database_type'] == 'oracle':
+            cmd = 'sh oracleScripts/shutdownOracle.sh && sh oracleScripts/startupOracle.sh'
+        elif CONF['database_type'] == 'mysql':
+            cmd = 'sudo /etc/init.d/mysql restart'
+        else:
+            raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
+        local(cmd)
 
 
 @task
 def drop_database():
-    if CONF['database_type'] == 'postgres':
-        cmd = "PGPASSWORD={} dropdb -e --if-exists {} -U {}".\
-              format(CONF['password'], CONF['database_name'], CONF['username'])
-    elif CONF['database_type'] == 'mysql':
-        cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock drop {}".format(CONF['username'],CONF['password'],CONF['database_name'])
+    if CONF['azure_enabled'] == True:
+        LOG.info("Azure is enabled, logging in to drop database:")
+        my_azure_provider.login()    
+        cmd = "mysqladmin -h {} -u {} -p{} -f drop {}".format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'],CONF['database_name'])
     else:
-        raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
+        if CONF['database_type'] == 'postgres':
+            cmd = "PGPASSWORD={} dropdb -e --if-exists {} -U {}".\
+                format(CONF['password'], CONF['database_name'], CONF['username'])
+        elif CONF['database_type'] == 'mysql':
+            cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock drop {}".format(CONF['username'],CONF['password'],CONF['database_name'])
+        else:
+            raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
 
 
 @task
 def create_database():
-    if CONF['database_type'] == 'postgres':
-        cmd = "PGPASSWORD={} createdb -e {} -U {}".\
-              format(CONF['password'], CONF['database_name'], CONF['username'])
-    elif CONF['database_type'] == 'mysql':
-        cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock create {}".format(CONF['username'],CONF['password'],CONF['database_name'])
-    else:
-        raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
+    if CONF['azure_enabled'] == True:
+        LOG.info("Azure is enabled, logging in to create database:")
+        my_azure_provider.login()    
+        #my_azure_provider.create_database(CONF['database_type'],CONF['azure_server_name'],CONF['database_name'])
+        cmd = "mysqladmin -h {} -u {} -p{} -f create {}".format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'],CONF['database_name'])
+    else:   
+        if CONF['database_type'] == 'postgres':
+            cmd = "PGPASSWORD={} createdb -e {} -U {}".\
+                format(CONF['password'], CONF['database_name'], CONF['username'])
+        elif CONF['database_type'] == 'mysql':
+            cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock create {}".format(CONF['username'],CONF['password'],CONF['database_name'])
+        else:
+            raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
 
 
@@ -108,6 +127,13 @@ def change_conf():
           format(CONF['database_type'], next_conf, CONF['database_conf'])
     local(cmd)
 
+    # if using azure, need to then apply all the configurations to the database before restart
+    # apply_config_batch
+    if CONF['azure_enabled'] == True:
+        LOG.info("Azure is enabled, logging in to create database:")
+        LOG.info("Attempting to apply configurations to server.")
+        my_azure_provider.apply_config_batch(CONF['database_type'],CONF['azure_server_name'], next_conf)
+    
 
 @task
 def load_oltpbench():
@@ -203,41 +229,52 @@ def dump_database():
         return False
     else:
         LOG.info('Dump database %s to %s', CONF['database_name'], db_file_path)
-        # You must create a directory named dpdata through sqlplus in your Oracle database
-        if CONF['database_type'] == 'oracle':
-            cmd = 'expdp {}/{}@{} schemas={} dumpfile={}.dump DIRECTORY=dpdata'.format(
-                'c##tpcc', 'oracle', 'orcldb', 'c##tpcc', 'orcldb')
-        elif CONF['database_type'] == 'postgres':
-            cmd = 'PGPASSWORD={} pg_dump -U {} -F c -d {} > {}'.format(CONF['password'],
-                                                                       CONF['username'],
-                                                                       CONF['database_name'],
-                                                                       db_file_path)
-        elif CONF['database_type'] == 'mysql':
-            cmd = 'mysqldump -u {} -p{} {} > {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
+        if CONF['azure_enabled'] == True:
+            LOG.info("Azure is enabled, logging in to create database:")
+            my_azure_provider.login()    
+            cmd = "mysqldump -h {} -u {} -p{} {} > {}".format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'],CONF['database_name'], db_file_path)
         else:
-            raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
+            # You must create a directory named dpdata through sqlplus in your Oracle database
+            if CONF['database_type'] == 'oracle':
+                cmd = 'expdp {}/{}@{} schemas={} dumpfile={}.dump DIRECTORY=dpdata'.format(
+                    'c##tpcc', 'oracle', 'orcldb', 'c##tpcc', 'orcldb')
+            elif CONF['database_type'] == 'postgres':
+                cmd = 'PGPASSWORD={} pg_dump -U {} -F c -d {} > {}'.format(CONF['password'],
+                                                                        CONF['username'],
+                                                                        CONF['database_name'],
+                                                                        db_file_path)
+            elif CONF['database_type'] == 'mysql':
+                cmd = 'mysqldump -u {} -p{} {} > {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
+            else:
+                raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
         local(cmd)
         return True
 
 
 @task
 def restore_database():
-    if CONF['database_type'] == 'oracle':
-        # You must create a directory named dpdata through sqlplus in your Oracle database
-        # The following script assumes such directory exists.
-        # You may want to modify the username, password, and dump file name in the script
-        cmd = 'sh oracleScripts/restoreOracle.sh'
-    elif CONF['database_type'] == 'postgres':
+    if CONF['azure_enabled'] == True:
+        LOG.info("Azure is enabled, logging in to create database:")
+        my_azure_provider.login()    
         db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
-        drop_database()
-        create_database()
-        cmd = 'PGPASSWORD={} pg_restore -U {} -n public -j 8 -F c -d {} {}'.\
-              format(CONF['password'], CONF['username'], CONF['database_name'], db_file_path)
-    elif CONF['database_type'] == 'mysql':
-        db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
-        cmd = 'mysql -u{} -p{} {} < {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
+        cmd = 'mysql -h {} -u{} -p{} {} < {}'.format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'], CONF['database_name'], db_file_path)
     else:
-        raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
+        if CONF['database_type'] == 'oracle':
+            # You must create a directory named dpdata through sqlplus in your Oracle database
+            # The following script assumes such directory exists.
+            # You may want to modify the username, password, and dump file name in the script
+            cmd = 'sh oracleScripts/restoreOracle.sh'
+        elif CONF['database_type'] == 'postgres':
+            db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
+            drop_database()
+            create_database()
+            cmd = 'PGPASSWORD={} pg_restore -U {} -n public -j 8 -F c -d {} {}'.\
+                format(CONF['password'], CONF['username'], CONF['database_name'], db_file_path)
+        elif CONF['database_type'] == 'mysql':
+            db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
+            cmd = 'mysql -u{} -p{} {} < {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
+        else:
+            raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     LOG.info('Start restoring database')
     local(cmd)
     LOG.info('Finish restoring database')
@@ -348,6 +385,7 @@ def run_lhs():
         # reload database periodically
         if RELOAD_INTERVAL > 0:
             if i % RELOAD_INTERVAL == 0:
+                LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
                 if i == 0 and dump is False:
                     restore_database()
                 elif i > 0:

@@ -14,8 +14,16 @@
   "controller_log" : "/mnt/d/Ottertune/ottertune/client/driver/controller.log",
   "save_path": "/mnt/d/Ottertune/results/",
   "upload_url" : "http://127.0.0.1:8000",
-  "upload_code" : "99G2QZME73I5KHWYXXW3",
+  "upload_code" : "PXW55WMCEZ7ML1W984SA",
   "lhs_knob_path" : "/mnt/d/Ottertune/ottertune/client/driver/knobs/mysql-57.json",
   "lhs_save_path" : "/mnt/d/Ottertune/ottertune/client/driver/configs",
-  "oracle_awr_enabled": false
+  "oracle_awr_enabled": false,
+  "azure_enabled": true,
+  "azure_server_name": "mj-ottest1",
+  "azure_host_name": "mj-ottest1.mysql.database.azure.com",
+  "azure_username": "mysqladmin@mj-ottest1",
+  "azure_password": "Experiment!23",
+  "azure_subscription": "707595a1-1498-4b7d-9771-cf0455939d2c",
+  "azure_resource_group": "moljainOrcas",
+  "azure_region": "westus2"
 }

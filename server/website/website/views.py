@@ -759,7 +759,9 @@ def get_workload_data(request):
 
     results = Result.objects.filter(workload=workload)
     result_data = {r.pk: JSONUtil.loads(r.metric_data.data) for r in results}
-    results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.THROUGHPUT]))
+    #LOG.info(result_data)
+    #results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.THROUGHPUT]))
+    results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.LATENCY_99]))
 
     default_metrics = MetricCatalog.objects.get_default_metrics(session.target_objective)
     metrics = request.GET.get('met', ','.join(default_metrics)).split(',')
@@ -835,7 +837,7 @@ def get_timeline_data(request):
     for met in default_metrics:
         met_info = metric_meta[met]
         columnnames.append(met_info.pprint + ' (' + met_info.short_unit + ')')
-
+    LOG.info("target objective: {}".format(session.target_objective))
     results_per_page = int(request.GET['nres'])
 
     # Get all results related to the selected session, sort by time
@@ -858,6 +860,7 @@ def get_timeline_data(request):
         results = [r for r in results if str(r.workload.pk) in workload_confs]
 
     metric_datas = {r.pk: JSONUtil.loads(r.metric_data.data) for r in results}
+    #LOG.info(metric_datas) # this is all zeros
     result_list = []
     for res in results:
         entry = [

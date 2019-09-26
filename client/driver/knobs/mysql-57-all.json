@@ -1,0 +1,812 @@
+[
+    {
+        "name": "eq_range_index_dive_limit",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 4294967295
+        },
+        "default": 10,
+        "type": "integer"
+    },
+    {
+        "name": "flush_time",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 8640000
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "ft_query_expansion_limit",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000
+        },
+        "default": 20,
+        "type": "integer"
+    },
+    {
+        "name": "group_concat_max_len",
+        "tuning_range": {
+            "minval": 4,
+            "maxval": 16777216
+        },
+        "default": 1024,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_adaptive_flushing_lwm",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 70
+        },
+        "default": 10,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_adaptive_hash_index_parts",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 512
+        },
+        "default": 8,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_adaptive_max_sleep_delay",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000000
+        },
+        "default": 150000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_autoextend_increment",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 1000
+        },
+        "default": 64,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_autoinc_lock_mode",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 2
+        },
+        "default": 1,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_buffer_pool_dump_pct",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 100
+        },
+        "default": 25,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_buffer_pool_size",
+        "tuning_range": {
+            "minval": 134217728,
+            "maxval": 3758096384
+        },
+        "default": 134217728,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_change_buffer_max_size",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 50
+        },
+        "default": 25,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_commit_concurrency",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_compression_failure_threshold_pct",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 100
+        },
+        "default": 5,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_compression_level",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 9
+        },
+        "default": 6,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_compression_pad_pct_max",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 75
+        },
+        "default": 50,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_concurrency_tickets",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 4294967295
+        },
+        "default": 5000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_fill_factor",
+        "tuning_range": {
+            "minval": 10,
+            "maxval": 100
+        },
+        "default": 100,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_ft_cache_size",
+        "tuning_range": {
+            "minval": 1600000,
+            "maxval": 80000000
+        },
+        "default": 8000000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_ft_max_token_size",
+        "tuning_range": {
+            "minval": 10,
+            "maxval": 84
+        },
+        "default": 84,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_ft_min_token_size",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 16
+        },
+        "default": 3,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_ft_num_word_optimize",
+        "tuning_range": {
+            "minval": 1000,
+            "maxval": 10000
+        },
+        "default": 2000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_ft_result_cache_limit",
+        "tuning_range": {
+            "minval": 1000000,
+            "maxval": 4294967295
+        },
+        "default": 2000000000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_ft_sort_pll_degree",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 32
+        },
+        "default": 2,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_ft_total_cache_size",
+        "tuning_range": {
+            "minval": 32000000,
+            "maxval": 640000000
+        },
+        "default": 640000000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_io_capacity",
+        "tuning_range": {
+            "minval": 100,
+            "maxval": 4294967295
+        },
+        "default": 200,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_io_capacity_max",
+        "tuning_range": {
+            "minval": 100,
+            "maxval": 4294967295
+        },
+        "default": 2000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_lock_wait_timeout",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 1073741824
+        },
+        "default": 50,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_lru_scan_depth",
+        "tuning_range": {
+            "minval": 100,
+            "maxval": 4294967295
+        },
+        "default": 1024,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_max_dirty_pages_pct",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 99.99
+        },
+        "default": 75,
+        "type": "float"
+    },
+    {
+        "name": "innodb_max_dirty_pages_pct_lwm",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 99.99
+        },
+        "default": 0,
+        "type": "float"
+    },
+    {
+        "name": "innodb_max_purge_lag",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 4294967295
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_max_purge_lag_delay",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 10000000
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_old_blocks_pct",
+        "tuning_range": {
+            "minval": 5,
+            "maxval": 95
+        },
+        "default": 37,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_old_blocks_time",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 4294967295
+        },
+        "default": 1000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_page_cleaners",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 64
+        },
+        "default": 4,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_purge_batch_size",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 5000
+        },
+        "default": 300,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_purge_rseg_truncate_frequency",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 128
+        },
+        "default": 128,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_purge_threads",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 32
+        },
+        "default": 4,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_read_ahead_threshold",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 64
+        },
+        "default": 56,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_read_io_threads",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 64
+        },
+        "default": 4,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_rollback_segments",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 128
+        },
+        "default": 128,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_stats_persistent_sample_pages",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 18446744073709551615
+        },
+        "default": 20,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_stats_transient_sample_pages",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 18446744073709551615
+        },
+        "default": 8,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_sync_array_size",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 1024
+        },
+        "default": 1,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_thread_concurrency",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_thread_sleep_delay",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1000000
+        },
+        "default": 10000,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_write_io_threads",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 64
+        },
+        "default": 4,
+        "type": "integer"
+    },
+    {
+        "name": "interactive_timeout",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 31536000
+        },
+        "default": 28800,
+        "type": "integer"
+    },
+    {
+        "name": "join_buffer_size",
+        "tuning_range": {
+            "minval": 128,
+            "maxval": 268435455
+        },
+        "default": 262144,
+        "type": "integer"
+    },
+    {
+        "name": "lock_wait_timeout",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 31536000
+        },
+        "default": 31536000,
+        "type": "integer"
+    },
+    {
+        "name": "log_throttle_queries_not_using_indexes",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 4294967295
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "long_query_time",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 31536000
+        },
+        "default": 10,
+        "type": "integer"
+    },
+    {
+        "name": "lower_case_table_names",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 2
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "max_allowed_packet",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 1073741824
+        },
+        "default": 4194304,
+        "type": "integer"
+    },
+    {
+        "name": "max_connect_errors",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 4294967295
+        },
+        "default": 100,
+        "type": "integer"
+    },
+    {
+        "name": "max_connections",
+        "tuning_range": {
+            "minval": 10,
+            "maxval": 300
+        },
+        "default": 300,
+        "type": "integer"
+    },
+    {
+        "name": "max_digest_length",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1048576
+        },
+        "default": 1024,
+        "type": "integer"
+    },
+    {
+        "name": "max_error_count",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 65535
+        },
+        "default": 64,
+        "type": "integer"
+    },
+    {
+        "name": "max_join_size",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 18446744073709551615
+        },
+        "default": 18446744073709551615,
+        "type": "integer"
+    },
+    {
+        "name": "max_length_for_sort_data",
+        "tuning_range": {
+            "minval": 4,
+            "maxval": 8388608
+        },
+        "default": 1024,
+        "type": "integer"
+    },
+    {
+        "name": "max_prepared_stmt_count",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 1048576
+        },
+        "default": 16382,
+        "type": "integer"
+    },
+    {
+        "name": "max_seeks_for_key",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 4294967295
+        },
+        "default": 4294967295,
+        "type": "integer"
+    },
+    {
+        "name": "max_sort_length",
+        "tuning_range": {
+            "minval": 4,
+            "maxval": 8388608
+        },
+        "default": 1024,
+        "type": "integer"
+    },
+    {
+        "name": "max_user_connections",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 4294967295
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "max_write_lock_count",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 4294967295
+        },
+        "default": 4294967295,
+        "type": "integer"
+    },
+    {
+        "name": "min_examined_row_limit",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 4294967295
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "net_buffer_length",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 1048576
+        },
+        "default": 16384,
+        "type": "integer"
+    },
+    {
+        "name": "net_read_timeout",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 31536000
+        },
+        "default": 120,
+        "type": "integer"
+    },
+    {
+        "name": "net_retry_count",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 4294967295
+        },
+        "default": 10,
+        "type": "integer"
+    },
+    {
+        "name": "net_write_timeout",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 31536000
+        },
+        "default": 240,
+        "type": "integer"
+    },
+    {
+        "name": "optimizer_search_depth",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 62
+        },
+        "default": 62,
+        "type": "integer"
+    },
+    {
+        "name": "optimizer_search_depth",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 62
+        },
+        "default": 62,
+        "type": "integer"
+    },
+    {
+        "name": "preload_buffer_size",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 1073741824
+        },
+        "default": 32768,
+        "type": "integer"
+    },
+    {
+        "name": "query_cache_limit",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 16777216
+        },
+        "default": 1048576,
+        "type": "integer"
+    },
+    {
+        "name": "query_cache_min_res_unit",
+        "tuning_range": {
+            "minval": 512,
+            "maxval": 16384
+        },
+        "default": 4096,
+        "type": "integer"
+    },
+    {
+        "name": "query_cache_size",
+        "tuning_range": {
+            "minval": 0,
+            "maxval": 16777216
+        },
+        "default": 0,
+        "type": "integer"
+    },
+    {
+        "name": "query_prealloc_size",
+        "tuning_range": {
+            "minval": 8192,
+            "maxval": 16384
+        },
+        "default": 8192,
+        "type": "integer"
+    },
+    {
+        "name": "range_alloc_block_size",
+        "tuning_range": {
+            "minval": 4096,
+            "maxval": 16384
+        },
+        "default": 4096,
+        "type": "integer"
+    },
+    {
+        "name": "server_id",
+        "tuning_range": {
+            "minval": 1000,
+            "maxval": 4294967295
+        },
+        "default": 1000,
+        "type": "integer"
+    },
+    {
+        "name": "slave_net_timeout",
+        "tuning_range": {
+            "minval": 30,
+            "maxval": 3600
+        },
+        "default": 60,
+        "type": "integer"
+    },
+    {
+        "name": "sort_buffer_size",
+        "tuning_range": {
+            "minval": 32768,
+            "maxval": 4194304
+        },
+        "default": 524288,
+        "type": "integer"
+    },
+    {
+        "name": "stored_program_cache",
+        "tuning_range": {
+            "minval": 16,
+            "maxval": 524288
+        },
+        "default": 256,
+        "type": "integer"
+    },
+    {
+        "name": "table_definition_cache",
+        "tuning_range": {
+            "minval": 400,
+            "maxval": 524288
+        },
+        "default": 2000,
+        "type": "integer"
+    },
+    {
+        "name": "table_open_cache",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 20000
+        },
+        "default": 2000,
+        "type": "integer"
+    },
+    {
+        "name": "table_open_cache_instances",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 16
+        },
+        "default": 1,
+        "type": "integer"
+    },
+    {
+        "name": "tmp_table_size",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 67108864
+        },
+        "default": 16777216,
+        "type": "integer"
+    },
+    {
+        "name": "transaction_alloc_block_size",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 131072
+        },
+        "default": 8192,
+        "type": "integer"
+    },
+    {
+        "name": "transaction_prealloc_size",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 131072
+        },
+        "default": 4096,
+        "type": "integer"
+    },
+    {
+        "name": "wait_timeout",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 2147483
+        },
+        "default": 120,
+        "type": "integer"
+    }
+]

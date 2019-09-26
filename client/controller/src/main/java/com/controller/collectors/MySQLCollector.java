@@ -30,7 +30,12 @@ public class MySQLCollector extends DBCollector {
 
   public MySQLCollector(String oriDBUrl, String username, String password) {
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      LOG.info(oriDBUrl);
+      LOG.info(username);
+      LOG.info(password);
       Connection conn = DriverManager.getConnection(oriDBUrl, username, password);
+      LOG.info(conn);
       Statement s = conn.createStatement();
 
       // Collect DBMS version
@@ -53,7 +58,10 @@ public class MySQLCollector extends DBCollector {
       conn.close();
     } catch (SQLException e) {
       LOG.error("Error while collecting DB parameters: " + e.getMessage());
+      LOG.error(e);
       e.printStackTrace();
+    } catch (ClassNotFoundException ex) {
+      LOG.error("Class com.mysql.jdbc.Driver not found: " + ex.getMessage());
     }
   }
 
