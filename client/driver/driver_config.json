@@ -14,7 +14,7 @@
   "controller_log" : "/mnt/d/Ottertune/ottertune/client/driver/controller.log",
   "save_path": "/mnt/d/Ottertune/results/",
   "upload_url" : "http://127.0.0.1:8000",
-  "upload_code" : "PXW55WMCEZ7ML1W984SA",
+  "upload_code" : "J39AQO42BV67AHP3CN0Q",
   "lhs_knob_path" : "/mnt/d/Ottertune/ottertune/client/driver/knobs/mysql-57.json",
   "lhs_save_path" : "/mnt/d/Ottertune/ottertune/client/driver/configs",
   "oracle_awr_enabled": false,
