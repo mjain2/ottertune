@@ -188,7 +188,7 @@ def save_dbms_result():
 
 @task
 def free_cache():
-    cmd = '' #sync; sudo bash -c "echo 1 > /proc/sys/vm/drop_caches"'
+    cmd = 'sync; sudo bash -c "echo 1 > /proc/sys/vm/drop_caches"'
     local(cmd)
 
 
@@ -383,13 +383,13 @@ def run_lhs():
 
     for i, sample in enumerate(samples):
         # reload database periodically
-        # if RELOAD_INTERVAL > 0:
-        #     if i % RELOAD_INTERVAL == 0:
-        #         LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
-        #         if i == 0 and dump is False:
-        #             restore_database()
-        #         elif i > 0:
-        #             restore_database()
+        if RELOAD_INTERVAL > 0:
+            if i % RELOAD_INTERVAL == 0:
+                LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
+                if i == 0 and dump is False:
+                    restore_database()
+                elif i > 0:
+                    restore_database()
         # free cache
         free_cache()
 

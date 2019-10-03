@@ -29,39 +29,48 @@ public class MySQLCollector extends DBCollector {
   private static final String METRICS_SQL = "SHOW STATUS";
 
   public MySQLCollector(String oriDBUrl, String username, String password) {
-    try {
-      Class.forName("com.mysql.jdbc.Driver");
-      LOG.info(oriDBUrl);
-      LOG.info(username);
-      LOG.info(password);
-      Connection conn = DriverManager.getConnection(oriDBUrl, username, password);
-      LOG.info(conn);
-      Statement s = conn.createStatement();
+    Connection conn = null;
+    int count = 0;
 
-      // Collect DBMS version
-      ResultSet out = s.executeQuery(VERSION_SQL);
-      if (out.next()) {
-        this.version.append(out.getString(1));
-      }
+    while (conn == null && count < 3) {      
+      try {
+        Class.forName("com.mysql.jdbc.Driver");
+        LOG.info(oriDBUrl);
+        LOG.info(username);
+        LOG.info(password);
+        conn = DriverManager.getConnection(oriDBUrl, username, password);
+        LOG.info(conn);
+        Statement s = conn.createStatement();
 
-      // Collect DBMS parameters
-      out = s.executeQuery(PARAMETERS_SQL);
-      while (out.next()) {
-        dbParameters.put(out.getString(1).toLowerCase(), out.getString(2));
-      }
+        // Collect DBMS version
+        ResultSet out = s.executeQuery(VERSION_SQL);
+        if (out.next()) {
+          this.version.append(out.getString(1));
+        }
 
-      // Collect DBMS internal metrics
-      out = s.executeQuery(METRICS_SQL);
-      while (out.next()) {
-        dbMetrics.put(out.getString(1).toLowerCase(), out.getString(2));
+        // Collect DBMS parameters
+        out = s.executeQuery(PARAMETERS_SQL);
+        while (out.next()) {
+          dbParameters.put(out.getString(1).toLowerCase(), out.getString(2));
+        }
+
+        // Collect DBMS internal metrics
+        out = s.executeQuery(METRICS_SQL);
+        while (out.next()) {
+          dbMetrics.put(out.getString(1).toLowerCase(), out.getString(2));
+        }
+        conn.close();
+      } catch (SQLException e) {
+        LOG.error("Error while collecting DB parameters: " + e.getMessage());
+        LOG.error(e);
+        e.printStackTrace();
+        count++;
+        LOG.error("Retrying connection, retry count: " + count);
+      } catch (ClassNotFoundException ex) {
+        LOG.error("Class com.mysql.jdbc.Driver not found: " + ex.getMessage());
+        count++;
+        LOG.error("Retrying connection, retry count: " + count);
       }
-      conn.close();
-    } catch (SQLException e) {
-      LOG.error("Error while collecting DB parameters: " + e.getMessage());
-      LOG.error(e);
-      e.printStackTrace();
-    } catch (ClassNotFoundException ex) {
-      LOG.error("Class com.mysql.jdbc.Driver not found: " + ex.getMessage());
     }
   }
 
