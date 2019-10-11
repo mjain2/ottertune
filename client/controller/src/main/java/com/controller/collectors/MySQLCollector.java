@@ -31,7 +31,7 @@ public class MySQLCollector extends DBCollector {
   public MySQLCollector(String oriDBUrl, String username, String password) {
     Connection conn = null;
     int count = 0;
-
+    LOG.info("Starting MySQL connection collection, will retry 3 times if connection fails.");
     while (conn == null && count < 3) {      
       try {
         Class.forName("com.mysql.jdbc.Driver");

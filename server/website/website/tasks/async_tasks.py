@@ -467,7 +467,9 @@ def map_workload(target_data):
         pipeline_run=latest_pipeline_run,
         workload__dbms=target_workload.dbms,
         workload__hardware=target_workload.hardware)
-
+    LOG.info(PipelineRun.objects.all().exclude(end_time=None).first())
+    LOG.info(pipeline_data.values())
+    LOG.info(pipeline_data)
     # FIXME (dva): we should also compute the global (i.e., overall) ranked_knobs
     # and pruned metrics but we just use those from the first workload for now
     initialized = False

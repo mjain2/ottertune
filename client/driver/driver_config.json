@@ -14,7 +14,7 @@
   "controller_log" : "/home/deaadmin/ottertune/client/driver/controller.log",
   "save_path": "/home/deaadmin/misc/results/",
   "upload_url" : "http://127.0.0.1:8000",
-  "upload_code" : "NTP0I8BX0GB7MK482HUS",
+  "upload_code" : "TFZ1DK4D669QAAXKQIUW",
   "lhs_knob_path" : "/home/deaadmin/ottertune/client/driver/knobs/mysql-57.json",
   "lhs_save_path" : "/home/deaadmin/ottertune/client/driver/configs",
   "oracle_awr_enabled": false,

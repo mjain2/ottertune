@@ -469,6 +469,7 @@ def handle_result_files(session, files):
     # Load, process, and store the knobs in the DBMS's configuration
     knob_dict, knob_diffs = Parser.parse_dbms_knobs(
         dbms.pk, JSONUtil.loads(files['knobs']))
+    LOG.info(knob_dict['session_variables.join_buffer_size'])
     tunable_knob_dict = Parser.convert_dbms_knobs(
         dbms.pk, knob_dict)
     knob_data = KnobData.objects.create_knob_data(
@@ -499,6 +500,7 @@ def handle_result_files(session, files):
     result = Result.objects.create_result(
         session, dbms, workload, knob_data, metric_data,
         start_time, end_time, observation_time)
+    LOG.info(result.knob_data)
     result.save()
 
     # Workload is now modified so backgroundTasks can make calculationw
@@ -523,14 +525,17 @@ def handle_result_files(session, files):
         session.nondefault_settings = JSONUtil.dumps(nondefault_settings)
     session.project.save()
     session.save()
+    LOG.info("reaching here -- session.save line 526")
 
     if session.tuning_session == 'no_tuning_session':
         return HttpResponse("Result stored successfully!")
 
     result_id = result.pk
+    LOG.info("Before chain from response")
     response = chain(aggregate_target_results.s(result.pk),
                      map_workload.s(),
                      configuration_recommendation.s()).apply_async()
+    LOG.info("Reaching after chain from response.")
     taskmeta_ids = [response.parent.parent.id, response.parent.id, response.id]
     result.task_ids = ','.join(taskmeta_ids)
     result.save()
@@ -949,7 +954,7 @@ def give_result(request, upload_code):  # pylint: disable=unused-argument
         LOG.warning("Invalid upload code: %s", upload_code)
         return HttpResponse("Invalid upload code: " + upload_code)
     results = Result.objects.filter(session=session)
-    LOG.info(results)
+    # LOG.info(results)
     LOG.info(len(results))
     if len(results) > 0:
         lastest_result = results[len(results) - 1]

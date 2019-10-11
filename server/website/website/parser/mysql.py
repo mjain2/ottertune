@@ -104,6 +104,7 @@ class MySqlParser(BaseParser):
         dbms_version = version_string.split(',')[0]
         return re.search(r'\d+\.\d+(?=\.\d+)', dbms_version).group(0)
 
+    # moljain: A global variable in mysql could also look like session_variables.x instead of global.x
     def parse_helper(self, scope, valid_variables, view_variables):
         for view_name, variables in list(view_variables.items()):
             if scope == 'local':
@@ -114,6 +115,9 @@ class MySqlParser(BaseParser):
             elif scope == 'global':
                 for var_name, var_value in list(variables.items()):  # global
                     full_name = '{}.{}'.format(view_name, var_name)
+                    if var_name == 'join_buffer_size':
+                        LOG.info(view_name)
+                        LOG.info(full_name)
                     valid_variables[full_name] = var_value
             else:
                 raise Exception('Unsupported variable scope: {}'.format(scope))
@@ -125,6 +129,8 @@ class MySqlParser(BaseParser):
     def parse_dbms_variables(self, variables):
         valid_variables = {}
         for scope, sub_vars in list(variables.items()):
+            # LOG.info("sub_vars")
+            # LOG.info(sub_vars) # ex:  ('join_buffer_size', '497403648'),
             if sub_vars is None:
                 continue
             if scope == 'global':
@@ -160,11 +166,11 @@ class MySqlParser(BaseParser):
     # variable remains same. This is because local varialbe in knob_catalog is in
     # parial format (i,e. viewname.varname)
     @staticmethod
-    def partial_name_metrics(full_name):
+    def partial_name_metrics(prefixMySql,full_name):
         var_name = full_name.split('.')
         if len(var_name) == 2:  # global variable
             if ("global" in var_name[0]):
-                return "session_status.{}".format(var_name[1])
+                return "{}.{}".format(prefixMySql, var_name[1])
             return full_name
         elif len(var_name) == 3:  # local variable
             return var_name[0] + '.' + var_name[2]
@@ -172,9 +178,10 @@ class MySqlParser(BaseParser):
             raise Exception('Invalid variable full name: {}'.format(full_name))
 
     @staticmethod
-    def extract_valid_variables(variables, catalog, default_value=None):
+    def extract_valid_variables(variables, catalog, prefixMySql, default_value=None):
         valid_variables = {}
         diff_log = []
+        LOG.info(prefixMySql)
         valid_lc_variables = {k.lower(): v for k, v in list(catalog.items())}
         try:
             # First check that the names of all variables are valid (i.e., listed
@@ -185,12 +192,14 @@ class MySqlParser(BaseParser):
             for var_name, var_value in list(variables.items()):
                 lc_var_name = var_name.lower()                
                 prt_name = MySqlParser.partial_name_metrics(lc_var_name)
+                # LOG.info("prt_name: " + prt_name)
 
                 #moljain add specific parsing for mysql scenario
                 if ("." in prt_name):
                     subParts = prt_name.split(".")
                     if len(subParts) == 2 and subParts[0] == "global":  # global variable
-                        prt_name = "session_status.{}".format(subParts[1])
+                        # prt_name = "{}.{}".format(prefixMySql,subParts[1])
+                        LOG.info(prt_name)
                 
                 if prt_name in valid_lc_variables:
                     valid_name = valid_lc_variables[prt_name].name
@@ -240,16 +249,19 @@ class MySqlParser(BaseParser):
         return adjusted_metrics
 
     def parse_dbms_knobs(self, knobs):
+        # LOG.info(knobs) #this is CORRECT - join buffer size is adjusted value
+        LOG.info("Knobs passed into parse_dbms_knobs: this is CORRECT - join buffer size is adjusted value")
         valid_knobs = self.parse_dbms_variables(knobs)
         # Extract all valid knobs
+        LOG.info("somewhat correct valid_knobs printed above: ex. global.join_buffer_size': '497403648'")
         return MySqlParser.extract_valid_variables(
-            valid_knobs, self.knob_catalog_)
+            valid_knobs, self.knob_catalog_, "session_variables")
 
     def parse_dbms_metrics(self, metrics):
         valid_metrics = self.parse_dbms_variables(metrics)
         # Extract all valid metrics
         valid_metrics, diffs = MySqlParser.extract_valid_variables(
-            valid_metrics, self.metric_catalog_, default_value='0')
+            valid_metrics, self.metric_catalog_,"session_status",default_value='0')
         return valid_metrics, diffs
 
     def convert_dbms_metrics(self, metrics, observation_time, target_objective=None):
