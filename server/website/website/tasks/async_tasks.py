@@ -207,6 +207,7 @@ def configuration_recommendation(target_data):
         return target_data_res
 
     # Load mapped workload data
+    LOG.info("Load mapped workload data.")
     mapped_workload_id = target_data['mapped_workload'][0]
 
     mapped_workload = Workload.objects.get(pk=mapped_workload_id)
@@ -221,6 +222,7 @@ def configuration_recommendation(target_data):
         task_type=PipelineTaskType.METRIC_DATA)
     workload_metric_data = JSONUtil.loads(workload_metric_data.data)
 
+    LOG.info("Loaded workload knob and metric data. Clean data:")
     newest_result = Result.objects.get(pk=target_data['newest_result_id'])
     cleaned_workload_knob_data = clean_knob_data(workload_knob_data["data"],
                                                  workload_knob_data["columnlabels"],
@@ -246,6 +248,7 @@ def configuration_recommendation(target_data):
                          'identical y columnlabels (sorted metric names)'))
 
     # Filter Xs by top 10 ranked knobs
+    LOG.info("Filter Xs by the top 10 ranked knobs")
     ranked_knobs = PipelineData.objects.get(
         pipeline_run=latest_pipeline_run,
         workload=mapped_workload,
@@ -257,6 +260,7 @@ def configuration_recommendation(target_data):
     X_columnlabels = X_columnlabels[ranked_knob_idxs]
 
     # Filter ys by current target objective metric
+    LOG.info("Filter Ys by current target objective metric.")
     target_objective = newest_result.session.target_objective
     target_obj_idx = [i for i, cl in enumerate(y_columnlabels) if cl == target_objective]
     if len(target_obj_idx) == 0:

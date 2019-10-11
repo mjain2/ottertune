@@ -284,11 +284,6 @@ def run_knob_identification(knob_data, metric_data, dbms):
     nonconst_knob_columnlabels = []
 
     for col, cl in zip(knob_matrix.T, knob_columnlabels):
-        LOG.info("Printing col, then col[0]")
-        # LOG.info(np.any(col != col[0]))
-        LOG.info(col)
-        LOG.info(col[0])
-        LOG.info(cl)
         if np.any(col != col[0]):
             LOG.info("Printing col, then cl:")
             LOG.info(col)

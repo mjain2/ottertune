@@ -1,7 +1,7 @@
 [
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.aborted_clients",
             "summary": "",
             "vartype": 2,
@@ -12,7 +12,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.aborted_connects",
             "summary": "",
             "vartype": 2,
@@ -23,7 +23,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.audit_pii_login_failure",
             "summary": "",
             "vartype": 2,
@@ -34,7 +34,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.audit_pii_login_success",
             "summary": "",
             "vartype": 2,
@@ -45,7 +45,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.audit_pii_login_total",
             "summary": "",
             "vartype": 2,
@@ -56,7 +56,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.audit_slow_log_failure",
             "summary": "",
             "vartype": 2,
@@ -67,7 +67,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.audit_slow_log_success",
             "summary": "",
             "vartype": 2,
@@ -78,7 +78,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.audit_slow_log_total",
             "summary": "",
             "vartype": 2,
@@ -89,7 +89,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_cache_disk_use",
             "summary": "",
             "vartype": 2,
@@ -100,7 +100,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_cache_use",
             "summary": "",
             "vartype": 2,
@@ -111,7 +111,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_io_read",
             "summary": "",
             "vartype": 2,
@@ -122,7 +122,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_io_reads",
             "summary": "",
             "vartype": 2,
@@ -133,7 +133,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_io_writes",
             "summary": "",
             "vartype": 2,
@@ -144,7 +144,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_io_written",
             "summary": "",
             "vartype": 2,
@@ -155,7 +155,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_stmt_cache_disk_use",
             "summary": "",
             "vartype": 2,
@@ -166,7 +166,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.binlog_stmt_cache_use",
             "summary": "",
             "vartype": 2,
@@ -177,7 +177,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.bytes_received",
             "summary": "",
             "vartype": 2,
@@ -188,7 +188,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.bytes_sent",
             "summary": "",
             "vartype": 2,
@@ -199,7 +199,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_admin_commands",
             "summary": "",
             "vartype": 2,
@@ -210,7 +210,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_assign_to_keycache",
             "summary": "",
             "vartype": 2,
@@ -221,7 +221,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_db",
             "summary": "",
             "vartype": 2,
@@ -232,7 +232,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_db_upgrade",
             "summary": "",
             "vartype": 2,
@@ -243,7 +243,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_event",
             "summary": "",
             "vartype": 2,
@@ -254,7 +254,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_function",
             "summary": "",
             "vartype": 2,
@@ -265,7 +265,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_instance",
             "summary": "",
             "vartype": 2,
@@ -276,7 +276,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_procedure",
             "summary": "",
             "vartype": 2,
@@ -287,7 +287,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_server",
             "summary": "",
             "vartype": 2,
@@ -298,7 +298,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_table",
             "summary": "",
             "vartype": 2,
@@ -309,7 +309,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_tablespace",
             "summary": "",
             "vartype": 2,
@@ -320,7 +320,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_alter_user",
             "summary": "",
             "vartype": 2,
@@ -331,7 +331,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_analyze",
             "summary": "",
             "vartype": 2,
@@ -342,7 +342,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_begin",
             "summary": "",
             "vartype": 2,
@@ -353,7 +353,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_binlog",
             "summary": "",
             "vartype": 2,
@@ -364,7 +364,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_call_procedure",
             "summary": "",
             "vartype": 2,
@@ -375,7 +375,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_change_db",
             "summary": "",
             "vartype": 2,
@@ -386,7 +386,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_change_master",
             "summary": "",
             "vartype": 2,
@@ -397,7 +397,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_change_repl_filter",
             "summary": "",
             "vartype": 2,
@@ -408,7 +408,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_check",
             "summary": "",
             "vartype": 2,
@@ -419,7 +419,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_checksum",
             "summary": "",
             "vartype": 2,
@@ -430,7 +430,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_commit",
             "summary": "",
             "vartype": 2,
@@ -441,7 +441,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_db",
             "summary": "",
             "vartype": 2,
@@ -452,7 +452,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_event",
             "summary": "",
             "vartype": 2,
@@ -463,7 +463,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_function",
             "summary": "",
             "vartype": 2,
@@ -474,7 +474,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_index",
             "summary": "",
             "vartype": 2,
@@ -485,7 +485,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_procedure",
             "summary": "",
             "vartype": 2,
@@ -496,7 +496,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_server",
             "summary": "",
             "vartype": 2,
@@ -507,7 +507,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_table",
             "summary": "",
             "vartype": 2,
@@ -518,7 +518,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_trigger",
             "summary": "",
             "vartype": 2,
@@ -529,7 +529,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_udf",
             "summary": "",
             "vartype": 2,
@@ -540,7 +540,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_user",
             "summary": "",
             "vartype": 2,
@@ -551,7 +551,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_create_view",
             "summary": "",
             "vartype": 2,
@@ -562,7 +562,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_dealloc_sql",
             "summary": "",
             "vartype": 2,
@@ -573,7 +573,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_delete",
             "summary": "",
             "vartype": 2,
@@ -584,7 +584,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_delete_multi",
             "summary": "",
             "vartype": 2,
@@ -595,7 +595,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_do",
             "summary": "",
             "vartype": 2,
@@ -606,7 +606,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_db",
             "summary": "",
             "vartype": 2,
@@ -617,7 +617,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_event",
             "summary": "",
             "vartype": 2,
@@ -628,7 +628,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_function",
             "summary": "",
             "vartype": 2,
@@ -639,7 +639,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_index",
             "summary": "",
             "vartype": 2,
@@ -650,7 +650,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_procedure",
             "summary": "",
             "vartype": 2,
@@ -661,7 +661,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_server",
             "summary": "",
             "vartype": 2,
@@ -672,7 +672,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_table",
             "summary": "",
             "vartype": 2,
@@ -683,7 +683,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_trigger",
             "summary": "",
             "vartype": 2,
@@ -694,7 +694,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_user",
             "summary": "",
             "vartype": 2,
@@ -705,7 +705,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_drop_view",
             "summary": "",
             "vartype": 2,
@@ -716,7 +716,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_empty_query",
             "summary": "",
             "vartype": 2,
@@ -727,7 +727,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_execute_sql",
             "summary": "",
             "vartype": 2,
@@ -738,7 +738,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_explain_other",
             "summary": "",
             "vartype": 2,
@@ -749,7 +749,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_flush",
             "summary": "",
             "vartype": 2,
@@ -760,7 +760,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_get_diagnostics",
             "summary": "",
             "vartype": 2,
@@ -771,7 +771,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_grant",
             "summary": "",
             "vartype": 2,
@@ -782,7 +782,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_ha_close",
             "summary": "",
             "vartype": 2,
@@ -793,7 +793,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_ha_open",
             "summary": "",
             "vartype": 2,
@@ -804,7 +804,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_ha_read",
             "summary": "",
             "vartype": 2,
@@ -815,7 +815,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_help",
             "summary": "",
             "vartype": 2,
@@ -826,7 +826,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_insert",
             "summary": "",
             "vartype": 2,
@@ -837,7 +837,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_insert_select",
             "summary": "",
             "vartype": 2,
@@ -848,7 +848,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_install_plugin",
             "summary": "",
             "vartype": 2,
@@ -859,7 +859,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_kill",
             "summary": "",
             "vartype": 2,
@@ -870,7 +870,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_load",
             "summary": "",
             "vartype": 2,
@@ -881,7 +881,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_lock_tables",
             "summary": "",
             "vartype": 2,
@@ -892,7 +892,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_lock_tables_for_backup",
             "summary": "",
             "vartype": 2,
@@ -903,7 +903,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_lock_binlog_for_backup",
             "summary": "",
             "vartype": 2,
@@ -914,7 +914,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_optimize",
             "summary": "",
             "vartype": 2,
@@ -925,7 +925,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_preload_keys",
             "summary": "",
             "vartype": 2,
@@ -936,7 +936,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_prepare_sql",
             "summary": "",
             "vartype": 2,
@@ -947,7 +947,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_purge",
             "summary": "",
             "vartype": 2,
@@ -958,7 +958,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_purge_before_date",
             "summary": "",
             "vartype": 2,
@@ -969,7 +969,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_release_savepoint",
             "summary": "",
             "vartype": 2,
@@ -980,7 +980,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_rename_table",
             "summary": "",
             "vartype": 2,
@@ -991,7 +991,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_rename_user",
             "summary": "",
             "vartype": 2,
@@ -1002,7 +1002,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_repair",
             "summary": "",
             "vartype": 2,
@@ -1013,7 +1013,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_replace",
             "summary": "",
             "vartype": 2,
@@ -1024,7 +1024,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_replace_select",
             "summary": "",
             "vartype": 2,
@@ -1035,7 +1035,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_reset",
             "summary": "",
             "vartype": 2,
@@ -1046,7 +1046,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_resignal",
             "summary": "",
             "vartype": 2,
@@ -1057,7 +1057,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_revoke",
             "summary": "",
             "vartype": 2,
@@ -1068,7 +1068,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_revoke_all",
             "summary": "",
             "vartype": 2,
@@ -1079,7 +1079,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_rollback",
             "summary": "",
             "vartype": 2,
@@ -1090,7 +1090,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_rollback_to_savepoint",
             "summary": "",
             "vartype": 2,
@@ -1101,7 +1101,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_savepoint",
             "summary": "",
             "vartype": 2,
@@ -1112,7 +1112,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_select",
             "summary": "",
             "vartype": 2,
@@ -1123,7 +1123,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_set_option",
             "summary": "",
             "vartype": 2,
@@ -1134,7 +1134,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_signal",
             "summary": "",
             "vartype": 2,
@@ -1145,7 +1145,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_binlog_events",
             "summary": "",
             "vartype": 2,
@@ -1156,7 +1156,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_binlogs",
             "summary": "",
             "vartype": 2,
@@ -1167,7 +1167,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_charsets",
             "summary": "",
             "vartype": 2,
@@ -1178,7 +1178,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_collations",
             "summary": "",
             "vartype": 2,
@@ -1189,7 +1189,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_create_db",
             "summary": "",
             "vartype": 2,
@@ -1200,7 +1200,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_create_event",
             "summary": "",
             "vartype": 2,
@@ -1211,7 +1211,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_create_func",
             "summary": "",
             "vartype": 2,
@@ -1222,7 +1222,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_create_proc",
             "summary": "",
             "vartype": 2,
@@ -1233,7 +1233,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_create_table",
             "summary": "",
             "vartype": 2,
@@ -1244,7 +1244,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_create_trigger",
             "summary": "",
             "vartype": 2,
@@ -1255,7 +1255,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_databases",
             "summary": "",
             "vartype": 2,
@@ -1266,7 +1266,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_engine_logs",
             "summary": "",
             "vartype": 2,
@@ -1277,7 +1277,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_engine_mutex",
             "summary": "",
             "vartype": 2,
@@ -1288,7 +1288,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_engine_status",
             "summary": "",
             "vartype": 2,
@@ -1299,7 +1299,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_events",
             "summary": "",
             "vartype": 2,
@@ -1310,7 +1310,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_errors",
             "summary": "",
             "vartype": 2,
@@ -1321,7 +1321,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_fields",
             "summary": "",
             "vartype": 2,
@@ -1332,7 +1332,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_function_code",
             "summary": "",
             "vartype": 2,
@@ -1343,7 +1343,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_function_status",
             "summary": "",
             "vartype": 2,
@@ -1354,7 +1354,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_grants",
             "summary": "",
             "vartype": 2,
@@ -1365,7 +1365,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_keys",
             "summary": "",
             "vartype": 2,
@@ -1376,7 +1376,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_master_status",
             "summary": "",
             "vartype": 2,
@@ -1387,7 +1387,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_open_tables",
             "summary": "",
             "vartype": 2,
@@ -1398,7 +1398,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_plugins",
             "summary": "",
             "vartype": 2,
@@ -1409,7 +1409,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_privileges",
             "summary": "",
             "vartype": 2,
@@ -1420,7 +1420,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_procedure_code",
             "summary": "",
             "vartype": 2,
@@ -1431,7 +1431,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_procedure_status",
             "summary": "",
             "vartype": 2,
@@ -1442,7 +1442,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_processlist",
             "summary": "",
             "vartype": 2,
@@ -1453,7 +1453,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_profile",
             "summary": "",
             "vartype": 2,
@@ -1464,7 +1464,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_profiles",
             "summary": "",
             "vartype": 2,
@@ -1475,7 +1475,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_relaylog_events",
             "summary": "",
             "vartype": 2,
@@ -1486,7 +1486,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_slave_hosts",
             "summary": "",
             "vartype": 2,
@@ -1497,7 +1497,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_slave_status",
             "summary": "",
             "vartype": 2,
@@ -1508,7 +1508,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_status",
             "summary": "",
             "vartype": 2,
@@ -1519,7 +1519,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_storage_engines",
             "summary": "",
             "vartype": 2,
@@ -1530,7 +1530,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_table_status",
             "summary": "",
             "vartype": 2,
@@ -1541,7 +1541,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_tables",
             "summary": "",
             "vartype": 2,
@@ -1552,7 +1552,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_triggers",
             "summary": "",
             "vartype": 2,
@@ -1563,7 +1563,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_variables",
             "summary": "",
             "vartype": 2,
@@ -1574,7 +1574,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_warnings",
             "summary": "",
             "vartype": 2,
@@ -1585,7 +1585,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_show_create_user",
             "summary": "",
             "vartype": 2,
@@ -1596,7 +1596,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_shutdown",
             "summary": "",
             "vartype": 2,
@@ -1607,7 +1607,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_slave_start",
             "summary": "",
             "vartype": 2,
@@ -1618,7 +1618,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_slave_stop",
             "summary": "",
             "vartype": 2,
@@ -1629,7 +1629,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_group_replication_start",
             "summary": "",
             "vartype": 2,
@@ -1640,7 +1640,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_group_replication_stop",
             "summary": "",
             "vartype": 2,
@@ -1651,7 +1651,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_stmt_close",
             "summary": "",
             "vartype": 2,
@@ -1662,7 +1662,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_stmt_execute",
             "summary": "",
             "vartype": 2,
@@ -1673,7 +1673,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_stmt_fetch",
             "summary": "",
             "vartype": 2,
@@ -1684,7 +1684,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_stmt_prepare",
             "summary": "",
             "vartype": 2,
@@ -1695,7 +1695,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_stmt_reset",
             "summary": "",
             "vartype": 2,
@@ -1706,7 +1706,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_stmt_send_long_data",
             "summary": "",
             "vartype": 2,
@@ -1717,7 +1717,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_truncate",
             "summary": "",
             "vartype": 2,
@@ -1728,7 +1728,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_uninstall_plugin",
             "summary": "",
             "vartype": 2,
@@ -1739,7 +1739,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_unlock_binlog",
             "summary": "",
             "vartype": 2,
@@ -1750,7 +1750,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_unlock_tables",
             "summary": "",
             "vartype": 2,
@@ -1761,7 +1761,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_update",
             "summary": "",
             "vartype": 2,
@@ -1772,7 +1772,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_update_multi",
             "summary": "",
             "vartype": 2,
@@ -1783,7 +1783,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_xa_commit",
             "summary": "",
             "vartype": 2,
@@ -1794,7 +1794,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_xa_end",
             "summary": "",
             "vartype": 2,
@@ -1805,7 +1805,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_xa_prepare",
             "summary": "",
             "vartype": 2,
@@ -1816,7 +1816,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_xa_recover",
             "summary": "",
             "vartype": 2,
@@ -1827,7 +1827,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_xa_rollback",
             "summary": "",
             "vartype": 2,
@@ -1838,7 +1838,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_xa_start",
             "summary": "",
             "vartype": 2,
@@ -1849,7 +1849,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.com_stmt_reprepare",
             "summary": "",
             "vartype": 2,
@@ -1860,7 +1860,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.compression",
             "summary": "",
             "vartype": 4,
@@ -1871,7 +1871,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.connection_errors_accept",
             "summary": "",
             "vartype": 2,
@@ -1882,7 +1882,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.connection_errors_internal",
             "summary": "",
             "vartype": 2,
@@ -1893,7 +1893,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.connection_errors_max_connections",
             "summary": "",
             "vartype": 2,
@@ -1904,7 +1904,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.connection_errors_peer_address",
             "summary": "",
             "vartype": 2,
@@ -1915,7 +1915,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.connection_errors_select",
             "summary": "",
             "vartype": 2,
@@ -1926,7 +1926,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.connection_errors_tcpwrap",
             "summary": "",
             "vartype": 2,
@@ -1937,7 +1937,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.connections",
             "summary": "",
             "vartype": 2,
@@ -1948,7 +1948,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.created_tmp_disk_tables",
             "summary": "",
             "vartype": 2,
@@ -1959,7 +1959,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.created_tmp_files",
             "summary": "",
             "vartype": 2,
@@ -1970,7 +1970,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.created_tmp_tables",
             "summary": "",
             "vartype": 2,
@@ -1981,7 +1981,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.delayed_errors",
             "summary": "",
             "vartype": 2,
@@ -1992,7 +1992,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.delayed_insert_threads",
             "summary": "",
             "vartype": 2,
@@ -2003,7 +2003,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.delayed_writes",
             "summary": "",
             "vartype": 2,
@@ -2014,7 +2014,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.flush_commands",
             "summary": "",
             "vartype": 2,
@@ -2025,7 +2025,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_commit",
             "summary": "",
             "vartype": 2,
@@ -2036,7 +2036,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_delete",
             "summary": "",
             "vartype": 2,
@@ -2047,7 +2047,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_discover",
             "summary": "",
             "vartype": 2,
@@ -2058,7 +2058,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_external_lock",
             "summary": "",
             "vartype": 2,
@@ -2069,7 +2069,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_mrr_init",
             "summary": "",
             "vartype": 2,
@@ -2080,7 +2080,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_prepare",
             "summary": "",
             "vartype": 2,
@@ -2091,7 +2091,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_read_first",
             "summary": "",
             "vartype": 2,
@@ -2102,7 +2102,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_read_key",
             "summary": "",
             "vartype": 2,
@@ -2113,7 +2113,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_read_last",
             "summary": "",
             "vartype": 2,
@@ -2124,7 +2124,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_read_next",
             "summary": "",
             "vartype": 2,
@@ -2135,7 +2135,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_read_prev",
             "summary": "",
             "vartype": 2,
@@ -2146,7 +2146,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_read_rnd",
             "summary": "",
             "vartype": 2,
@@ -2157,7 +2157,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_read_rnd_next",
             "summary": "",
             "vartype": 2,
@@ -2168,7 +2168,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_rollback",
             "summary": "",
             "vartype": 2,
@@ -2179,7 +2179,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_savepoint",
             "summary": "",
             "vartype": 2,
@@ -2190,7 +2190,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_savepoint_rollback",
             "summary": "",
             "vartype": 2,
@@ -2201,7 +2201,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_update",
             "summary": "",
             "vartype": 2,
@@ -2212,7 +2212,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.handler_write",
             "summary": "",
             "vartype": 2,
@@ -2223,7 +2223,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_dump_status",
             "summary": "",
             "vartype": 1,
@@ -2234,7 +2234,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_load_status",
             "summary": "",
             "vartype": 1,
@@ -2245,7 +2245,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_resize_status",
             "summary": "",
             "vartype": 1,
@@ -2256,7 +2256,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_pages_data",
             "summary": "",
             "vartype": 2,
@@ -2267,7 +2267,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_bytes_data",
             "summary": "",
             "vartype": 2,
@@ -2278,7 +2278,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_pages_dirty",
             "summary": "",
             "vartype": 2,
@@ -2289,7 +2289,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_bytes_dirty",
             "summary": "",
             "vartype": 2,
@@ -2300,7 +2300,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_pages_flushed",
             "summary": "",
             "vartype": 2,
@@ -2311,7 +2311,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_pages_free",
             "summary": "",
             "vartype": 2,
@@ -2322,7 +2322,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_pages_misc",
             "summary": "",
             "vartype": 2,
@@ -2333,7 +2333,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_pages_total",
             "summary": "",
             "vartype": 2,
@@ -2344,7 +2344,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_read_ahead_rnd",
             "summary": "",
             "vartype": 2,
@@ -2355,7 +2355,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_read_ahead",
             "summary": "",
             "vartype": 2,
@@ -2366,7 +2366,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_read_ahead_evicted",
             "summary": "",
             "vartype": 2,
@@ -2377,7 +2377,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_read_requests",
             "summary": "",
             "vartype": 2,
@@ -2388,7 +2388,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_reads",
             "summary": "",
             "vartype": 2,
@@ -2399,7 +2399,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_wait_free",
             "summary": "",
             "vartype": 2,
@@ -2410,7 +2410,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_pool_write_requests",
             "summary": "",
             "vartype": 2,
@@ -2421,7 +2421,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_disk_reads",
             "summary": "",
             "vartype": 2,
@@ -2432,7 +2432,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_disk_read_conflicts",
             "summary": "",
             "vartype": 2,
@@ -2443,7 +2443,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_disk_writes",
             "summary": "",
             "vartype": 2,
@@ -2454,7 +2454,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_disk_writes_conflicts",
             "summary": "",
             "vartype": 2,
@@ -2465,7 +2465,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_buffer_disk_removes",
             "summary": "",
             "vartype": 2,
@@ -2476,7 +2476,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_fsyncs",
             "summary": "",
             "vartype": 2,
@@ -2487,7 +2487,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_pending_fsyncs",
             "summary": "",
             "vartype": 2,
@@ -2498,7 +2498,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_pending_reads",
             "summary": "",
             "vartype": 2,
@@ -2509,7 +2509,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_pending_writes",
             "summary": "",
             "vartype": 2,
@@ -2520,7 +2520,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_read",
             "summary": "",
             "vartype": 2,
@@ -2531,7 +2531,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_reads",
             "summary": "",
             "vartype": 2,
@@ -2542,7 +2542,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_writes",
             "summary": "",
             "vartype": 2,
@@ -2553,7 +2553,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_data_written",
             "summary": "",
             "vartype": 2,
@@ -2564,7 +2564,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_dblwr_pages_written",
             "summary": "",
             "vartype": 2,
@@ -2575,7 +2575,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_dblwr_writes",
             "summary": "",
             "vartype": 2,
@@ -2586,7 +2586,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_log_waits",
             "summary": "",
             "vartype": 2,
@@ -2597,7 +2597,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_log_write_requests",
             "summary": "",
             "vartype": 2,
@@ -2608,7 +2608,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_log_writes",
             "summary": "",
             "vartype": 2,
@@ -2619,7 +2619,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_os_log_fsyncs",
             "summary": "",
             "vartype": 2,
@@ -2630,7 +2630,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_os_log_pending_fsyncs",
             "summary": "",
             "vartype": 2,
@@ -2641,7 +2641,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_os_log_pending_writes",
             "summary": "",
             "vartype": 2,
@@ -2652,7 +2652,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_os_log_written",
             "summary": "",
             "vartype": 2,
@@ -2663,7 +2663,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_page_size",
             "summary": "",
             "vartype": 2,
@@ -2674,7 +2674,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_pages_created",
             "summary": "",
             "vartype": 2,
@@ -2685,7 +2685,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_pages_read",
             "summary": "",
             "vartype": 2,
@@ -2696,7 +2696,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_pages_written",
             "summary": "",
             "vartype": 2,
@@ -2707,7 +2707,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_row_lock_current_waits",
             "summary": "",
             "vartype": 2,
@@ -2718,7 +2718,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_row_lock_time",
             "summary": "",
             "vartype": 2,
@@ -2729,7 +2729,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_row_lock_time_avg",
             "summary": "",
             "vartype": 2,
@@ -2740,7 +2740,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_row_lock_time_max",
             "summary": "",
             "vartype": 2,
@@ -2751,7 +2751,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_row_lock_waits",
             "summary": "",
             "vartype": 2,
@@ -2762,7 +2762,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_rows_deleted",
             "summary": "",
             "vartype": 2,
@@ -2773,7 +2773,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_rows_inserted",
             "summary": "",
             "vartype": 2,
@@ -2784,7 +2784,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_rows_read",
             "summary": "",
             "vartype": 2,
@@ -2795,7 +2795,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_rows_updated",
             "summary": "",
             "vartype": 2,
@@ -2806,7 +2806,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_num_open_files",
             "summary": "",
             "vartype": 2,
@@ -2817,7 +2817,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_truncated_status_writes",
             "summary": "",
             "vartype": 2,
@@ -2828,7 +2828,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.innodb_available_undo_logs",
             "summary": "",
             "vartype": 2,
@@ -2839,7 +2839,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.key_blocks_not_flushed",
             "summary": "",
             "vartype": 2,
@@ -2850,7 +2850,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.key_blocks_unused",
             "summary": "",
             "vartype": 2,
@@ -2861,7 +2861,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.key_blocks_used",
             "summary": "",
             "vartype": 2,
@@ -2872,7 +2872,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.key_read_requests",
             "summary": "",
             "vartype": 2,
@@ -2883,7 +2883,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.key_reads",
             "summary": "",
             "vartype": 2,
@@ -2894,7 +2894,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.key_write_requests",
             "summary": "",
             "vartype": 2,
@@ -2905,7 +2905,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.key_writes",
             "summary": "",
             "vartype": 2,
@@ -2916,7 +2916,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.last_query_cost",
             "summary": "",
             "vartype": 3,
@@ -2927,7 +2927,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.last_query_partial_plans",
             "summary": "",
             "vartype": 2,
@@ -2938,7 +2938,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.locked_connects",
             "summary": "",
             "vartype": 2,
@@ -2949,7 +2949,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.max_execution_time_exceeded",
             "summary": "",
             "vartype": 2,
@@ -2960,7 +2960,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.max_execution_time_set",
             "summary": "",
             "vartype": 2,
@@ -2971,7 +2971,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.max_execution_time_set_failed",
             "summary": "",
             "vartype": 2,
@@ -2982,7 +2982,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.max_used_connections",
             "summary": "",
             "vartype": 2,
@@ -2993,7 +2993,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.max_used_connections_time",
             "summary": "",
             "vartype": 6,
@@ -3004,7 +3004,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.not_flushed_delayed_rows",
             "summary": "",
             "vartype": 2,
@@ -3015,7 +3015,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ongoing_anonymous_transaction_count",
             "summary": "",
             "vartype": 2,
@@ -3026,7 +3026,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.open_files",
             "summary": "",
             "vartype": 2,
@@ -3037,7 +3037,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.open_streams",
             "summary": "",
             "vartype": 2,
@@ -3048,7 +3048,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.open_table_definitions",
             "summary": "",
             "vartype": 2,
@@ -3059,7 +3059,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.open_tables",
             "summary": "",
             "vartype": 2,
@@ -3070,7 +3070,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.opened_files",
             "summary": "",
             "vartype": 2,
@@ -3081,7 +3081,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.opened_table_definitions",
             "summary": "",
             "vartype": 2,
@@ -3092,7 +3092,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.opened_tables",
             "summary": "",
             "vartype": 2,
@@ -3103,7 +3103,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_accounts_lost",
             "summary": "",
             "vartype": 2,
@@ -3114,7 +3114,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_az_digest_lost",
             "summary": "",
             "vartype": 2,
@@ -3125,7 +3125,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_cond_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3136,7 +3136,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_cond_instances_lost",
             "summary": "",
             "vartype": 2,
@@ -3147,7 +3147,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_digest_lost",
             "summary": "",
             "vartype": 2,
@@ -3158,7 +3158,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_file_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3169,7 +3169,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_file_handles_lost",
             "summary": "",
             "vartype": 2,
@@ -3180,7 +3180,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_file_instances_lost",
             "summary": "",
             "vartype": 2,
@@ -3191,7 +3191,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_hosts_lost",
             "summary": "",
             "vartype": 2,
@@ -3202,7 +3202,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_index_stat_lost",
             "summary": "",
             "vartype": 2,
@@ -3213,7 +3213,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_locker_lost",
             "summary": "",
             "vartype": 2,
@@ -3224,7 +3224,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_memory_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3235,7 +3235,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_metadata_lock_lost",
             "summary": "",
             "vartype": 2,
@@ -3246,7 +3246,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_mutex_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3257,7 +3257,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_mutex_instances_lost",
             "summary": "",
             "vartype": 2,
@@ -3268,7 +3268,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_nested_statement_lost",
             "summary": "",
             "vartype": 2,
@@ -3279,7 +3279,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_prepared_statements_lost",
             "summary": "",
             "vartype": 2,
@@ -3290,7 +3290,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_program_lost",
             "summary": "",
             "vartype": 2,
@@ -3301,7 +3301,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_rwlock_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3312,7 +3312,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_rwlock_instances_lost",
             "summary": "",
             "vartype": 2,
@@ -3323,7 +3323,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_session_connect_attrs_lost",
             "summary": "",
             "vartype": 2,
@@ -3334,7 +3334,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_socket_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3345,7 +3345,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_socket_instances_lost",
             "summary": "",
             "vartype": 2,
@@ -3356,7 +3356,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_stage_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3367,7 +3367,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_statement_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3378,7 +3378,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_table_handles_lost",
             "summary": "",
             "vartype": 2,
@@ -3389,7 +3389,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_table_instances_lost",
             "summary": "",
             "vartype": 2,
@@ -3400,7 +3400,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_table_lock_stat_lost",
             "summary": "",
             "vartype": 2,
@@ -3411,7 +3411,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_thread_classes_lost",
             "summary": "",
             "vartype": 2,
@@ -3422,7 +3422,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_thread_instances_lost",
             "summary": "",
             "vartype": 2,
@@ -3433,7 +3433,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.performance_schema_users_lost",
             "summary": "",
             "vartype": 2,
@@ -3444,7 +3444,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.prepared_stmt_count",
             "summary": "",
             "vartype": 2,
@@ -3455,7 +3455,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_free_blocks",
             "summary": "",
             "vartype": 2,
@@ -3466,7 +3466,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_free_memory",
             "summary": "",
             "vartype": 2,
@@ -3477,7 +3477,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_hits",
             "summary": "",
             "vartype": 2,
@@ -3488,7 +3488,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_inserts",
             "summary": "",
             "vartype": 2,
@@ -3499,7 +3499,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_lowmem_prunes",
             "summary": "",
             "vartype": 2,
@@ -3510,7 +3510,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_not_cached",
             "summary": "",
             "vartype": 2,
@@ -3521,7 +3521,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_queries_in_cache",
             "summary": "",
             "vartype": 2,
@@ -3532,7 +3532,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.qcache_total_blocks",
             "summary": "",
             "vartype": 2,
@@ -3543,7 +3543,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.queries",
             "summary": "",
             "vartype": 2,
@@ -3554,7 +3554,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.questions",
             "summary": "",
             "vartype": 2,
@@ -3565,7 +3565,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.select_full_join",
             "summary": "",
             "vartype": 2,
@@ -3576,7 +3576,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.select_full_range_join",
             "summary": "",
             "vartype": 2,
@@ -3587,7 +3587,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.select_range",
             "summary": "",
             "vartype": 2,
@@ -3598,7 +3598,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.select_range_check",
             "summary": "",
             "vartype": 2,
@@ -3609,7 +3609,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.select_scan",
             "summary": "",
             "vartype": 2,
@@ -3620,7 +3620,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.slave_open_temp_tables",
             "summary": "",
             "vartype": 2,
@@ -3631,7 +3631,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.slow_launch_threads",
             "summary": "",
             "vartype": 2,
@@ -3642,7 +3642,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.slow_queries",
             "summary": "",
             "vartype": 2,
@@ -3653,7 +3653,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.sort_merge_passes",
             "summary": "",
             "vartype": 2,
@@ -3664,7 +3664,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.sort_range",
             "summary": "",
             "vartype": 2,
@@ -3675,7 +3675,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.sort_rows",
             "summary": "",
             "vartype": 2,
@@ -3686,7 +3686,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.sort_scan",
             "summary": "",
             "vartype": 2,
@@ -3697,7 +3697,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_accept_renegotiates",
             "summary": "",
             "vartype": 2,
@@ -3708,7 +3708,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_accepts",
             "summary": "",
             "vartype": 2,
@@ -3719,7 +3719,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_callback_cache_hits",
             "summary": "",
             "vartype": 2,
@@ -3730,7 +3730,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_cipher",
             "summary": "",
             "vartype": 1,
@@ -3741,7 +3741,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_cipher_list",
             "summary": "",
             "vartype": 1,
@@ -3752,7 +3752,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_client_connects",
             "summary": "",
             "vartype": 2,
@@ -3763,7 +3763,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_connect_renegotiates",
             "summary": "",
             "vartype": 2,
@@ -3774,7 +3774,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_ctx_verify_depth",
             "summary": "",
             "vartype": 2,
@@ -3785,7 +3785,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_ctx_verify_mode",
             "summary": "",
             "vartype": 2,
@@ -3796,7 +3796,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_default_timeout",
             "summary": "",
             "vartype": 2,
@@ -3807,7 +3807,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_finished_accepts",
             "summary": "",
             "vartype": 2,
@@ -3818,7 +3818,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_finished_connects",
             "summary": "",
             "vartype": 2,
@@ -3829,7 +3829,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_server_not_after",
             "summary": "",
             "vartype": 6,
@@ -3840,7 +3840,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_server_not_before",
             "summary": "",
             "vartype": 6,
@@ -3851,7 +3851,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_session_cache_hits",
             "summary": "",
             "vartype": 2,
@@ -3862,7 +3862,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_session_cache_misses",
             "summary": "",
             "vartype": 2,
@@ -3873,7 +3873,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_session_cache_mode",
             "summary": "",
             "vartype": 1,
@@ -3884,7 +3884,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_session_cache_overflows",
             "summary": "",
             "vartype": 2,
@@ -3895,7 +3895,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_session_cache_size",
             "summary": "",
             "vartype": 2,
@@ -3906,7 +3906,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_session_cache_timeouts",
             "summary": "",
             "vartype": 2,
@@ -3917,7 +3917,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_sessions_reused",
             "summary": "",
             "vartype": 2,
@@ -3928,7 +3928,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_used_session_cache_entries",
             "summary": "",
             "vartype": 2,
@@ -3939,7 +3939,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_verify_depth",
             "summary": "",
             "vartype": 2,
@@ -3950,7 +3950,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_verify_mode",
             "summary": "",
             "vartype": 2,
@@ -3961,7 +3961,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.ssl_version",
             "summary": "",
             "vartype": 1,
@@ -3972,7 +3972,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.table_locks_immediate",
             "summary": "",
             "vartype": 2,
@@ -3983,7 +3983,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.table_locks_waited",
             "summary": "",
             "vartype": 2,
@@ -3994,7 +3994,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.table_open_cache_hits",
             "summary": "",
             "vartype": 2,
@@ -4005,7 +4005,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.table_open_cache_misses",
             "summary": "",
             "vartype": 2,
@@ -4016,7 +4016,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.table_open_cache_overflows",
             "summary": "",
             "vartype": 2,
@@ -4027,7 +4027,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.tc_log_max_pages_used",
             "summary": "",
             "vartype": 2,
@@ -4038,7 +4038,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.tc_log_page_size",
             "summary": "",
             "vartype": 2,
@@ -4049,7 +4049,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.tc_log_page_waits",
             "summary": "",
             "vartype": 2,
@@ -4060,7 +4060,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.threads_cached",
             "summary": "",
             "vartype": 2,
@@ -4071,7 +4071,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.threads_connected",
             "summary": "",
             "vartype": 2,
@@ -4082,7 +4082,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.threads_created",
             "summary": "",
             "vartype": 2,
@@ -4093,7 +4093,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.threads_running",
             "summary": "",
             "vartype": 2,
@@ -4104,7 +4104,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.uptime",
             "summary": "",
             "vartype": 2,
@@ -4115,7 +4115,7 @@
     },
     {
         "fields": {
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_status.uptime_since_flush_status",
             "summary": "",
             "vartype": 2,
