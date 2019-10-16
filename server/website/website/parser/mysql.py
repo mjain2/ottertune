@@ -253,11 +253,8 @@ class MySqlParser(BaseParser):
         return adjusted_metrics
 
     def parse_dbms_knobs(self, knobs):
-        # LOG.info(knobs) #this is CORRECT - join buffer size is adjusted value
-        LOG.info("Knobs passed into parse_dbms_knobs: this is CORRECT - join buffer size is adjusted value")
         valid_knobs = self.parse_dbms_variables(knobs, "session_variables")
         # Extract all valid knobs
-        LOG.info("somewhat correct valid_knobs printed above: ex. global.join_buffer_size': '497403648'")
         return MySqlParser.extract_valid_variables(
             valid_knobs, self.knob_catalog_)
 
@@ -286,6 +283,8 @@ class MySqlParser(BaseParser):
                         name, metadata.metric_type))
 
         targetObjectiveMetric = self.target_metric(target_objective)()
+        LOG.info("target_objective: " + target_objective + " targetObjectiveMetric: " + targetObjectiveMetric)
+        LOG.info(metric_data)
         if target_objective is not None and targetObjectiveMetric not in metric_data:
             raise Exception("Cannot find objective function")
 

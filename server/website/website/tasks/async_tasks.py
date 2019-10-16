@@ -77,7 +77,7 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
 
     def on_success(self, retval, task_id, args, kwargs):
         super(ConfigurationRecommendation, self).on_success(retval, task_id, args, kwargs)
-
+        LOG.info("Configuration Recommendation was successful")
         result_id = args[0]['newest_result_id']
         result = Result.objects.get(pk=result_id)
 
@@ -437,6 +437,8 @@ def configuration_recommendation(target_data):
     best_config = np.maximum(best_config, X_min_inv)
 
     conf_map = {k: best_config[i] for i, k in enumerate(X_columnlabels)}
+    LOG.info("recommendation generated conf_map:")
+    LOG.info(conf_map)
     conf_map_res = {}
     conf_map_res['status'] = 'good'
     conf_map_res['recommendation'] = conf_map

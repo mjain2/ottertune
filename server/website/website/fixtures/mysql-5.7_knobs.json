@@ -3,7 +3,7 @@
         "fields": {
             "category": "",
             "maxval": "65535",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.auto_increment_increment",
             "minval": "1",
             "default": "1",
@@ -22,7 +22,7 @@
         "fields": {
             "category": "",
             "maxval": "65535",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.auto_increment_offset",
             "minval": "1",
             "default": "1",
@@ -41,7 +41,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.autocommit",
             "minval": "null",
             "default": "ON",
@@ -60,7 +60,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.automatic_sp_privileges",
             "minval": "null",
             "default": "TRUE",
@@ -79,7 +79,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.avoid_temporal_upgrade",
             "minval": "null",
             "default": "OFF",
@@ -98,7 +98,7 @@
         "fields": {
             "category": "",
             "maxval": "65535",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.back_log",
             "minval": "1",
             "default": "-1 (autosized)",
@@ -117,7 +117,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.basedir",
             "minval": "null",
             "default": "",
@@ -136,7 +136,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.big_tables",
             "minval": "null",
             "default": "OFF",
@@ -155,7 +155,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.bind_address",
             "minval": "null",
             "default": "*",
@@ -174,7 +174,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_cache_size",
             "minval": "4096",
             "default": "32768",
@@ -193,7 +193,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_checksum",
             "minval": "null",
             "default": "CRC32",
@@ -212,7 +212,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_direct_non_transactional_updates",
             "minval": "null",
             "default": "OFF",
@@ -231,7 +231,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_error_action",
             "minval": "null",
             "default": "IGNORE_ERROR",
@@ -250,7 +250,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_format",
             "minval": "null",
             "default": "MIXED",
@@ -269,7 +269,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_gtid_simple_recovery",
             "minval": "null",
             "default": "FALSE",
@@ -288,7 +288,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_order_commits",
             "minval": "null",
             "default": "ON",
@@ -307,7 +307,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_row_image",
             "minval": "null",
             "default": "MINIMAL",
@@ -326,7 +326,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_rows_query_log_events",
             "minval": "null",
             "default": "FALSE",
@@ -345,7 +345,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.binlog_stmt_cache_size",
             "minval": "4096",
             "default": "32768",
@@ -364,7 +364,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.block_encryption_mode",
             "minval": "null",
             "default": "aes-128-ecb",
@@ -383,7 +383,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.bulk_insert_buffer_size",
             "minval": "0",
             "default": "8388608",
@@ -402,7 +402,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_set_client",
             "minval": "null",
             "default": "latin1",
@@ -421,7 +421,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_set_connection",
             "minval": "null",
             "default": "latin1",
@@ -440,7 +440,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_set_database",
             "minval": "null",
             "default": "latin1",
@@ -459,7 +459,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_set_filesystem",
             "minval": "null",
             "default": "binary",
@@ -478,7 +478,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_set_results",
             "minval": "null",
             "default": "latin1",
@@ -497,7 +497,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_set_server",
             "minval": "null",
             "default": "latin1",
@@ -516,7 +516,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_set_system",
             "minval": "null",
             "default": "utf8",
@@ -535,7 +535,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.character_sets_dir",
             "minval": "null",
             "default": "",
@@ -554,7 +554,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.collation_connection",
             "minval": "null",
             "default": "latin1_swedish_ci",
@@ -573,7 +573,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.collation_database",
             "minval": "null",
             "default": "latin1_swedish_ci",
@@ -592,7 +592,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.collation_server",
             "minval": "null",
             "default": "latin1_swedish_ci",
@@ -611,7 +611,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.completion_type",
             "minval": "null",
             "default": "NO_CHAIN",
@@ -630,7 +630,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.concurrent_insert",
             "minval": "null",
             "default": "AUTO",
@@ -649,7 +649,7 @@
         "fields": {
             "category": "",
             "maxval": "31536000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.connect_timeout",
             "minval": "2",
             "default": "10",
@@ -668,7 +668,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.core_file",
             "minval": "null",
             "default": "OFF",
@@ -687,7 +687,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.datadir",
             "minval": "null",
             "default": "",
@@ -706,7 +706,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.date_format",
             "minval": "null",
             "default": "%Y-%m-%d",
@@ -725,7 +725,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.datetime_format",
             "minval": "null",
             "default": "%Y-%m-%d %H:%i:%s",
@@ -744,7 +744,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.default_storage_engine",
             "minval": "null",
             "default": "session_variables.innodb",
@@ -763,7 +763,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.default_tmp_storage_engine",
             "minval": "null",
             "default": "session_variables.innodb",
@@ -782,7 +782,7 @@
         "fields": {
             "category": "",
             "maxval": "7",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.default_week_format",
             "minval": "0",
             "default": "0",
@@ -801,7 +801,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.delay_key_write",
             "minval": "null",
             "default": "ON",
@@ -820,7 +820,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.delayed_insert_limit",
             "minval": "1",
             "default": "100",
@@ -839,7 +839,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.delayed_insert_timeout",
             "minval": "null",
             "default": "300",
@@ -858,7 +858,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.delayed_queue_size",
             "minval": "1",
             "default": "1000",
@@ -877,7 +877,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.disconnect_on_expired_password",
             "minval": "null",
             "default": "ON",
@@ -896,7 +896,7 @@
         "fields": {
             "category": "",
             "maxval": "30",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.div_precision_increment",
             "minval": "0",
             "default": "4",
@@ -915,7 +915,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.end_markers_in_json",
             "minval": "null",
             "default": "OFF",
@@ -934,7 +934,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.enforce_gtid_consistency",
             "minval": "null",
             "default": "false",
@@ -953,7 +953,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.eq_range_index_dive_limit",
             "minval": "0",
             "default": "10",
@@ -972,7 +972,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.error_count",
             "minval": "null",
             "default": "0",
@@ -991,7 +991,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.event_scheduler",
             "minval": "null",
             "default": "OFF",
@@ -1010,7 +1010,7 @@
         "fields": {
             "category": "",
             "maxval": "99",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.expire_logs_days",
             "minval": "0",
             "default": "0",
@@ -1029,7 +1029,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.explicit_defaults_for_timestamp",
             "minval": "null",
             "default": "OFF",
@@ -1048,7 +1048,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.external_user",
             "minval": "null",
             "default": "",
@@ -1067,7 +1067,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.flush",
             "minval": "null",
             "default": "OFF",
@@ -1086,7 +1086,7 @@
         "fields": {
             "category": "",
             "maxval": "8640000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.flush_time",
             "minval": "0",
             "default": "0",
@@ -1105,7 +1105,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.foreign_key_checks",
             "minval": "null",
             "default": "1",
@@ -1124,7 +1124,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ft_boolean_syntax",
             "minval": "null",
             "default": "|",
@@ -1143,7 +1143,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ft_max_word_len",
             "minval": "10",
             "default": "84",
@@ -1162,7 +1162,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ft_min_word_len",
             "minval": "1",
             "default": "4",
@@ -1181,7 +1181,7 @@
         "fields": {
             "category": "",
             "maxval": "1000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ft_query_expansion_limit",
             "minval": "0",
             "default": "20",
@@ -1200,7 +1200,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ft_stopword_file",
             "minval": "null",
             "default": "(built-in)",
@@ -1219,7 +1219,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.general_log",
             "minval": "null",
             "default": "OFF",
@@ -1238,7 +1238,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.general_log_file",
             "minval": "null",
             "default": "host_name.log",
@@ -1257,7 +1257,7 @@
         "fields": {
             "category": "",
             "maxval": "16777216",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.group_concat_max_len",
             "minval": "4",
             "default": "1024",
@@ -1276,7 +1276,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.gtid_mode",
             "minval": "null",
             "default": "OFF",
@@ -1295,7 +1295,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.gtid_next",
             "minval": "null",
             "default": "AUTOMATIC",
@@ -1314,7 +1314,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.gtid_owned",
             "minval": "null",
             "default": "",
@@ -1333,7 +1333,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.gtid_purged",
             "minval": "null",
             "default": "",
@@ -1352,7 +1352,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_compress",
             "minval": "null",
             "default": "Yes",
@@ -1371,7 +1371,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_crypt",
             "minval": "null",
             "default": "Yes",
@@ -1390,7 +1390,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_dynamic_loading",
             "minval": "null",
             "default": "Yes",
@@ -1409,7 +1409,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_geometry",
             "minval": "null",
             "default": "Yes",
@@ -1428,7 +1428,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_openssl",
             "minval": "null",
             "default": "Yes",
@@ -1447,7 +1447,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_profiling",
             "minval": "null",
             "default": "Yes",
@@ -1466,7 +1466,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_query_cache",
             "minval": "null",
             "default": "Yes",
@@ -1485,7 +1485,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_rtree_keys",
             "minval": "null",
             "default": "Yes",
@@ -1504,7 +1504,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_ssl",
             "minval": "null",
             "default": "Disabled",
@@ -1523,7 +1523,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.have_symlink",
             "minval": "null",
             "default": "Yes",
@@ -1542,7 +1542,7 @@
         "fields": {
             "category": "",
             "maxval": "65536",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.host_cache_size",
             "minval": "0",
             "default": "-1 (autosized)",
@@ -1561,7 +1561,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.hostname",
             "minval": "null",
             "default": "",
@@ -1580,7 +1580,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.identity",
             "minval": "null",
             "default": "0",
@@ -1599,7 +1599,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ignore_builtin_innodb",
             "minval": "null",
             "default": "OFF",
@@ -1618,7 +1618,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ignore_db_dirs",
             "minval": "null",
             "default": "",
@@ -1637,7 +1637,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.init_connect",
             "minval": "null",
             "default": "",
@@ -1656,7 +1656,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.init_file",
             "minval": "null",
             "default": "",
@@ -1675,7 +1675,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.init_slave",
             "minval": "null",
             "default": "",
@@ -1694,7 +1694,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_adaptive_flushing",
             "minval": null,
             "default": "ON",
@@ -1713,7 +1713,7 @@
         "fields": {
             "category": "",
             "maxval": "70",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_adaptive_flushing_lwm",
             "minval": "0",
             "default": "10",
@@ -1732,7 +1732,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_adaptive_hash_index",
             "minval": null,
             "default": "ON",
@@ -1751,7 +1751,7 @@
         "fields": {
             "category": "",
             "maxval": "512",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_adaptive_hash_index_parts",
             "minval": "1",
             "default": "8",
@@ -1770,7 +1770,7 @@
         "fields": {
             "category": "",
             "maxval": "1000000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_adaptive_max_sleep_delay",
             "minval": "0",
             "default": "150000",
@@ -1789,7 +1789,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_aggressive_pc",
             "minval": null,
             "default": "OFF",
@@ -1808,7 +1808,7 @@
         "fields": {
             "category": "",
             "maxval": "1000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_autoextend_increment",
             "minval": "1",
             "default": "64",
@@ -1827,7 +1827,7 @@
         "fields": {
             "category": "",
             "maxval": "2",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_autoinc_lock_mode",
             "minval": "0",
             "default": "1",
@@ -1846,7 +1846,7 @@
         "fields": {
             "category": "",
             "maxval": "100",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_buffer_pool_dump_pct",
             "minval": "1",
             "default": "25",
@@ -1865,7 +1865,7 @@
         "fields": {
             "category": "",
             "maxval": "3758096384",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_buffer_pool_size",
             "minval": "134217728",
             "default": "134217728",
@@ -1884,7 +1884,7 @@
         "fields": {
             "category": "",
             "maxval": "50",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_change_buffer_max_size",
             "minval": "0",
             "default": "25",
@@ -1903,7 +1903,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_change_buffering",
             "minval": null,
             "default": "all",
@@ -1922,7 +1922,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_checksum_algorithm",
             "minval": null,
             "default": "crc32",
@@ -1941,7 +1941,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_chunk_write_enabled",
             "minval": null,
             "default": "OFF",
@@ -1960,7 +1960,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_cmp_per_index_enabled",
             "minval": null,
             "default": "OFF",
@@ -1979,7 +1979,7 @@
         "fields": {
             "category": "",
             "maxval": "1000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_commit_concurrency",
             "minval": "0",
             "default": "0",
@@ -1998,7 +1998,7 @@
         "fields": {
             "category": "",
             "maxval": "100",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_compression_failure_threshold_pct",
             "minval": "0",
             "default": "5",
@@ -2017,7 +2017,7 @@
         "fields": {
             "category": "",
             "maxval": "9",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_compression_level",
             "minval": "0",
             "default": "6",
@@ -2036,7 +2036,7 @@
         "fields": {
             "category": "",
             "maxval": "75",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_compression_pad_pct_max",
             "minval": "0",
             "default": "50",
@@ -2055,7 +2055,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_concurrency_tickets",
             "minval": "1",
             "default": "5000",
@@ -2074,7 +2074,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_deadlock_detect",
             "minval": null,
             "default": "ON",
@@ -2093,7 +2093,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_default_row_format",
             "minval": null,
             "default": "DYNAMIC",
@@ -2112,7 +2112,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_delay_datasync",
             "minval": null,
             "default": "OFF",
@@ -2131,7 +2131,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_delay_logwrite",
             "minval": null,
             "default": "OFF",
@@ -2150,7 +2150,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_disable_sort_file_cache",
             "minval": null,
             "default": "OFF",
@@ -2169,7 +2169,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_disk_buffer_pool_filename",
             "minval": null,
             "default": "C:\\\\work\\\\diskcache.data",
@@ -2188,7 +2188,7 @@
         "fields": {
             "category": "",
             "maxval": "515396075520",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_disk_buffer_pool_size",
             "minval": "0",
             "default": "0",
@@ -2207,7 +2207,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_doublewrite",
             "minval": null,
             "default": "OFF",
@@ -2226,7 +2226,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_fast0ext_enabled",
             "minval": null,
             "default": "OFF",
@@ -2245,7 +2245,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_fast_init_buffer_pool",
             "minval": null,
             "default": "OFF",
@@ -2264,7 +2264,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_fast_shutdown",
             "minval": null,
             "default": "1",
@@ -2283,7 +2283,7 @@
         "fields": {
             "category": "",
             "maxval": "864000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_fatal_semaphore_wait_threshold",
             "minval": "1",
             "default": "600",
@@ -2302,7 +2302,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_file_format",
             "minval": null,
             "default": "Barracuda",
@@ -2321,7 +2321,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_file_per_table",
             "minval": null,
             "default": "OFF",
@@ -2340,7 +2340,7 @@
         "fields": {
             "category": "",
             "maxval": "100",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_fill_factor",
             "minval": "10",
             "default": "100",
@@ -2359,7 +2359,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_flush_log_at_trx_commit",
             "minval": null,
             "default": "1",
@@ -2378,7 +2378,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_flush_method",
             "minval": null,
             "default": "async_unbuffered",
@@ -2397,7 +2397,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_flush_neighbors",
             "minval": null,
             "default": "1",
@@ -2416,7 +2416,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_flush_sync",
             "minval": null,
             "default": "ON",
@@ -2435,7 +2435,7 @@
         "fields": {
             "category": "",
             "maxval": "1000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_flushing_avg_loops",
             "minval": "1",
             "default": "30",
@@ -2454,7 +2454,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_force_load_corrupted",
             "minval": null,
             "default": "OFF",
@@ -2473,7 +2473,7 @@
         "fields": {
             "category": "",
             "maxval": "6",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_force_recovery",
             "minval": "0",
             "default": "0",
@@ -2492,7 +2492,7 @@
         "fields": {
             "category": "",
             "maxval": "80000000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_cache_size",
             "minval": "1600000",
             "default": "8000000",
@@ -2511,7 +2511,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_enable_diag_print",
             "minval": null,
             "default": "OFF",
@@ -2530,7 +2530,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_enable_stopword",
             "minval": null,
             "default": "ON",
@@ -2549,7 +2549,7 @@
         "fields": {
             "category": "",
             "maxval": "84",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_max_token_size",
             "minval": "10",
             "default": "84",
@@ -2568,7 +2568,7 @@
         "fields": {
             "category": "",
             "maxval": "16",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_min_token_size",
             "minval": "0",
             "default": "3",
@@ -2587,7 +2587,7 @@
         "fields": {
             "category": "",
             "maxval": "10000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_num_word_optimize",
             "minval": "1000",
             "default": "2000",
@@ -2606,7 +2606,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_result_cache_limit",
             "minval": "1000000",
             "default": "2000000000",
@@ -2625,7 +2625,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_server_stopword_table",
             "minval": null,
             "default": "",
@@ -2644,7 +2644,7 @@
         "fields": {
             "category": "",
             "maxval": "32",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_sort_pll_degree",
             "minval": "1",
             "default": "2",
@@ -2663,7 +2663,7 @@
         "fields": {
             "category": "",
             "maxval": "640000000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_total_cache_size",
             "minval": "32000000",
             "default": "640000000",
@@ -2682,7 +2682,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_ft_user_stopword_table",
             "minval": null,
             "default": "",
@@ -2701,7 +2701,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_io_capacity",
             "minval": "100",
             "default": "200",
@@ -2720,7 +2720,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_io_capacity_max",
             "minval": "100",
             "default": "2000",
@@ -2739,7 +2739,7 @@
         "fields": {
             "category": "",
             "maxval": "16",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_keybsize_min",
             "minval": "1",
             "default": "1",
@@ -2758,7 +2758,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_large_prefix",
             "minval": null,
             "default": "ON",
@@ -2777,7 +2777,7 @@
         "fields": {
             "category": "",
             "maxval": "1073741824",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_lock_wait_timeout",
             "minval": "1",
             "default": "50",
@@ -2796,7 +2796,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_log_buffer_size",
             "minval": "1048576",
             "default": "16777216",
@@ -2815,7 +2815,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_log_checksums",
             "minval": null,
             "default": "ON",
@@ -2834,7 +2834,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_log_compressed_pages",
             "minval": null,
             "default": "ON",
@@ -2853,7 +2853,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_log_flush_shallow_check",
             "minval": null,
             "default": "OFF",
@@ -2872,7 +2872,7 @@
         "fields": {
             "category": "",
             "maxval": "512",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_log_wrlock_retrymax",
             "minval": "0",
             "default": "0",
@@ -2891,7 +2891,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_lru_scan_depth",
             "minval": "100",
             "default": "1024",
@@ -2910,7 +2910,7 @@
         "fields": {
             "category": "",
             "maxval": "99.99",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_max_dirty_pages_pct",
             "minval": "0",
             "default": "75",
@@ -2929,7 +2929,7 @@
         "fields": {
             "category": "",
             "maxval": "99.99",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_max_dirty_pages_pct_lwm",
             "minval": "0",
             "default": "0",
@@ -2948,7 +2948,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_max_purge_lag",
             "minval": "0",
             "default": "0",
@@ -2967,7 +2967,7 @@
         "fields": {
             "category": "",
             "maxval": "10000000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_max_purge_lag_delay",
             "minval": "0",
             "default": "0",
@@ -2986,7 +2986,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_max_undo_log_size",
             "minval": "10485760",
             "default": "1073741824",
@@ -3005,7 +3005,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_monitor_disable",
             "minval": null,
             "default": "",
@@ -3024,7 +3024,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_monitor_enable",
             "minval": null,
             "default": "",
@@ -3043,7 +3043,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_monitor_reset",
             "minval": null,
             "default": "",
@@ -3062,7 +3062,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_monitor_reset_all",
             "minval": null,
             "default": "",
@@ -3081,7 +3081,7 @@
         "fields": {
             "category": "",
             "maxval": "95",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_old_blocks_pct",
             "minval": "5",
             "default": "37",
@@ -3100,7 +3100,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_old_blocks_time",
             "minval": "0",
             "default": "1000",
@@ -3119,7 +3119,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_online_alter_log_max_size",
             "minval": "65536",
             "default": "134217728",
@@ -3138,7 +3138,7 @@
         "fields": {
             "category": "",
             "maxval": "1,10-4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_open_files",
             "minval": "",
             "default": "-1",
@@ -3157,7 +3157,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_optimize_fulltext_only",
             "minval": null,
             "default": "OFF",
@@ -3176,7 +3176,7 @@
         "fields": {
             "category": "",
             "maxval": "64",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_page_cleaners",
             "minval": "1",
             "default": "4",
@@ -3195,7 +3195,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_print_all_deadlocks",
             "minval": null,
             "default": "OFF",
@@ -3214,7 +3214,7 @@
         "fields": {
             "category": "",
             "maxval": "5000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_purge_batch_size",
             "minval": "1",
             "default": "300",
@@ -3233,7 +3233,7 @@
         "fields": {
             "category": "",
             "maxval": "128",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_purge_rseg_truncate_frequency",
             "minval": "1",
             "default": "128",
@@ -3252,7 +3252,7 @@
         "fields": {
             "category": "",
             "maxval": "32",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_purge_threads",
             "minval": "1",
             "default": "4",
@@ -3271,7 +3271,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_random_read_ahead",
             "minval": null,
             "default": "OFF",
@@ -3290,7 +3290,7 @@
         "fields": {
             "category": "",
             "maxval": "64",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_read_ahead_threshold",
             "minval": "0",
             "default": "56",
@@ -3309,7 +3309,7 @@
         "fields": {
             "category": "",
             "maxval": "64",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_read_io_threads",
             "minval": "1",
             "default": "4",
@@ -3328,7 +3328,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_read_only",
             "minval": null,
             "default": "OFF",
@@ -3347,7 +3347,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_replication_delay",
             "minval": "0",
             "default": "0",
@@ -3366,7 +3366,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_rollback_on_timeout",
             "minval": null,
             "default": "OFF",
@@ -3385,7 +3385,7 @@
         "fields": {
             "category": "",
             "maxval": "128",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_rollback_segments",
             "minval": "1",
             "default": "128",
@@ -3404,7 +3404,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_shutdown_clean_memory",
             "minval": null,
             "default": "OFF",
@@ -3423,7 +3423,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_spin_wait_delay",
             "minval": "0",
             "default": "6",
@@ -3442,7 +3442,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_stats_auto_recalc",
             "minval": null,
             "default": "ON",
@@ -3461,7 +3461,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_stats_include_delete_marked",
             "minval": null,
             "default": "OFF",
@@ -3480,7 +3480,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_stats_method",
             "minval": null,
             "default": "nulls_equal",
@@ -3499,7 +3499,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_stats_on_metadata",
             "minval": null,
             "default": "OFF",
@@ -3518,7 +3518,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_stats_persistent",
             "minval": null,
             "default": "ON",
@@ -3537,7 +3537,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_stats_persistent_sample_pages",
             "minval": "1",
             "default": "20",
@@ -3556,7 +3556,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_stats_transient_sample_pages",
             "minval": "1",
             "default": "8",
@@ -3575,7 +3575,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_status_output",
             "minval": null,
             "default": "OFF",
@@ -3594,7 +3594,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_status_output_locks",
             "minval": null,
             "default": "OFF",
@@ -3613,7 +3613,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_strict_mode",
             "minval": null,
             "default": "ON",
@@ -3632,7 +3632,7 @@
         "fields": {
             "category": "",
             "maxval": "1024",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_sync_array_size",
             "minval": "1",
             "default": "1",
@@ -3651,7 +3651,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_sync_spin_loops",
             "minval": "0",
             "default": "30",
@@ -3670,7 +3670,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_table_locks",
             "minval": null,
             "default": "ON",
@@ -3689,7 +3689,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_temp_data_file_path",
             "minval": null,
             "default": "C:\\\\temp\\\\ibtmp1:12M:autoextend",
@@ -3708,7 +3708,7 @@
         "fields": {
             "category": "",
             "maxval": "1000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_thread_concurrency",
             "minval": "0",
             "default": "0",
@@ -3727,7 +3727,7 @@
         "fields": {
             "category": "",
             "maxval": "1000000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_thread_sleep_delay",
             "minval": "0",
             "default": "10000",
@@ -3746,7 +3746,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_tmpdir",
             "minval": null,
             "default": "",
@@ -3765,7 +3765,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_undo_log_truncate",
             "minval": null,
             "default": "OFF",
@@ -3784,7 +3784,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_undolog_init_mt",
             "minval": null,
             "default": "ON",
@@ -3803,7 +3803,7 @@
         "fields": {
             "category": "",
             "maxval": "64",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.innodb_write_io_threads",
             "minval": "1",
             "default": "4",
@@ -3822,7 +3822,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.insert_id",
             "minval": "null",
             "default": "0",
@@ -3841,7 +3841,7 @@
         "fields": {
             "category": "",
             "maxval": "31536000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.interactive_timeout",
             "minval": "1",
             "default": "28800",
@@ -3860,7 +3860,7 @@
         "fields": {
             "category": "",
             "maxval": "268435455",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.join_buffer_size",
             "minval": "128",
             "default": "262144",
@@ -3879,7 +3879,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.keep_files_on_create",
             "minval": "null",
             "default": "OFF",
@@ -3898,7 +3898,7 @@
         "fields": {
             "category": "",
             "maxval": "OS_PER_PROCESS_LIMIT",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.key_buffer_size",
             "minval": "8",
             "default": "8388608",
@@ -3917,7 +3917,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.key_cache_age_threshold",
             "minval": "100",
             "default": "300",
@@ -3936,7 +3936,7 @@
         "fields": {
             "category": "",
             "maxval": "16384",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.key_cache_block_size",
             "minval": "512",
             "default": "1024",
@@ -3955,7 +3955,7 @@
         "fields": {
             "category": "",
             "maxval": "100",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.key_cache_division_limit",
             "minval": "1",
             "default": "100",
@@ -3974,7 +3974,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.large_files_support",
             "minval": "null",
             "default": "ON",
@@ -3993,7 +3993,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.large_page_size",
             "minval": "null",
             "default": "0",
@@ -4012,7 +4012,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.large_pages",
             "minval": "null",
             "default": "FALSE",
@@ -4031,7 +4031,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.last_insert_id",
             "minval": "null",
             "default": "0",
@@ -4050,7 +4050,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.lc_messages",
             "minval": "null",
             "default": "en_US",
@@ -4069,7 +4069,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.lc_messages_dir",
             "minval": "null",
             "default": "",
@@ -4088,7 +4088,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.lc_time_names",
             "minval": "null",
             "default": "en_US",
@@ -4107,7 +4107,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.license",
             "minval": "null",
             "default": "GPL",
@@ -4126,7 +4126,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.local_infile",
             "minval": "null",
             "default": "ON",
@@ -4145,7 +4145,7 @@
         "fields": {
             "category": "",
             "maxval": "31536000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.lock_wait_timeout",
             "minval": "1",
             "default": "31536000",
@@ -4164,7 +4164,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.locked_in_memory",
             "minval": "null",
             "default": "OFF",
@@ -4183,7 +4183,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_bin",
             "minval": "null",
             "default": "ON",
@@ -4202,7 +4202,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_bin_basename",
             "minval": "null",
             "default": "datadir + '/' + hostname + '-bin'",
@@ -4221,7 +4221,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_bin_index",
             "minval": "null",
             "default": "datadir + '/' + hostname + '-bin.index'",
@@ -4240,7 +4240,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_bin_trust_function_creators",
             "minval": "null",
             "default": "FALSE",
@@ -4259,7 +4259,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_bin_use_v1_row_events",
             "minval": "null",
             "default": "0",
@@ -4278,7 +4278,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_error",
             "minval": "null",
             "default": "datadir + '/' + hostname + '.err'",
@@ -4297,7 +4297,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_output",
             "minval": "null",
             "default": "FILE",
@@ -4316,7 +4316,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_queries_not_using_indexes",
             "minval": "null",
             "default": "OFF",
@@ -4335,7 +4335,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_slave_updates",
             "minval": "null",
             "default": "FALSE",
@@ -4354,7 +4354,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_slow_admin_statements",
             "minval": "null",
             "default": "OFF",
@@ -4373,7 +4373,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_slow_slave_statements",
             "minval": "null",
             "default": "OFF",
@@ -4392,7 +4392,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_throttle_queries_not_using_indexes",
             "minval": "0",
             "default": "0",
@@ -4411,7 +4411,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.log_warnings",
             "minval": "0",
             "default": "1",
@@ -4430,7 +4430,7 @@
         "fields": {
             "category": "",
             "maxval": "31536000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.long_query_time",
             "minval": "0",
             "default": "10",
@@ -4449,7 +4449,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.low_priority_updates",
             "minval": "null",
             "default": "FALSE",
@@ -4468,7 +4468,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.lower_case_file_system",
             "minval": "null",
             "default": "OFF",
@@ -4487,7 +4487,7 @@
         "fields": {
             "category": "",
             "maxval": "2",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.lower_case_table_names",
             "minval": "0",
             "default": "0",
@@ -4506,7 +4506,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.master_info_repository",
             "minval": "null",
             "default": "FILE",
@@ -4525,7 +4525,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.master_verify_checksum",
             "minval": "null",
             "default": "OFF",
@@ -4544,7 +4544,7 @@
         "fields": {
             "category": "",
             "maxval": "1073741824",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_allowed_packet",
             "minval": "1024",
             "default": "4194304",
@@ -4563,7 +4563,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_binlog_cache_size",
             "minval": "4096",
             "default": "18446744073709551615",
@@ -4582,7 +4582,7 @@
         "fields": {
             "category": "",
             "maxval": "1073741824",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_binlog_size",
             "minval": "4096",
             "default": "1073741824",
@@ -4601,7 +4601,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709547520",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_binlog_stmt_cache_size",
             "minval": "4096",
             "default": "18446744073709547520",
@@ -4620,7 +4620,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_connect_errors",
             "minval": "1",
             "default": "100",
@@ -4639,7 +4639,7 @@
         "fields": {
             "category": "",
             "maxval": "300",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_connections",
             "minval": "10",
             "default": "300",
@@ -4658,7 +4658,7 @@
         "fields": {
             "category": "",
             "maxval": "16384",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_delayed_threads",
             "minval": "0",
             "default": "20",
@@ -4677,7 +4677,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_digest_length",
             "minval": "0",
             "default": "1024",
@@ -4696,7 +4696,7 @@
         "fields": {
             "category": "",
             "maxval": "65535",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_error_count",
             "minval": "0",
             "default": "64",
@@ -4715,7 +4715,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_insert_delayed_threads",
             "minval": "null",
             "default": "20",
@@ -4734,7 +4734,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_join_size",
             "minval": "1",
             "default": "18446744073709551615",
@@ -4753,7 +4753,7 @@
         "fields": {
             "category": "",
             "maxval": "8388608",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_length_for_sort_data",
             "minval": "4",
             "default": "1024",
@@ -4772,7 +4772,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_prepared_stmt_count",
             "minval": "0",
             "default": "16382",
@@ -4791,7 +4791,7 @@
         "fields": {
             "category": "",
             "maxval": "1073741824",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_relay_log_size",
             "minval": "0",
             "default": "0",
@@ -4810,7 +4810,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_seeks_for_key",
             "minval": "1",
             "default": "4294967295",
@@ -4829,7 +4829,7 @@
         "fields": {
             "category": "",
             "maxval": "8388608",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_sort_length",
             "minval": "4",
             "default": "1024",
@@ -4848,7 +4848,7 @@
         "fields": {
             "category": "",
             "maxval": "255",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_sp_recursion_depth",
             "minval": "null",
             "default": "0",
@@ -4867,7 +4867,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_tmp_tables",
             "minval": "null",
             "default": "32",
@@ -4886,7 +4886,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_user_connections",
             "minval": "0",
             "default": "0",
@@ -4905,7 +4905,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.max_write_lock_count",
             "minval": "1",
             "default": "4294967295",
@@ -4924,7 +4924,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.metadata_locks_cache_size",
             "minval": "1",
             "default": "1024",
@@ -4943,7 +4943,7 @@
         "fields": {
             "category": "",
             "maxval": "1024",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.metadata_locks_hash_instances",
             "minval": "1",
             "default": "8",
@@ -4962,7 +4962,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.min_examined_row_limit",
             "minval": "0",
             "default": "0",
@@ -4981,7 +4981,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.multi_range_count",
             "minval": "1",
             "default": "256",
@@ -5000,7 +5000,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.net_buffer_length",
             "minval": "1024",
             "default": "16384",
@@ -5019,7 +5019,7 @@
         "fields": {
             "category": "",
             "maxval": "31536000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.net_read_timeout",
             "minval": "1",
             "default": "120",
@@ -5038,7 +5038,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.net_retry_count",
             "minval": "1",
             "default": "10",
@@ -5057,7 +5057,7 @@
         "fields": {
             "category": "",
             "maxval": "31536000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.net_write_timeout",
             "minval": "1",
             "default": "240",
@@ -5076,7 +5076,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.new",
             "minval": "null",
             "default": "FALSE",
@@ -5095,7 +5095,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.old",
             "minval": "null",
             "default": "OFF",
@@ -5114,7 +5114,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.old_alter_table",
             "minval": "null",
             "default": "OFF",
@@ -5133,7 +5133,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.old_passwords",
             "minval": "null",
             "default": "0",
@@ -5152,7 +5152,7 @@
         "fields": {
             "category": "",
             "maxval": "platform dependent",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.open_files_limit",
             "minval": "0",
             "default": "5000, with possible adjustment",
@@ -5171,7 +5171,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_prune_level",
             "minval": "null",
             "default": "1",
@@ -5190,7 +5190,7 @@
         "fields": {
             "category": "",
             "maxval": "62",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_search_depth",
             "minval": "0",
             "default": "62",
@@ -5209,7 +5209,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_switch",
             "minval": "null",
             "default": "index_merge=on,index_merge_union=on,index_merge_sort_union=on,index_merge_intersection=on,engine_condition_pushdown=on,index_condition_pushdown=on,mrr=on,mrr_cost_based=on,block_nested_loop=on,batched_key_access=off,materialization=on,semijoin=on,loosescan=on,firstmatch=on,subquery_materialization_cost_based=on,use_index_extensions=on,skip_scan=off,skip_scan_cost_based=on",
@@ -5228,7 +5228,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_trace",
             "minval": "null",
             "default": "enabled=off,one_line=off",
@@ -5247,7 +5247,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_trace_features",
             "minval": "null",
             "default": "greedy_search=on,range_optimizer=on,dynamic_range=on,repeated_subselect=on",
@@ -5266,7 +5266,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_trace_limit",
             "minval": "null",
             "default": "1",
@@ -5285,7 +5285,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_trace_max_mem_size",
             "minval": "null",
             "default": "16384",
@@ -5304,7 +5304,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.optimizer_trace_offset",
             "minval": "null",
             "default": "-1",
@@ -5323,7 +5323,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema",
             "minval": null,
             "default": "ON",
@@ -5342,7 +5342,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_az_digest_exclude_user",
             "minval": null,
             "default": "azure_superuser",
@@ -5361,7 +5361,7 @@
         "fields": {
             "category": "",
             "maxval": "1-1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_az_digests_size",
             "minval": "",
             "default": "512",
@@ -5380,7 +5380,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_az_max_sql_text_length",
             "minval": "0",
             "default": "1024",
@@ -5399,7 +5399,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_consumer_az_statements_digest",
             "minval": null,
             "default": "OFF",
@@ -5418,7 +5418,7 @@
         "fields": {
             "category": "",
             "maxval": null,
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_expand_query_sample",
             "minval": null,
             "default": "OFF",
@@ -5437,7 +5437,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_cond_classes",
             "minval": "0",
             "default": "80",
@@ -5456,7 +5456,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_digest_sample_age",
             "minval": "0",
             "default": "60",
@@ -5475,7 +5475,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_file_classes",
             "minval": "0",
             "default": "80",
@@ -5494,7 +5494,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_file_handles",
             "minval": "0",
             "default": "32768",
@@ -5513,7 +5513,7 @@
         "fields": {
             "category": "",
             "maxval": "1024",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_memory_classes",
             "minval": "0",
             "default": "320",
@@ -5532,7 +5532,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_mutex_classes",
             "minval": "0",
             "default": "200",
@@ -5551,7 +5551,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_rwlock_classes",
             "minval": "0",
             "default": "40",
@@ -5570,7 +5570,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_socket_classes",
             "minval": "0",
             "default": "10",
@@ -5589,7 +5589,7 @@
         "fields": {
             "category": "",
             "maxval": "1048576",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_sql_text_length",
             "minval": "0",
             "default": "1024",
@@ -5608,7 +5608,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_stage_classes",
             "minval": "0",
             "default": "150",
@@ -5627,7 +5627,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_statement_stack",
             "minval": "1",
             "default": "10",
@@ -5646,7 +5646,7 @@
         "fields": {
             "category": "",
             "maxval": "256",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.performance_schema_max_thread_classes",
             "minval": "0",
             "default": "50",
@@ -5665,7 +5665,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.pid_file",
             "minval": "null",
             "default": "datadir + '/' + hostname + '.pid'",
@@ -5684,7 +5684,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.plugin_dir",
             "minval": "null",
             "default": "BASEDIR/lib/plugin",
@@ -5703,7 +5703,7 @@
         "fields": {
             "category": "",
             "maxval": "65535",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.port",
             "minval": "0",
             "default": "3306",
@@ -5722,7 +5722,7 @@
         "fields": {
             "category": "",
             "maxval": "1073741824",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.preload_buffer_size",
             "minval": "1024",
             "default": "32768",
@@ -5741,7 +5741,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.profiling",
             "minval": "null",
             "default": " 0 or OFF",
@@ -5760,7 +5760,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.profiling_history_size",
             "minval": "null",
             "default": "15",
@@ -5779,7 +5779,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.protocol_version",
             "minval": "null",
             "default": "10",
@@ -5798,7 +5798,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.proxy_user",
             "minval": "null",
             "default": "",
@@ -5817,7 +5817,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.pseudo_slave_mode",
             "minval": "null",
             "default": "OFF",
@@ -5836,7 +5836,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.pseudo_thread_id",
             "minval": "null",
             "default": "60",
@@ -5855,7 +5855,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.query_alloc_block_size",
             "minval": "1024",
             "default": "8192",
@@ -5874,7 +5874,7 @@
         "fields": {
             "category": "",
             "maxval": "16777216",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.query_cache_limit",
             "minval": "0",
             "default": "1048576",
@@ -5893,7 +5893,7 @@
         "fields": {
             "category": "",
             "maxval": "16384",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.query_cache_min_res_unit",
             "minval": "512",
             "default": "4096",
@@ -5912,7 +5912,7 @@
         "fields": {
             "category": "",
             "maxval": "16777216",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.query_cache_size",
             "minval": "0",
             "default": "0",
@@ -5931,7 +5931,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.query_cache_type",
             "minval": "null",
             "default": "OFF",
@@ -5950,7 +5950,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.query_cache_wlock_invalidate",
             "minval": "null",
             "default": "FALSE",
@@ -5969,7 +5969,7 @@
         "fields": {
             "category": "",
             "maxval": "16384",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.query_prealloc_size",
             "minval": "8192",
             "default": "8192",
@@ -5988,7 +5988,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.rand_seed1",
             "minval": "null",
             "default": "0",
@@ -6007,7 +6007,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.rand_seed2",
             "minval": "null",
             "default": "0",
@@ -6026,7 +6026,7 @@
         "fields": {
             "category": "",
             "maxval": "16384",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.range_alloc_block_size",
             "minval": "4096",
             "default": "4096",
@@ -6045,7 +6045,7 @@
         "fields": {
             "category": "",
             "maxval": "2147479552",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.read_buffer_size",
             "minval": "8200",
             "default": "131072",
@@ -6064,7 +6064,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.read_only",
             "minval": "null",
             "default": "OFF",
@@ -6083,7 +6083,7 @@
         "fields": {
             "category": "",
             "maxval": "2147483647",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.read_rnd_buffer_size",
             "minval": "1",
             "default": "262144",
@@ -6102,7 +6102,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log",
             "minval": "null",
             "default": "",
@@ -6121,7 +6121,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log_basename",
             "minval": "null",
             "default": "datadir + '/' + hostname + '-relay-bin'",
@@ -6140,7 +6140,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log_index",
             "minval": "null",
             "default": "",
@@ -6159,7 +6159,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log_info_file",
             "minval": "null",
             "default": "relay-log.info",
@@ -6178,7 +6178,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log_info_repository",
             "minval": "null",
             "default": "FILE",
@@ -6197,7 +6197,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log_purge",
             "minval": "null",
             "default": "TRUE",
@@ -6216,7 +6216,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log_recovery",
             "minval": "null",
             "default": "FALSE",
@@ -6235,7 +6235,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.relay_log_space_limit",
             "minval": "0",
             "default": "0",
@@ -6254,7 +6254,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.report_host",
             "minval": "null",
             "default": "",
@@ -6273,7 +6273,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.report_password",
             "minval": "null",
             "default": "",
@@ -6292,7 +6292,7 @@
         "fields": {
             "category": "",
             "maxval": "65535",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.report_port",
             "minval": "0",
             "default": "[slave_port]",
@@ -6311,7 +6311,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.report_user",
             "minval": "null",
             "default": "",
@@ -6330,7 +6330,7 @@
         "fields": {
             "category": "",
             "maxval": "31536000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.rpl_stop_slave_timeout",
             "minval": "2",
             "default": "31536000",
@@ -6349,7 +6349,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.secure_auth",
             "minval": "null",
             "default": "ON",
@@ -6368,7 +6368,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.secure_file_priv",
             "minval": "null",
             "default": "platform specific",
@@ -6387,7 +6387,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.server_id",
             "minval": "1000",
             "default": "1000",
@@ -6406,7 +6406,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.server_id_bits",
             "minval": "null",
             "default": "32 ",
@@ -6425,7 +6425,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.server_uuid",
             "minval": "null",
             "default": "",
@@ -6444,7 +6444,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.show_old_temporals",
             "minval": "null",
             "default": "OFF",
@@ -6463,7 +6463,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.skip_external_locking",
             "minval": "null",
             "default": "ON",
@@ -6482,7 +6482,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.skip_name_resolve",
             "minval": "null",
             "default": "OFF",
@@ -6501,7 +6501,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.skip_networking",
             "minval": "null",
             "default": "OFF",
@@ -6520,7 +6520,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.skip_show_database",
             "minval": "null",
             "default": "OFF",
@@ -6539,7 +6539,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_allow_batching",
             "minval": "null",
             "default": "off",
@@ -6558,7 +6558,7 @@
         "fields": {
             "category": "",
             "maxval": "524280",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_checkpoint_group",
             "minval": "32",
             "default": "512",
@@ -6577,7 +6577,7 @@
         "fields": {
             "category": "",
             "maxval": "4G",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_checkpoint_period",
             "minval": "1",
             "default": "300",
@@ -6596,7 +6596,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_compressed_protocol",
             "minval": "null",
             "default": "OFF",
@@ -6615,7 +6615,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_exec_mode",
             "minval": "null",
             "default": " IDEMPOTENT(NDB)",
@@ -6634,7 +6634,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_load_tmpdir",
             "minval": "null",
             "default": "/tmp",
@@ -6653,7 +6653,7 @@
         "fields": {
             "category": "",
             "maxval": "1073741824",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_max_allowed_packet",
             "minval": "1024",
             "default": "1073741824",
@@ -6672,7 +6672,7 @@
         "fields": {
             "category": "",
             "maxval": "3600",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_net_timeout",
             "minval": "30",
             "default": "60",
@@ -6691,7 +6691,7 @@
         "fields": {
             "category": "",
             "maxval": "1024",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_parallel_workers",
             "minval": "0",
             "default": "0",
@@ -6710,7 +6710,7 @@
         "fields": {
             "category": "",
             "maxval": "18EB",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_pending_jobs_size_max",
             "minval": "1024",
             "default": "16M",
@@ -6729,7 +6729,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_rows_search_algorithms",
             "minval": "null",
             "default": "TABLE_SCAN,INDEX_SCAN",
@@ -6748,7 +6748,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_skip_errors",
             "minval": "null",
             "default": "OFF",
@@ -6767,7 +6767,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_sql_verify_checksum",
             "minval": "null",
             "default": "1",
@@ -6786,7 +6786,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_transaction_retries",
             "minval": "0",
             "default": "10",
@@ -6805,7 +6805,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slave_type_conversions",
             "minval": "null",
             "default": "Default",
@@ -6824,7 +6824,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slow_launch_time",
             "minval": "null",
             "default": "2",
@@ -6843,7 +6843,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slow_query_log",
             "minval": "null",
             "default": "OFF",
@@ -6862,7 +6862,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.slow_query_log_file",
             "minval": "null",
             "default": "host_name-slow.log",
@@ -6881,7 +6881,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.socket",
             "minval": "null",
             "default": "/tmp/mysql.sock",
@@ -6900,7 +6900,7 @@
         "fields": {
             "category": "",
             "maxval": "4194304",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sort_buffer_size",
             "minval": "32768",
             "default": "524288",
@@ -6919,7 +6919,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_auto_is_null",
             "minval": "null",
             "default": "0",
@@ -6938,7 +6938,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_big_selects",
             "minval": "null",
             "default": "1",
@@ -6957,7 +6957,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_buffer_result",
             "minval": "null",
             "default": "0",
@@ -6976,7 +6976,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_log_bin",
             "minval": "null",
             "default": "ON",
@@ -6995,7 +6995,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_log_off",
             "minval": "null",
             "default": "OFF",
@@ -7014,7 +7014,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_mode",
             "minval": "null",
             "default": "NO_ENGINE_SUBSTITUTION",
@@ -7033,7 +7033,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_notes",
             "minval": "null",
             "default": "ON",
@@ -7052,7 +7052,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_quote_show_create",
             "minval": "null",
             "default": "ON",
@@ -7071,7 +7071,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_safe_updates",
             "minval": "null",
             "default": "OFF",
@@ -7090,7 +7090,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_select_limit",
             "minval": "null",
             "default": "18446744073709551615",
@@ -7109,7 +7109,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_slave_skip_counter",
             "minval": "null",
             "default": "0",
@@ -7128,7 +7128,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sql_warnings",
             "minval": "null",
             "default": "OFF",
@@ -7147,7 +7147,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ssl_ca",
             "minval": "null",
             "default": "",
@@ -7166,7 +7166,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ssl_capath",
             "minval": "null",
             "default": "",
@@ -7185,7 +7185,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ssl_cert",
             "minval": "null",
             "default": "",
@@ -7204,7 +7204,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ssl_cipher",
             "minval": "null",
             "default": "",
@@ -7223,7 +7223,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ssl_crl",
             "minval": "null",
             "default": "",
@@ -7242,7 +7242,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ssl_crlpath",
             "minval": "null",
             "default": "",
@@ -7261,7 +7261,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.ssl_key",
             "minval": "null",
             "default": "",
@@ -7280,7 +7280,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.storage_engine",
             "minval": "null",
             "default": "session_variables.innodb",
@@ -7299,7 +7299,7 @@
         "fields": {
             "category": "",
             "maxval": "524288",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.stored_program_cache",
             "minval": "16",
             "default": "256",
@@ -7318,7 +7318,7 @@
         "fields": {
             "category": "",
             "maxval": "4294967295",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sync_binlog",
             "minval": "0",
             "default": "0",
@@ -7337,7 +7337,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sync_frm",
             "minval": "null",
             "default": "TRUE",
@@ -7356,7 +7356,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sync_master_info",
             "minval": "0",
             "default": "10000",
@@ -7375,7 +7375,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sync_relay_log",
             "minval": "0",
             "default": "10000",
@@ -7394,7 +7394,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.sync_relay_log_info",
             "minval": "0",
             "default": "10000",
@@ -7413,7 +7413,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.system_time_zone",
             "minval": "null",
             "default": "utc",
@@ -7432,7 +7432,7 @@
         "fields": {
             "category": "",
             "maxval": "524288",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.table_definition_cache",
             "minval": "400",
             "default": "2000",
@@ -7451,7 +7451,7 @@
         "fields": {
             "category": "",
             "maxval": "20000",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.table_open_cache",
             "minval": "1",
             "default": "2000",
@@ -7470,7 +7470,7 @@
         "fields": {
             "category": "",
             "maxval": "16",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.table_open_cache_instances",
             "minval": "1",
             "default": "1",
@@ -7489,7 +7489,7 @@
         "fields": {
             "category": "",
             "maxval": "16384",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.thread_cache_size",
             "minval": "0",
             "default": "-1 (autosized)",
@@ -7508,7 +7508,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.thread_handling",
             "minval": "null",
             "default": "one-thread-per-connection",
@@ -7527,7 +7527,7 @@
         "fields": {
             "category": "",
             "maxval": "18446744073709551615",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.thread_stack",
             "minval": "131072",
             "default": "262144",
@@ -7546,7 +7546,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.time_format",
             "minval": "null",
             "default": "",
@@ -7565,7 +7565,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.time_zone",
             "minval": "null",
             "default": "system",
@@ -7584,7 +7584,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.timestamp",
             "minval": "null",
             "default": "0.0",
@@ -7603,7 +7603,7 @@
         "fields": {
             "category": "",
             "maxval": "67108864",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.tmp_table_size",
             "minval": "1024",
             "default": "16777216",
@@ -7622,7 +7622,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.tmpdir",
             "minval": "null",
             "default": "/tmp",
@@ -7641,7 +7641,7 @@
         "fields": {
             "category": "",
             "maxval": "131072",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.transaction_alloc_block_size",
             "minval": "1024",
             "default": "8192",
@@ -7660,7 +7660,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.transaction_allow_batching",
             "minval": "null",
             "default": "FALSE",
@@ -7679,7 +7679,7 @@
         "fields": {
             "category": "",
             "maxval": "131072",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.transaction_prealloc_size",
             "minval": "1024",
             "default": "4096",
@@ -7698,7 +7698,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.tx_isolation",
             "minval": "null",
             "default": "REPEATABLE-READ",
@@ -7717,7 +7717,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.tx_read_only",
             "minval": "null",
             "default": "OFF",
@@ -7736,7 +7736,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.unique_checks",
             "minval": "null",
             "default": "1",
@@ -7755,7 +7755,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.updatable_views_with_limit",
             "minval": "null",
             "default": "1",
@@ -7774,7 +7774,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.version",
             "minval": "null",
             "default": "",
@@ -7793,7 +7793,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.version_comment",
             "minval": "null",
             "default": "",
@@ -7812,7 +7812,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.version_compile_machine",
             "minval": "null",
             "default": "",
@@ -7831,7 +7831,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.version_compile_os",
             "minval": "null",
             "default": "",
@@ -7850,7 +7850,7 @@
         "fields": {
             "category": "",
             "maxval": "2147483",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.wait_timeout",
             "minval": "1",
             "default": "120",
@@ -7869,7 +7869,7 @@
         "fields": {
             "category": "",
             "maxval": "null",
-            "dbms": 1,
+            "dbms": 6,
             "name": "session_variables.warning_count",
             "minval": "null",
             "default": "0",

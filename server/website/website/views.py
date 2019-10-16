@@ -435,6 +435,8 @@ def handle_result_files(session, files):
     dbms_type = DBMSType.type(summary['database_type'])
     # dbms_version = summary['database_version']  # TODO: fix parse_version_string
     dbms_version = Parser.parse_version_string_mysql(dbms_type,summary['database_version']) # TODO: moljain currently created own parser for mysql specifically
+    LOG.info(dbms_version)
+    LOG.info(dbms_type) # should be 6
     workload_name = summary['workload_name']
     observation_time = summary['observation_time']
     start_time = datetime.fromtimestamp(
@@ -469,7 +471,6 @@ def handle_result_files(session, files):
     # Load, process, and store the knobs in the DBMS's configuration
     knob_dict, knob_diffs = Parser.parse_dbms_knobs(
         dbms.pk, JSONUtil.loads(files['knobs']))
-    LOG.info(knob_dict['session_variables.join_buffer_size'])
     tunable_knob_dict = Parser.convert_dbms_knobs(
         dbms.pk, knob_dict)
     knob_data = KnobData.objects.create_knob_data(
@@ -484,7 +485,6 @@ def handle_result_files(session, files):
     metric_dict = Parser.calculate_change_in_metrics(
         dbms.pk, initial_metric_dict, final_metric_dict)
     # LOG.info(initial_metric_dict)
-    # LOG.info(metric_dict)
     initial_metric_diffs.extend(final_metric_diffs)
     numeric_metric_dict = Parser.convert_dbms_metrics(
         dbms.pk, metric_dict, observation_time, session.target_objective)

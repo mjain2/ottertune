@@ -25,13 +25,13 @@ class BaseParser(object, metaclass=ABCMeta):
     def __init__(self, dbms_id):
         self.dbms_id_ = dbms_id
         
-        if (self.dbms_id_ == 6):
-            # this is mysql! let's load mysql specific things
-            knobs = KnobCatalog.objects.filter(dbms__pk=1)    
-            metrics = MetricCatalog.objects.filter(dbms__pk=1)
-        else:
-            knobs = KnobCatalog.objects.filter(dbms__pk=self.dbms_id_)      
-            metrics = MetricCatalog.objects.filter(dbms__pk=self.dbms_id_)
+        # if (self.dbms_id_ == 6):
+        #     # this is mysql! let's load mysql specific things
+        #     knobs = KnobCatalog.objects.filter(dbms__pk=6)
+        #     metrics = MetricCatalog.objects.filter(dbms__pk=6)
+        # else:
+        knobs = KnobCatalog.objects.filter(dbms__pk=self.dbms_id_)
+        metrics = MetricCatalog.objects.filter(dbms__pk=self.dbms_id_)
 
         self.knob_catalog_ = {k.name: k for k in knobs}
         self.tunable_knob_catalog_ = {k: v for k, v in
@@ -323,6 +323,10 @@ class BaseParser(object, metaclass=ABCMeta):
             if knob_name.startswith('global.'):
                 knob_name_global = knob_name[knob_name.find('.') + 1:]
                 configuration[knob_name_global] = knob_value
+            elif knob_name.startswith('session_'):
+                knob_name_session_variable = knob_name[knob_name.find('.') + 1:]
+                LOG.info("Recommendating a value for: " + knob_name_session_variable)
+                configuration[knob_name_session_variable] = knob_value
 
         configuration = OrderedDict(sorted(configuration.items()))
         return configuration

@@ -80,6 +80,9 @@ class Azure(CloudProviderBase):
         config = json.load(conf_file, encoding="UTF-8", object_pairs_hook=OrderedDict)
         recommendation = config['recommendation']
 
+        logging.info("Next_config to apply: ")
+        logging.info(recommendation)
+
         for (knob_name, knob_value) in list(recommendation.items()):
             completed = self.apply_config_internal(database_type, server_name, knob_name, knob_value)
             if completed is None:
