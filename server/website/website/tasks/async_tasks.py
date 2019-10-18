@@ -196,7 +196,7 @@ def gen_random_data(knobs):
 
 @task(base=ConfigurationRecommendation, name='configuration_recommendation')
 def configuration_recommendation(target_data):
-    LOG.info('configuration_recommendation called')
+    LOG.info('configuration_recommendation started')
     latest_pipeline_run = PipelineRun.objects.get_latest()
 
     if target_data['bad'] is True:
@@ -437,8 +437,6 @@ def configuration_recommendation(target_data):
     best_config = np.maximum(best_config, X_min_inv)
 
     conf_map = {k: best_config[i] for i, k in enumerate(X_columnlabels)}
-    LOG.info("recommendation generated conf_map:")
-    LOG.info(conf_map)
     conf_map_res = {}
     conf_map_res['status'] = 'good'
     conf_map_res['recommendation'] = conf_map
@@ -449,7 +447,6 @@ def configuration_recommendation(target_data):
 def load_data_helper(filtered_pipeline_data, workload, task_type):
     pipeline_data = filtered_pipeline_data.get(workload=workload,
                                                task_type=task_type)
-    LOG.debug("PIPELINE DATA: %s", str(pipeline_data.data))
     return JSONUtil.loads(pipeline_data.data)
 
 
@@ -473,9 +470,7 @@ def map_workload(target_data):
         pipeline_run=latest_pipeline_run,
         workload__dbms=target_workload.dbms,
         workload__hardware=target_workload.hardware)
-    LOG.info(PipelineRun.objects.all().exclude(end_time=None).first())
-    LOG.info(pipeline_data.values())
-    LOG.info(pipeline_data)
+
     # FIXME (dva): we should also compute the global (i.e., overall) ranked_knobs
     # and pruned metrics but we just use those from the first workload for now
     initialized = False

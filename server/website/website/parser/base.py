@@ -326,10 +326,37 @@ class BaseParser(object, metaclass=ABCMeta):
             elif knob_name.startswith('session_'):
                 knob_name_session_variable = knob_name[knob_name.find('.') + 1:]
                 LOG.info("Recommendating a value for: " + knob_name_session_variable)
-                configuration[knob_name_session_variable] = knob_value
+                # if value is not a string, then it won't be a format of bytes (ie. "512MB")
+                if isinstance(knob_value, str):
+                    configuration[knob_name_session_variable] = self.convert_to_bytes(knob_value)
+                else:
+                    configuration[knob_name_session_variable] = knob_value
+
 
         configuration = OrderedDict(sorted(configuration.items()))
         return configuration
+
+    def convert_to_bytes(self, value):
+        bytesDict = {
+            'PB': 1024 ** 5,
+            'TB': 1024 ** 4,
+            'GB': 1024 ** 3,
+            'MB': 1024 ** 2,
+            'kB': 1024 ** 1,
+            'B': 1024 ** 0,
+        }
+
+        try:
+            for key in bytesDict.keys():
+                if key in value:
+                    splitval = value.split(key)
+                    if splitval[0] is not None:
+                        bytesval = int(splitval[0])
+                        newvalue = bytesval * bytesDict[key]
+                        return str(newvalue)
+        except ValueError:
+            return value
+        return value
 
     def get_nondefault_knob_settings(self, knobs):
         nondefault_settings = OrderedDict()
