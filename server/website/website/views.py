@@ -486,6 +486,7 @@ def handle_result_files(session, files):
         dbms.pk, initial_metric_dict, final_metric_dict)
     # LOG.info(initial_metric_dict)
     initial_metric_diffs.extend(final_metric_diffs)
+    LOG.info(session.target_objective)
     numeric_metric_dict = Parser.convert_dbms_metrics(
         dbms.pk, metric_dict, observation_time, session.target_objective)
     metric_data = MetricData.objects.create_metric_data(
@@ -764,9 +765,12 @@ def get_workload_data(request):
 
     results = Result.objects.filter(workload=workload)
     result_data = {r.pk: JSONUtil.loads(r.metric_data.data) for r in results}
-    #LOG.info(result_data)
-    #results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.THROUGHPUT]))
-    results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.LATENCY_99]))
+    if '99th_lat_ms' in session.target_objective:
+        LOG.info("Sorting results based on 99th latency metric.")
+        results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.LATENCY_99]))
+    else:
+        LOG.info("Sorting results based on throughput metric.")
+        results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.THROUGHPUT]))
 
     default_metrics = MetricCatalog.objects.get_default_metrics(session.target_objective)
     metrics = request.GET.get('met', ','.join(default_metrics)).split(',')

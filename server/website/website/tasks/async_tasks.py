@@ -275,6 +275,7 @@ def configuration_recommendation(target_data):
                                                         newest_result.session.target_objective)
     if metric_meta[target_objective].improvement == '(less is better)':
         lessisbetter = True
+        LOG.info("This is tuning for a lessisbetter algo.")
     else:
         lessisbetter = False
 
@@ -384,6 +385,7 @@ def configuration_recommendation(target_data):
     # Use gradient descent to minimize -throughput
     if not lessisbetter:
         y_scaled = -y_scaled
+        LOG.info("More is better, so maximizing throughput.")
 
     q = queue.PriorityQueue()
     for x in range(0, y_scaled.shape[0]):

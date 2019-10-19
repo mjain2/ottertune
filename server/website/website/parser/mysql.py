@@ -282,7 +282,11 @@ class MySqlParser(BaseParser):
                     raise Exception('Unknown metric type for {}: {}'.format(
                         name, metadata.metric_type))
 
-        targetObjectiveMetric = self.target_metric(target_objective)()
+
+        if '99th_lat_ms' in target_objective:
+            targetObjectiveMetric = self.target_metric(target_objective)()
+        else:
+            targetObjectiveMetric = self.target_metric(target_objective)
         LOG.info("target_objective: " + target_objective + " targetObjectiveMetric: " + targetObjectiveMetric)
         LOG.info(metric_data)
         if target_objective is not None and targetObjectiveMetric not in metric_data:
