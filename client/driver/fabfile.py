@@ -153,8 +153,10 @@ def run_oltpbench():
 
 @task
 def run_oltpbench_bg():
-    cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile > {} 2>&1 &".\
-          format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
+   # cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile > {} 2>&1 &".\
+          #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
+    cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
+       format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
     with lcd(CONF['oltpbench_home']):  # pylint: disable=not-context-manager
         local(cmd)
 

@@ -1,9 +1,9 @@
 {
   "database_type" : "mysql",
-  "database_url" : "jdbc:mysql://mj-ottest1.mysql.database.azure.com:3306/tpcc?useSSL=true&amp;requireSSL=false&amp;verifyServerCertificate=true&amp;autoReconnect=true",
-  "username" : "mysqladmin@mj-ottest1",
-  "password" : "Experiment!23",
+  "database_url" : "jdbc:mysql://mj-wptest1.mysql.database.azure.com:3306/wordpress?useSSL=true&amp;requireSSL=false&amp;verifyServerCertificate=true&amp;autoReconnect=true",
+  "username" : "mysqladmin@mj-wptest1",
+  "password" : "Experiment123",
   "upload_code" : "DEPRECATED",
   "upload_url" : "DEPRECATED",
-  "workload_name" : "tpcc"
+  "workload_name" : "wordpress"
 }

@@ -24,9 +24,9 @@ public class MySQLCollector extends DBCollector {
 
   private static final String VERSION_SQL = "SELECT @@GLOBAL.version;";
 
-  private static final String PARAMETERS_SQL = "SHOW VARIABLES;";
+  private static final String PARAMETERS_SQL = "SHOW GLOBAL VARIABLES;";
 
-  private static final String METRICS_SQL = "SHOW STATUS";
+  private static final String METRICS_SQL = "SHOW GLOBAL STATUS";
 
   public MySQLCollector(String oriDBUrl, String username, String password) {
     Connection conn = null;
