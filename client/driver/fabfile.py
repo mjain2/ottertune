@@ -151,13 +151,17 @@ def run_oltpbench():
         local(cmd)
 
 
+
 @task
 def run_oltpbench_bg():
-   # cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile > {} 2>&1 &".\
+    # cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile > {} 2>&1 &".\
           #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
-    cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
-       format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
-    with lcd(CONF['oltpbench_home']):  # pylint: disable=not-context-manager
+    #cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
+       #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
+
+    cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} --time=600 --threads=25 --report-interval=300 --forced-shutdown=5 --scale=35 run 2>&1 | tee {} &'.\
+        format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],CONF['azure_password'], CONF['database_name'], CONF['sysbench_log'])
+    with lcd(CONF['sysbench_home']):  # pylint: disable=not-context-manager
         local(cmd)
 
 
@@ -287,22 +291,28 @@ def _ready_to_start_oltpbench():
             'Output the process pid to'
             in open(CONF['controller_log']).read())
 
-
 def _ready_to_start_controller():
-    return (os.path.exists(CONF['oltpbench_log']) and
-            'Warmup complete, starting measurements'
-            in open(CONF['oltpbench_log']).read())
-
+    # return (os.path.exists(CONF['oltpbench_log']) and
+           #'Warmup complete, starting measurements'
+           # in open(CONF['oltpbench_log']).read())
+    return (os.path.exists(CONF['sysbench_log']) and
+            'Initializing worker threads...' in open(CONF['sysbench_log']).read())
 
 def _ready_to_shut_down_controller():
     pid_file_path = '../controller/pid.txt'
-    return (os.path.exists(pid_file_path) and os.path.exists(CONF['oltpbench_log']) and
-            'Output throughput samples into file' in open(CONF['oltpbench_log']).read())
+    #return (os.path.exists(pid_file_path) and os.path.exists(CONF['oltpbench_log']) and
+      #      'Output throughput samples into file' in open(CONF['oltpbench_log']).read())
+    return (os.path.exists(pid_file_path) and os.path.exists(CONF['sysbench_log']) and
+          'SQL statistics:' in open(CONF['sysbench_log']).read())
 
 
 def clean_logs():
     # remove oltpbench log
     cmd = 'rm -f {}'.format(CONF['oltpbench_log'])
+    local(cmd)
+
+    # remove sysbench log
+    cmd = 'rm -f {}'.format(CONF['sysbench_log'])
     local(cmd)
 
     # remove controller log
