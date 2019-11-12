@@ -367,6 +367,7 @@ def configuration_recommendation(target_data):
             col_min = X_scaled[:, i].min()
             col_max = X_scaled[:, i].max()
             for knob in session_knobs:
+                LOG.info("Reaching configuration recommendation knob name parsing: " + knob["name"])
                 if X_columnlabels[i] == knob["name"]:
                     X_scaler_matrix[0][i] = knob["minval"]
                     col_min = X_scaler.transform(X_scaler_matrix)[0][i]
