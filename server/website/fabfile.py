@@ -109,9 +109,9 @@ def reset_website():
     user = DATABASES['default']['USER']
     passwd = DATABASES['default']['PASSWORD']
     name = DATABASES['default']['NAME']
-    local("mysql -u {} -p{} -N -B -e \"DROP DATABASE IF EXISTS {}\"".format(
+    local("mysql -u {} -p{} -S /var/lib/mysql-databases/mysqld2/mysql.sock -N -B -e \"DROP DATABASE IF EXISTS {}\"".format(
         user, passwd, name))
-    local("mysql -u {} -p{} -N -B -e \"CREATE DATABASE {}\"".format(
+    local("mysql -u {} -p{} -S /var/lib/mysql-databases/mysqld2/mysql.sock -N -B -e \"CREATE DATABASE {}\"".format(
         user, passwd, name))
 
     # Reinitialize the website

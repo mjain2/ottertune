@@ -10,24 +10,32 @@ Created on Dec 12, 2017
 
 Parser interface.
 '''
-
+import logging
 from abc import ABCMeta, abstractmethod, abstractproperty
 from collections import OrderedDict
 
 from website.models import KnobCatalog, MetricCatalog
 from website.types import BooleanType, MetricType, VarType
 
+LOG = logging.getLogger(__name__)
 
 # pylint: disable=no-self-use
 class BaseParser(object, metaclass=ABCMeta):
 
     def __init__(self, dbms_id):
         self.dbms_id_ = dbms_id
+        
+        # if (self.dbms_id_ == 6):
+        #     # this is mysql! let's load mysql specific things
+        #     knobs = KnobCatalog.objects.filter(dbms__pk=6)
+        #     metrics = MetricCatalog.objects.filter(dbms__pk=6)
+        # else:
         knobs = KnobCatalog.objects.filter(dbms__pk=self.dbms_id_)
+        metrics = MetricCatalog.objects.filter(dbms__pk=self.dbms_id_)
+
         self.knob_catalog_ = {k.name: k for k in knobs}
         self.tunable_knob_catalog_ = {k: v for k, v in
-                                      list(self.knob_catalog_.items()) if v.tunable is True}
-        metrics = MetricCatalog.objects.filter(dbms__pk=self.dbms_id_)
+                                      list(self.knob_catalog_.items()) if v.tunable is True}    
         self.metric_catalog_ = {m.name: m for m in metrics}
         self.numeric_metric_catalog_ = {m: v for m, v in
                                         list(self.metric_catalog_.items()) if
@@ -86,6 +94,7 @@ class BaseParser(object, metaclass=ABCMeta):
         try:
             return int(int_value)
         except ValueError:
+            LOG.info("reaching error with converting integer: {}".format(int_value))
             return int(float(int_value))
 
     def convert_real(self, real_value, metadata):
@@ -314,9 +323,40 @@ class BaseParser(object, metaclass=ABCMeta):
             if knob_name.startswith('global.'):
                 knob_name_global = knob_name[knob_name.find('.') + 1:]
                 configuration[knob_name_global] = knob_value
+            elif knob_name.startswith('session_'):
+                knob_name_session_variable = knob_name[knob_name.find('.') + 1:]
+                LOG.info("Recommendating a value for: " + knob_name_session_variable)
+                # if value is not a string, then it won't be a format of bytes (ie. "512MB")
+                if isinstance(knob_value, str):
+                    configuration[knob_name_session_variable] = self.convert_to_bytes(knob_value)
+                else:
+                    configuration[knob_name_session_variable] = knob_value
+
 
         configuration = OrderedDict(sorted(configuration.items()))
         return configuration
+
+    def convert_to_bytes(self, value):
+        bytesDict = {
+            'PB': 1024 ** 5,
+            'TB': 1024 ** 4,
+            'GB': 1024 ** 3,
+            'MB': 1024 ** 2,
+            'kB': 1024 ** 1,
+            'B': 1024 ** 0,
+        }
+
+        try:
+            for key in bytesDict.keys():
+                if key in value:
+                    splitval = value.split(key)
+                    if splitval[0] is not None:
+                        bytesval = int(splitval[0])
+                        newvalue = bytesval * bytesDict[key]
+                        return str(newvalue)
+        except ValueError:
+            return value
+        return value
 
     def get_nondefault_knob_settings(self, knobs):
         nondefault_settings = OrderedDict()

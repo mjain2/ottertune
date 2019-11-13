@@ -4,7 +4,9 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
+import logging
 
+LOG = logging.getLogger(__name__)
 
 class Migration(migrations.Migration):
 
@@ -136,3 +138,4 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='website.Session'),
         ),
     ]
+    LOG.info("***** COMPLETED 0005 MIGRATION")

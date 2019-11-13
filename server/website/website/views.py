@@ -433,7 +433,10 @@ def handle_result_files(session, files):
     # Load the contents of the controller's summary file
     summary = JSONUtil.loads(files['summary'])
     dbms_type = DBMSType.type(summary['database_type'])
-    dbms_version = summary['database_version']  # TODO: fix parse_version_string
+    # dbms_version = summary['database_version']  # TODO: fix parse_version_string
+    dbms_version = Parser.parse_version_string_mysql(dbms_type,summary['database_version']) # TODO: moljain currently created own parser for mysql specifically
+    LOG.info(dbms_version)
+    LOG.info(dbms_type) # should be 6
     workload_name = summary['workload_name']
     observation_time = summary['observation_time']
     start_time = datetime.fromtimestamp(
@@ -452,7 +455,7 @@ def handle_result_files(session, files):
                             'alpha-numeric, underscore(_) and hyphen(-)')
 
     try:
-        # Check that we support this DBMS and version
+        # Check that we support this DBMS and version        
         dbms = DBMSCatalog.objects.get(
             type=dbms_type, version=dbms_version)
     except ObjectDoesNotExist:
@@ -481,7 +484,9 @@ def handle_result_files(session, files):
         dbms.pk, JSONUtil.loads(files['metrics_after']))
     metric_dict = Parser.calculate_change_in_metrics(
         dbms.pk, initial_metric_dict, final_metric_dict)
+    # LOG.info(initial_metric_dict)
     initial_metric_diffs.extend(final_metric_diffs)
+    LOG.info(session.target_objective)
     numeric_metric_dict = Parser.convert_dbms_metrics(
         dbms.pk, metric_dict, observation_time, session.target_objective)
     metric_data = MetricData.objects.create_metric_data(
@@ -496,6 +501,7 @@ def handle_result_files(session, files):
     result = Result.objects.create_result(
         session, dbms, workload, knob_data, metric_data,
         start_time, end_time, observation_time)
+    LOG.info(result.knob_data)
     result.save()
 
     # Workload is now modified so backgroundTasks can make calculationw
@@ -520,14 +526,17 @@ def handle_result_files(session, files):
         session.nondefault_settings = JSONUtil.dumps(nondefault_settings)
     session.project.save()
     session.save()
+    LOG.info("reaching here -- session.save line 526")
 
     if session.tuning_session == 'no_tuning_session':
         return HttpResponse("Result stored successfully!")
 
     result_id = result.pk
+    LOG.info("Before chain from response")
     response = chain(aggregate_target_results.s(result.pk),
                      map_workload.s(),
                      configuration_recommendation.s()).apply_async()
+    LOG.info("Reaching after chain from response.")
     taskmeta_ids = [response.parent.parent.id, response.parent.id, response.id]
     result.task_ids = ','.join(taskmeta_ids)
     result.save()
@@ -756,7 +765,12 @@ def get_workload_data(request):
 
     results = Result.objects.filter(workload=workload)
     result_data = {r.pk: JSONUtil.loads(r.metric_data.data) for r in results}
-    results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.THROUGHPUT]))
+    if '99th_lat_ms' in session.target_objective:
+        LOG.info("Sorting results based on 99th latency metric.")
+        results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.LATENCY_99]))
+    else:
+        LOG.info("Sorting results based on throughput metric.")
+        results = sorted(results, key=lambda x: int(result_data[x.pk][MetricManager.THROUGHPUT]))
 
     default_metrics = MetricCatalog.objects.get_default_metrics(session.target_objective)
     metrics = request.GET.get('met', ','.join(default_metrics)).split(',')
@@ -832,7 +846,7 @@ def get_timeline_data(request):
     for met in default_metrics:
         met_info = metric_meta[met]
         columnnames.append(met_info.pprint + ' (' + met_info.short_unit + ')')
-
+    LOG.info("target objective: {}".format(session.target_objective))
     results_per_page = int(request.GET['nres'])
 
     # Get all results related to the selected session, sort by time
@@ -855,6 +869,7 @@ def get_timeline_data(request):
         results = [r for r in results if str(r.workload.pk) in workload_confs]
 
     metric_datas = {r.pk: JSONUtil.loads(r.metric_data.data) for r in results}
+    #LOG.info(metric_datas) # this is all zeros
     result_list = []
     for res in results:
         entry = [
@@ -943,7 +958,7 @@ def give_result(request, upload_code):  # pylint: disable=unused-argument
         LOG.warning("Invalid upload code: %s", upload_code)
         return HttpResponse("Invalid upload code: " + upload_code)
     results = Result.objects.filter(session=session)
-    LOG.info(results)
+    # LOG.info(results)
     LOG.info(len(results))
     if len(results) > 0:
         lastest_result = results[len(results) - 1]

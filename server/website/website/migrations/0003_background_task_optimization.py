@@ -4,7 +4,9 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
+import logging
 
+LOG = logging.getLogger(__name__)
 
 class Migration(migrations.Migration):
 
@@ -19,3 +21,5 @@ class Migration(migrations.Migration):
             field=models.IntegerField(choices=[(1, 'MODIFIED'), (2, 'PROCESSING'), (3, 'PROCESSED')], default=1, editable=False),
         )
     ]
+    LOG.info("***** COMPLETED 0003 MIGRATION")
+    

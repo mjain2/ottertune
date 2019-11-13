@@ -3,6 +3,7 @@
 #
 # Copyright (c) 2017-18, Carnegie Mellon University Database Group
 #
+import logging
 from collections import namedtuple, OrderedDict
 
 from django.contrib.auth.models import User
@@ -14,6 +15,7 @@ from .types import (DBMSType, LabelStyleType, MetricType, KnobUnitType,
                     PipelineTaskType, VarType, KnobResourceType,
                     WorkloadStatusType)
 
+LOG = logging.getLogger(__name__)
 
 class BaseModel(models.Model):
 
@@ -119,7 +121,8 @@ class MetricManager(models.Manager):
 
     @staticmethod
     def get_default_objective_function():
-        return MetricManager.THROUGHPUT
+        return MetricManager.LATENCY_99
+        #return MetricManager.THROUGHPUT
 
     @staticmethod
     def get_metric_meta(dbms, target_objective=None):

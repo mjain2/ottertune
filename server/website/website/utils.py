@@ -168,6 +168,7 @@ class DataUtil(object):
 
         for i, knob_name in enumerate(featured_knobs):
             # knob can be uniquely identified by (dbms, knob_name)
+            LOG.info("[MJ] dummy_encoder_helper: knob_name is " + knob_name)
             knobs = KnobCatalog.objects.filter(name=knob_name,
                                                dbms=dbms)
             if len(knobs) == 0:

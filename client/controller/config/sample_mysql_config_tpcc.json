@@ -1,0 +1,9 @@
+{
+  "database_type" : "mysql",
+  "database_url" : "jdbc:mysql://mj-ottest1.mysql.database.azure.com:3306/tpcc?useSSL=true&amp;requireSSL=false&amp;verifyServerCertificate=true&amp;autoReconnect=true",
+  "username" : "mysqladmin@mj-ottest1",
+  "password" : "Experiment!23",
+  "upload_code" : "DEPRECATED",
+  "upload_url" : "DEPRECATED",
+  "workload_name" : "tpcc"
+}

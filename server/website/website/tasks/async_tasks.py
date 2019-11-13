@@ -77,7 +77,7 @@ class ConfigurationRecommendation(UpdateTask):  # pylint: disable=abstract-metho
 
     def on_success(self, retval, task_id, args, kwargs):
         super(ConfigurationRecommendation, self).on_success(retval, task_id, args, kwargs)
-
+        LOG.info("Configuration Recommendation was successful")
         result_id = args[0]['newest_result_id']
         result = Result.objects.get(pk=result_id)
 
@@ -196,7 +196,7 @@ def gen_random_data(knobs):
 
 @task(base=ConfigurationRecommendation, name='configuration_recommendation')
 def configuration_recommendation(target_data):
-    LOG.info('configuration_recommendation called')
+    LOG.info('configuration_recommendation started')
     latest_pipeline_run = PipelineRun.objects.get_latest()
 
     if target_data['bad'] is True:
@@ -207,6 +207,7 @@ def configuration_recommendation(target_data):
         return target_data_res
 
     # Load mapped workload data
+    LOG.info("Load mapped workload data.")
     mapped_workload_id = target_data['mapped_workload'][0]
 
     mapped_workload = Workload.objects.get(pk=mapped_workload_id)
@@ -221,6 +222,7 @@ def configuration_recommendation(target_data):
         task_type=PipelineTaskType.METRIC_DATA)
     workload_metric_data = JSONUtil.loads(workload_metric_data.data)
 
+    LOG.info("Loaded workload knob and metric data. Clean data:")
     newest_result = Result.objects.get(pk=target_data['newest_result_id'])
     cleaned_workload_knob_data = clean_knob_data(workload_knob_data["data"],
                                                  workload_knob_data["columnlabels"],
@@ -246,6 +248,7 @@ def configuration_recommendation(target_data):
                          'identical y columnlabels (sorted metric names)'))
 
     # Filter Xs by top 10 ranked knobs
+    LOG.info("Filter Xs by the top 10 ranked knobs")
     ranked_knobs = PipelineData.objects.get(
         pipeline_run=latest_pipeline_run,
         workload=mapped_workload,
@@ -257,6 +260,7 @@ def configuration_recommendation(target_data):
     X_columnlabels = X_columnlabels[ranked_knob_idxs]
 
     # Filter ys by current target objective metric
+    LOG.info("Filter Ys by current target objective metric.")
     target_objective = newest_result.session.target_objective
     target_obj_idx = [i for i, cl in enumerate(y_columnlabels) if cl == target_objective]
     if len(target_obj_idx) == 0:
@@ -271,6 +275,7 @@ def configuration_recommendation(target_data):
                                                         newest_result.session.target_objective)
     if metric_meta[target_objective].improvement == '(less is better)':
         lessisbetter = True
+        LOG.info("This is tuning for a lessisbetter algo.")
     else:
         lessisbetter = False
 
@@ -381,6 +386,7 @@ def configuration_recommendation(target_data):
     # Use gradient descent to minimize -throughput
     if not lessisbetter:
         y_scaled = -y_scaled
+        LOG.info("More is better, so maximizing throughput.")
 
     q = queue.PriorityQueue()
     for x in range(0, y_scaled.shape[0]):
@@ -444,7 +450,6 @@ def configuration_recommendation(target_data):
 def load_data_helper(filtered_pipeline_data, workload, task_type):
     pipeline_data = filtered_pipeline_data.get(workload=workload,
                                                task_type=task_type)
-    LOG.debug("PIPELINE DATA: %s", str(pipeline_data.data))
     return JSONUtil.loads(pipeline_data.data)
 
 

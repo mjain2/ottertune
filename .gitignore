@@ -102,3 +102,15 @@ out/
 # Text editor configs #
 #######################
 .vimrc
+
+# moljain MySQL #
+#######################
+pid.txt
+*/configs/config_*
+*/configs/old_configs/*
+client/driver/controller*.log
+client/driver/oltp*.log
+client/driver/next_config_old
+client/driver/configs/
+server/website/celerybeat.pid
+tpcc.dump

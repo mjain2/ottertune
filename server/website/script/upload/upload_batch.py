@@ -73,7 +73,6 @@ class ResultUploader(object):
                                  files=params,
                                  data={'upload_code': self._upload_code,
                                        'cluster_name': cluster_name})
-        LOG.info(response.content)
 
         for fh in list(fhandlers.values()):
             fh.close()

@@ -47,7 +47,6 @@ with open('driver_config.json', 'r') as f:
 
 my_azure_provider = Azure(CONF['azure_region'], CONF['azure_subscription'], CONF['azure_resource_group'])
 
-
 @task
 def check_disk_usage():
     partition = CONF['database_disk']
@@ -71,8 +70,8 @@ def check_memory_usage():
 def restart_database():
     if CONF['azure_enabled'] == True:
         LOG.info("Azure is enabled, logging in to drop database:")
-        my_azure_provider.login()
-        my_azure_provider.restart_server(CONF['database_type'], CONF['azure_server_name'])
+        my_azure_provider.login()   
+        my_azure_provider.restart_server(CONF['database_type'],CONF['azure_server_name'])
         LOG.info("Restarted server.")
     else:
         if CONF['database_type'] == 'postgres':
@@ -90,17 +89,14 @@ def restart_database():
 def drop_database():
     if CONF['azure_enabled'] == True:
         LOG.info("Azure is enabled, logging in to drop database:")
-        my_azure_provider.login()
-        cmd = "mysqladmin -h {} -u {} -p{} -f drop {}".format(CONF['azure_host_name'], CONF['azure_username'],
-                                                              CONF['azure_password'], CONF['database_name'])
+        my_azure_provider.login()    
+        cmd = "mysqladmin -h {} -u {} -p{} -f drop {}".format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'],CONF['database_name'])
     else:
         if CONF['database_type'] == 'postgres':
-            cmd = "PGPASSWORD={} dropdb -e --if-exists {} -U {}". \
+            cmd = "PGPASSWORD={} dropdb -e --if-exists {} -U {}".\
                 format(CONF['password'], CONF['database_name'], CONF['username'])
         elif CONF['database_type'] == 'mysql':
-            cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock drop {}".format(CONF['username'],
-                                                                                        CONF['password'],
-                                                                                        CONF['database_name'])
+            cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock drop {}".format(CONF['username'],CONF['password'],CONF['database_name'])
         else:
             raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
@@ -110,18 +106,15 @@ def drop_database():
 def create_database():
     if CONF['azure_enabled'] == True:
         LOG.info("Azure is enabled, logging in to create database:")
-        my_azure_provider.login()
-        # my_azure_provider.create_database(CONF['database_type'],CONF['azure_server_name'],CONF['database_name'])
-        cmd = "mysqladmin -h {} -u {} -p{} -f create {}".format(CONF['azure_host_name'], CONF['azure_username'],
-                                                                CONF['azure_password'], CONF['database_name'])
-    else:
+        my_azure_provider.login()    
+        #my_azure_provider.create_database(CONF['database_type'],CONF['azure_server_name'],CONF['database_name'])
+        cmd = "mysqladmin -h {} -u {} -p{} -f create {}".format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'],CONF['database_name'])
+    else:   
         if CONF['database_type'] == 'postgres':
-            cmd = "PGPASSWORD={} createdb -e {} -U {}". \
+            cmd = "PGPASSWORD={} createdb -e {} -U {}".\
                 format(CONF['password'], CONF['database_name'], CONF['username'])
         elif CONF['database_type'] == 'mysql':
-            cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock create {}".format(CONF['username'],
-                                                                                          CONF['password'],
-                                                                                          CONF['database_name'])
+            cmd = "mysqladmin -u{} -p{} -f -S /var/lib/mysql/mysql.sock create {}".format(CONF['username'],CONF['password'],CONF['database_name'])
         else:
             raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     local(cmd)
@@ -130,8 +123,8 @@ def create_database():
 @task
 def change_conf():
     next_conf = 'next_config'
-    cmd = "sudo python3 ConfParser.py {} {} {}". \
-        format(CONF['database_type'], next_conf, CONF['database_conf'])
+    cmd = "sudo python3 ConfParser.py {} {} {}".\
+          format(CONF['database_type'], next_conf, CONF['database_conf'])
     local(cmd)
 
     # if using azure, need to then apply all the configurations to the database before restart
@@ -139,43 +132,43 @@ def change_conf():
     if CONF['azure_enabled'] == True:
         LOG.info("Azure is enabled, logging in to create database:")
         LOG.info("Attempting to apply configurations to server.")
-        my_azure_provider.apply_config_batch(CONF['database_type'], CONF['azure_server_name'], next_conf)
-
+        my_azure_provider.apply_config_batch(CONF['database_type'],CONF['azure_server_name'], next_conf)
+    
 
 @task
 def load_oltpbench():
-    cmd = "./oltpbenchmark -b {} -c {} --create=true --load=true". \
-        format(CONF['oltpbench_workload'], CONF['oltpbench_config'])
+    cmd = "./oltpbenchmark -b {} -c {} --create=true --load=true".\
+          format(CONF['oltpbench_workload'], CONF['oltpbench_config'])
     with lcd(CONF['oltpbench_home']):  # pylint: disable=not-context-manager
         local(cmd)
 
 
 @task
 def run_oltpbench():
-    cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile". \
-        format(CONF['oltpbench_workload'], CONF['oltpbench_config'])
+    cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile".\
+          format(CONF['oltpbench_workload'], CONF['oltpbench_config'])
     with lcd(CONF['oltpbench_home']):  # pylint: disable=not-context-manager
         local(cmd)
+
 
 
 @task
 def run_oltpbench_bg():
     # cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile > {} 2>&1 &".\
-    # format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
-    # cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
-    # format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
+          #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
+    #cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
+       #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
 
-    cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} --time=600 --threads=25 --report-interval=300 --forced-shutdown=5 --scale=35 run 2>&1 | tee {} &'. \
-        format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],
-               CONF['azure_password'], CONF['database_name'], CONF['sysbench_log'])
+    cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} --time=600 --threads=25 --report-interval=300 --forced-shutdown=5 --scale=35 run 2>&1 | tee {} &'.\
+        format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],CONF['azure_password'], CONF['database_name'], CONF['sysbench_log'])
     with lcd(CONF['sysbench_home']):  # pylint: disable=not-context-manager
         local(cmd)
 
 
 @task
 def run_controller():
-    cmd = 'sudo gradle run -PappArgs="-c {} -d output/" --no-daemon > {}'. \
-        format(CONF['controller_config'], CONF['controller_log'])
+    cmd = 'sudo gradle run -PappArgs="-c {} -d output/" --no-daemon > {}'.\
+          format(CONF['controller_config'], CONF['controller_log'])
     with lcd("../controller"):  # pylint: disable=not-context-manager
         local(cmd)
 
@@ -194,8 +187,8 @@ def save_dbms_result():
     files = ['knobs.json', 'metrics_after.json', 'metrics_before.json', 'summary.json']
     for f_ in files:
         f_prefix = f_.split('.')[0]
-        cmd = 'cp ../controller/output/{} {}/{}__{}.json'. \
-            format(f_, CONF['save_path'], t, f_prefix)
+        cmd = 'cp ../controller/output/{} {}/{}__{}.json'.\
+              format(f_, CONF['save_path'], t, f_prefix)
         local(cmd)
 
 
@@ -215,8 +208,8 @@ def upload_result():
 
 @task
 def get_result():
-    cmd = 'python3 ../../script/query_and_get.py {} {} 5'. \
-        format(CONF['upload_url'], CONF['upload_code'])
+    cmd = 'python3 ../../script/query_and_get.py {} {} 5'.\
+          format(CONF['upload_url'], CONF['upload_code'])
     local(cmd)
 
 
@@ -244,10 +237,8 @@ def dump_database():
         LOG.info('Dump database %s to %s', CONF['database_name'], db_file_path)
         if CONF['azure_enabled'] == True:
             LOG.info("Azure is enabled, logging in to create database:")
-            my_azure_provider.login()
-            cmd = "mysqldump -h {} -u {} -p{} {} > {}".format(CONF['azure_host_name'], CONF['azure_username'],
-                                                              CONF['azure_password'], CONF['database_name'],
-                                                              db_file_path)
+            my_azure_provider.login()    
+            cmd = "mysqldump -h {} -u {} -p{} {} > {}".format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'],CONF['database_name'], db_file_path)
         else:
             # You must create a directory named dpdata through sqlplus in your Oracle database
             if CONF['database_type'] == 'oracle':
@@ -255,12 +246,11 @@ def dump_database():
                     'c##tpcc', 'oracle', 'orcldb', 'c##tpcc', 'orcldb')
             elif CONF['database_type'] == 'postgres':
                 cmd = 'PGPASSWORD={} pg_dump -U {} -F c -d {} > {}'.format(CONF['password'],
-                                                                           CONF['username'],
-                                                                           CONF['database_name'],
-                                                                           db_file_path)
+                                                                        CONF['username'],
+                                                                        CONF['database_name'],
+                                                                        db_file_path)
             elif CONF['database_type'] == 'mysql':
-                cmd = 'mysqldump -u {} -p{} {} > {}'.format(CONF['username'], CONF['password'], CONF['database_name'],
-                                                            db_file_path)
+                cmd = 'mysqldump -u {} -p{} {} > {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
             else:
                 raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
         local(cmd)
@@ -271,10 +261,9 @@ def dump_database():
 def restore_database():
     if CONF['azure_enabled'] == True:
         LOG.info("Azure is enabled, logging in to create database:")
-        my_azure_provider.login()
+        my_azure_provider.login()    
         db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
-        cmd = 'mysql -h {} -u{} -p{} {} < {}'.format(CONF['azure_host_name'], CONF['azure_username'],
-                                                     CONF['azure_password'], CONF['database_name'], db_file_path)
+        cmd = 'mysql -h {} -u{} -p{} {} < {}'.format(CONF['azure_host_name'],CONF['azure_username'],CONF['azure_password'], CONF['database_name'], db_file_path)
     else:
         if CONF['database_type'] == 'oracle':
             # You must create a directory named dpdata through sqlplus in your Oracle database
@@ -285,12 +274,11 @@ def restore_database():
             db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
             drop_database()
             create_database()
-            cmd = 'PGPASSWORD={} pg_restore -U {} -n public -j 8 -F c -d {} {}'. \
+            cmd = 'PGPASSWORD={} pg_restore -U {} -n public -j 8 -F c -d {} {}'.\
                 format(CONF['password'], CONF['username'], CONF['database_name'], db_file_path)
         elif CONF['database_type'] == 'mysql':
             db_file_path = '{}/{}.dump'.format(CONF['database_save_path'], CONF['database_name'])
-            cmd = 'mysql -u{} -p{} {} < {}'.format(CONF['username'], CONF['password'], CONF['database_name'],
-                                                   db_file_path)
+            cmd = 'mysql -u{} -p{} {} < {}'.format(CONF['username'], CONF['password'], CONF['database_name'], db_file_path)
         else:
             raise Exception("Database Type {} Not Implemented !".format(CONF['database_type']))
     LOG.info('Start restoring database')
@@ -303,21 +291,19 @@ def _ready_to_start_oltpbench():
             'Output the process pid to'
             in open(CONF['controller_log']).read())
 
-
 def _ready_to_start_controller():
     # return (os.path.exists(CONF['oltpbench_log']) and
-    # 'Warmup complete, starting measurements'
-    # in open(CONF['oltpbench_log']).read())
+           #'Warmup complete, starting measurements'
+           # in open(CONF['oltpbench_log']).read())
     return (os.path.exists(CONF['sysbench_log']) and
             'Initializing worker threads...' in open(CONF['sysbench_log']).read())
 
-
 def _ready_to_shut_down_controller():
     pid_file_path = '../controller/pid.txt'
-    # return (os.path.exists(pid_file_path) and os.path.exists(CONF['oltpbench_log']) and
-    #      'Output throughput samples into file' in open(CONF['oltpbench_log']).read())
+    #return (os.path.exists(pid_file_path) and os.path.exists(CONF['oltpbench_log']) and
+      #      'Output throughput samples into file' in open(CONF['oltpbench_log']).read())
     return (os.path.exists(pid_file_path) and os.path.exists(CONF['sysbench_log']) and
-            'SQL statistics:' in open(CONF['sysbench_log']).read())
+          'SQL statistics:' in open(CONF['sysbench_log']).read())
 
 
 def clean_logs():
@@ -342,6 +328,7 @@ def lhs_samples(count=10):
 
 @task
 def loop():
+
     # free cache
     LOG.info('freeing cache')
     free_cache()
@@ -408,13 +395,13 @@ def run_lhs():
 
     for i, sample in enumerate(samples):
         # reload database periodically
-        # if RELOAD_INTERVAL > 0:
-        #     if i % RELOAD_INTERVAL == 0:
-        #         LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
-        #         if i == 0 and dump is False:
-        #             restore_database()
-        #         elif i > 0:
-        #             restore_database()
+        if RELOAD_INTERVAL > 0:
+            if i % RELOAD_INTERVAL == 0:
+                LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
+                if i == 0 and dump is False:
+                    restore_database()
+                elif i > 0:
+                    restore_database()
         # free cache
         free_cache()
 
