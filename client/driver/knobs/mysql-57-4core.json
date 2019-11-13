@@ -1,0 +1,83 @@
+[
+    {
+        "name": "innodb_lru_scan_depth",
+        "tuning_range": {
+            "minval": 100,
+            "maxval": 4294967295
+        },
+        "default": 1024,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_read_io_threads",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 64
+        },
+        "default": 4,
+        "type": "integer"
+    },
+    {
+        "name": "innodb_write_io_threads",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 64
+        },
+        "default": 4,
+        "type": "integer"
+    },
+    {
+        "name": "join_buffer_size",
+        "tuning_range": {
+            "minval": 128,
+            "maxval": 536870912
+        },
+        "default": 262144,
+        "type": "integer"
+    },
+    {
+        "name": "net_buffer_length",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 1048576
+        },
+        "default": 16384,
+        "type": "integer"
+    },
+     {
+        "name": "preload_buffer_size",
+        "tuning_range": {
+            "minval": 1024,
+            "maxval": 1073741824
+        },
+        "default": 32768,
+        "type": "integer"
+    },
+    {
+        "name": "sort_buffer_size",
+        "tuning_range": {
+            "minval": 32768,
+            "maxval": 8388608
+        },
+        "default": 524288,
+        "type": "integer"
+    },
+    {
+        "name": "table_open_cache",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 40000
+        },
+        "default": 2500,
+        "type": "integer"
+    },
+    {
+        "name": "table_open_cache_instances",
+        "tuning_range": {
+            "minval": 1,
+            "maxval": 16
+        },
+        "default": 1,
+        "type": "integer"
+    }
+]
