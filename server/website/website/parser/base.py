@@ -24,12 +24,7 @@ class BaseParser(object, metaclass=ABCMeta):
 
     def __init__(self, dbms_id):
         self.dbms_id_ = dbms_id
-        
-        # if (self.dbms_id_ == 6):
-        #     # this is mysql! let's load mysql specific things
-        #     knobs = KnobCatalog.objects.filter(dbms__pk=6)
-        #     metrics = MetricCatalog.objects.filter(dbms__pk=6)
-        # else:
+
         knobs = KnobCatalog.objects.filter(dbms__pk=self.dbms_id_)
         metrics = MetricCatalog.objects.filter(dbms__pk=self.dbms_id_)
 

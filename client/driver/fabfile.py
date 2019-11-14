@@ -42,6 +42,9 @@ RELOAD_INTERVAL = 25
 # maximum disk usage
 MAX_DISK_USAGE = 90
 
+global_retry_times = 3
+sysbenchLocation = "/usr/local/bin/sysbench "  # the space at the end is a must
+
 with open('driver_config.json', 'r') as f:
     CONF = json.load(f)
 
@@ -158,12 +161,33 @@ def run_oltpbench_bg():
           #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
     #cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
        #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
+    runSysbenchHelper()
 
-    cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} --time=600 --threads=25 --report-interval=300 --forced-shutdown=5 --scale=35 run 2>&1 | tee {} &'.\
-        format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],CONF['azure_password'], CONF['database_name'], CONF['sysbench_log'])
-    with lcd(CONF['sysbench_home']):  # pylint: disable=not-context-manager
-        local(cmd)
-
+# run sysbench helper method
+# pylint: disable=redefined-outer-name
+def runSysbenchHelper():
+    counter = 0
+    while counter < global_retry_times:
+        try:
+            LOG.info("Run sysbench; retry count: {}".format(str(counter)))
+            # ubuntu has a limit for the maximum amount of threads, add sudo to surpass that
+            # sysbench sometimes wont stop running even after the max_time, add --forced-shutdown to fix it
+            cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} --time=600 --threads=25 --report-interval=300 --forced-shutdown=5 --scale=35 run 2>&1 | tee {} &'. \
+                format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],
+                       CONF['azure_password'], CONF['database_name'], CONF['sysbench_log'])
+            with lcd(CONF['sysbench_home']):  # pylint: disable=not-context-manager
+                local(cmd)
+            logFile = open(CONF['sysbench_log'], 'r')
+            content = logFile.read()
+            if "FATAL:" in content and "FATAL: The --max-time limit has expired, forcing shutdown..." not in content:
+                LOG.error("sysbench FATAL occurred")
+                raise Exception("sysbench run failed, retry....")
+            break # if complete one run of sysbench, then break out of the loop
+        except Exception as e:
+            LOG.info(e)
+            LOG.info("Waiting 3 minutes, then retrying.")
+            time.sleep(180)
+            counter += 1
 
 @task
 def run_controller():
@@ -395,13 +419,13 @@ def run_lhs():
 
     for i, sample in enumerate(samples):
         # reload database periodically
-        if RELOAD_INTERVAL > 0:
-            if i % RELOAD_INTERVAL == 0:
-                LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
-                if i == 0 and dump is False:
-                    restore_database()
-                elif i > 0:
-                    restore_database()
+        #if RELOAD_INTERVAL > 0:
+        #    if i % RELOAD_INTERVAL == 0:
+        #        LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
+        #        if i == 0 and dump is False:
+        #            restore_database()
+        #        elif i > 0:
+        #            restore_database()
         # free cache
         free_cache()
 
@@ -425,6 +449,8 @@ def run_lhs():
 
         # restart database
         restart_database()
+
+        time.sleep(120)
 
         if CONF.get('oracle_awr_enabled', False):
             # create snapshot for oracle AWR report
@@ -464,7 +490,6 @@ def run_lhs():
             # create oracle AWR report for performance analysis
             if CONF['database_type'] == 'oracle':
                 local('sh oracleScripts/snapshotOracle.sh && sh oracleScripts/awrOracle.sh')
-
 
 @task
 def run_loops(max_iter=1):
