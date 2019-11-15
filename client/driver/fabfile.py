@@ -15,6 +15,7 @@ import time
 import os.path
 import re
 import glob
+import subprocess
 from multiprocessing import Process
 from fabric.api import (env, local, task, lcd)
 from fabric.state import output as fabric_output
@@ -43,7 +44,8 @@ RELOAD_INTERVAL = 25
 MAX_DISK_USAGE = 90
 
 global_retry_times = 3
-sysbenchLocation = "/usr/local/bin/sysbench "  # the space at the end is a must
+sysbenchLocation = "/usr/bin/sysbench "  # the space at the end is a must
+sysbenchTime = 600 # 600 seconds per experiment = 10 minutes
 
 with open('driver_config.json', 'r') as f:
     CONF = json.load(f)
@@ -153,41 +155,42 @@ def run_oltpbench():
     with lcd(CONF['oltpbench_home']):  # pylint: disable=not-context-manager
         local(cmd)
 
+@task
+def run_sysbench_bg():
+    cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} ' \
+          '--time={} --threads=50 --report-interval=300 --forced-shutdown=5 --scale=70 run 2>&1 | tee {} &'. \
+        format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],
+               CONF['azure_password'], CONF['database_name'], CONF['sysbench_experiment_time_sec'], str(sysbenchTime), CONF['sysbench_log'])
 
+    LOG.info("Starting sysbench command.")
+    subprocess.check_call(cmd, cwd=CONF['sysbench_home'], shell=True)
 
 @task
 def run_oltpbench_bg():
-    # cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile > {} 2>&1 &".\
+    #cmd = "./oltpbenchmark -b {} -c {} --execute=true -s 5 -o outputfile > {} 2>&1 &".\
           #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
-    #cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
-       #format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
-    runSysbenchHelper()
+    cmd = 'ant execute -Dbenchmark={} -Dconfig={} -Dexecute=true -Dextra="-s 5 -o outputfile" > {} 2>&1 & '.\
+       format(CONF['oltpbench_workload'], CONF['oltpbench_config'], CONF['oltpbench_log'])
+    with lcd(CONF['oltpbench_home']):  # pylint: disable=not-context-manager
+        local(cmd)
 
-# run sysbench helper method
-# pylint: disable=redefined-outer-name
-def runSysbenchHelper():
-    counter = 0
-    while counter < global_retry_times:
-        try:
-            LOG.info("Run sysbench; retry count: {}".format(str(counter)))
-            # ubuntu has a limit for the maximum amount of threads, add sudo to surpass that
-            # sysbench sometimes wont stop running even after the max_time, add --forced-shutdown to fix it
-            cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} --time=600 --threads=25 --report-interval=300 --forced-shutdown=5 --scale=35 run 2>&1 | tee {} &'. \
-                format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],
-                       CONF['azure_password'], CONF['database_name'], CONF['sysbench_log'])
-            with lcd(CONF['sysbench_home']):  # pylint: disable=not-context-manager
-                local(cmd)
-            logFile = open(CONF['sysbench_log'], 'r')
-            content = logFile.read()
-            if "FATAL:" in content and "FATAL: The --max-time limit has expired, forcing shutdown..." not in content:
-                LOG.error("sysbench FATAL occurred")
-                raise Exception("sysbench run failed, retry....")
-            break # if complete one run of sysbench, then break out of the loop
-        except Exception as e:
-            LOG.info(e)
-            LOG.info("Waiting 3 minutes, then retrying.")
-            time.sleep(180)
-            counter += 1
+@task
+def poll_sysbench_logs():
+    if (os.path.exists(CONF['sysbench_log'])):
+        logFile = open(CONF['sysbench_log'], 'r')
+        content = logFile.read()
+        if "FATAL:" in content and "FATAL: The --max-time limit has expired, forcing shutdown..." not in content:
+            subprocess.check_call("echo FATAL occurred", shell=True)
+            raise Exception("sysbench run failed, retry....")
+
+def killSysbenchProcess():
+    try:
+        subprocess.check_call("pkill sysbench", shell=True)
+    except Exception as e:
+        LOG.info("Killing sysbench process failed:")
+        LOG.info(e)
+        return False
+    return True
 
 @task
 def run_controller():
@@ -316,19 +319,22 @@ def _ready_to_start_oltpbench():
             in open(CONF['controller_log']).read())
 
 def _ready_to_start_controller():
-    # return (os.path.exists(CONF['oltpbench_log']) and
-           #'Warmup complete, starting measurements'
-           # in open(CONF['oltpbench_log']).read())
-    return (os.path.exists(CONF['sysbench_log']) and
-            'Initializing worker threads...' in open(CONF['sysbench_log']).read())
+    if CONF['use_sysbench']:
+        return (os.path.exists(CONF['sysbench_log']) and
+                'Initializing worker threads...' in open(CONF['sysbench_log']).read())
+    else:
+        return (os.path.exists(CONF['oltpbench_log']) and
+           'Warmup complete, starting measurements'
+            in open(CONF['oltpbench_log']).read())
 
 def _ready_to_shut_down_controller():
     pid_file_path = '../controller/pid.txt'
-    #return (os.path.exists(pid_file_path) and os.path.exists(CONF['oltpbench_log']) and
-      #      'Output throughput samples into file' in open(CONF['oltpbench_log']).read())
-    return (os.path.exists(pid_file_path) and os.path.exists(CONF['sysbench_log']) and
-          'SQL statistics:' in open(CONF['sysbench_log']).read())
-
+    if CONF['use_sysbench']:
+        return (os.path.exists(pid_file_path) and os.path.exists(CONF['sysbench_log']) and
+                'SQL statistics:' in open(CONF['sysbench_log']).read())
+    else:
+        return (os.path.exists(pid_file_path) and os.path.exists(CONF['oltpbench_log']) and
+           'Output throughput samples into file' in open(CONF['oltpbench_log']).read())
 
 def clean_logs():
     # remove oltpbench log
@@ -352,7 +358,6 @@ def lhs_samples(count=10):
 
 @task
 def loop():
-
     # free cache
     LOG.info('freeing cache')
     free_cache()
@@ -461,22 +466,40 @@ def run_lhs():
         p = Process(target=run_controller, args=())
         p.start()
 
-        # run oltpbench as a background job
-        while not _ready_to_start_oltpbench():
-            pass
-        run_oltpbench_bg()
-        LOG.info('Run OLTP-Bench')
+        retrySysbench = True
+        retryCounter = 0 # try sysbench for this configuration 3 times before ending the loop
+        while retrySysbench and retryCounter < 3:
+            retrySysbench = False # hopefully this is the last/only run of sysbench needed!
 
-        while not _ready_to_start_controller():
-            pass
-        signal_controller()
-        LOG.info('Start the first collection')
+            # run oltpbench as a background job
+            while not _ready_to_start_oltpbench():
+                pass
+            run_sysbench_bg()
+            LOG.info('Run Sysbench in background')
 
-        while not _ready_to_shut_down_controller():
-            pass
-        # stop the experiment
-        signal_controller()
-        LOG.info('Start the second collection, shut down the controller')
+            while not _ready_to_start_controller():
+                pass
+            signal_controller()
+            LOG.info('Start the first collection')
+
+            while not _ready_to_shut_down_controller():
+                # check if sysbench failed. If it did let's go ahead and retry the controller processes.
+                try:
+                    poll_sysbench_logs()
+                except Exception as e:
+                    # FATAL error found in sysbench, need to retry.  Let's kill the sysbench process.
+                    LOG.info(e)
+                    LOG.info("Attempting to kill sysbench process:")
+                    killedProcess = killSysbenchProcess() # try to kill existing sysbench process
+                    LOG.info("Sysbench was killed: " + str(killedProcess))
+                    retryCounter += 1
+                    retrySysbench = True
+                    break # exit while loop and retry
+                pass
+            # stop the experiment
+            signal_controller()
+            LOG.info('Start the second collection, shut down the controller')
+
 
         p.join()
 

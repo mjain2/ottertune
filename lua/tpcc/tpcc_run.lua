@@ -85,12 +85,12 @@ function new_order()
   local w_tax
 
   c_discount, c_last, c_credit, w_tax = con:query_row(([[SELECT c_discount, c_last, c_credit, w_tax 
-                                                           FROM customer%d, warehouse%d
+                                                           FROM customer, warehouse
                                                           WHERE w_id = %d 
                                                             AND c_w_id = w_id 
                                                             AND c_d_id = %d 
                                                             AND c_id = %d]]):
-                                                         format(table_num, table_num, w_id, d_id, c_id))
+                                                         format(  w_id, d_id, c_id))
 
 --        SELECT d_next_o_id, d_tax INTO :d_next_o_id, :d_tax
 --                FROM district
@@ -101,18 +101,18 @@ function new_order()
   local d_tax
 
   d_next_o_id, d_tax = con:query_row(([[SELECT d_next_o_id, d_tax 
-                                          FROM district%d 
+                                          FROM district 
                                          WHERE d_w_id = %d 
                                            AND d_id = %d FOR UPDATE]]):
-                                        format(table_num, w_id, d_id))
+                                        format( w_id, d_id))
 
 -- UPDATE district SET d_next_o_id = :d_next_o_id + 1
 --                WHERE d_id = :d_id 
 --                AND d_w_id = :w_id;
 
-  con:query(([[UPDATE district%d
+  con:query(([[UPDATE district
                   SET d_next_o_id = %d
-                WHERE d_id = %d AND d_w_id= %d]]):format(table_num, d_next_o_id + 1, d_id, w_id))
+                WHERE d_id = %d AND d_w_id= %d]]):format( d_next_o_id + 1, d_id, w_id))
 
 --INSERT INTO orders (o_id, o_d_id, o_w_id, o_c_id,
 --                                    o_entry_d, o_ol_cnt, o_all_local)
@@ -120,17 +120,17 @@ function new_order()
 --                       :datetime,
 --                       :o_ol_cnt, :o_all_local);
 
-  con:query(([[INSERT INTO orders%d
+  con:query(([[INSERT INTO oorder
                            (o_id, o_d_id, o_w_id, o_c_id,  o_entry_d, o_ol_cnt, o_all_local)
                     VALUES (%d,%d,%d,%d,NOW(),%d,%d)]]):
-                    format(table_num, d_next_o_id, d_id, w_id, c_id, ol_cnt, all_local))
+                    format( d_next_o_id, d_id, w_id, c_id, ol_cnt, all_local))
 
 -- INSERT INTO new_orders (no_o_id, no_d_id, no_w_id)
 --    VALUES (:o_id,:d_id,:w_id); */
 
-  con:query(([[INSERT INTO new_orders%d (no_o_id, no_d_id, no_w_id)
+  con:query(([[INSERT INTO new_order (no_o_id, no_d_id, no_w_id)
                     VALUES (%d,%d,%d)]]):
-                   format(table_num, d_next_o_id, d_id, w_id))
+                   format( d_next_o_id, d_id, w_id))
 
   for ol_number=1, ol_cnt do
 	local ol_supply_w_id = supware[ol_number]
@@ -143,9 +143,9 @@ function new_order()
 --	WHERE i_id = :ol_i_id;*/
 
 	rs = con:query(([[SELECT i_price, i_name, i_data 
-	                    FROM item%d
+	                    FROM item
 	                   WHERE i_id = %d]]):
-	                  format(table_num, ol_i_id))
+	                  format( ol_i_id))
 
 	local i_price
 	local i_name
@@ -176,9 +176,9 @@ function new_order()
         local ol_dist_info
 
 	s_quantity, s_data, ol_dist_info = con:query_row(([[SELECT s_quantity, s_data, s_dist_%s s_dist 
-	                                                      FROM stock%d  
+	                                                      FROM stock  
 	                                                     WHERE s_i_id = %d AND s_w_id= %d FOR UPDATE]]):
-	                                                     format(string.format("%02d",d_id),table_num,ol_i_id,ol_supply_w_id ))
+	                                                     format(string.format("%02d",d_id),ol_i_id,ol_supply_w_id ))
      
         s_quantity=tonumber(s_quantity)
   	if (s_quantity > ol_quantity) then
@@ -191,11 +191,11 @@ function new_order()
 --	WHERE s_i_id = :ol_i_id 
 --	AND s_w_id = :ol_supply_w_id;*/
 
-	con:query(([[UPDATE stock%d
+	con:query(([[UPDATE stock
 	                SET s_quantity = %d
 	              WHERE s_i_id = %d 
 		        AND s_w_id= %d]]):
-		    format(table_num, s_quantity, ol_i_id, ol_supply_w_id))
+		    format( s_quantity, ol_i_id, ol_supply_w_id))
    
         i_price=tonumber(i_price)
         w_tax=tonumber(w_tax)
@@ -212,10 +212,10 @@ function new_order()
 --		:ol_supply_w_id, :ol_quantity, :ol_amount,
 --		:ol_dist_info);
 
-	con:query(([[INSERT INTO order_line%d
+	con:query(([[INSERT INTO order_line
                                  (ol_o_id, ol_d_id, ol_w_id, ol_number, ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_dist_info)
 	                  VALUES (%d,%d,%d,%d,%d,%d,%d,%d,'%s')]]):
-	                  format(table_num, d_next_o_id, d_id, w_id, ol_number, ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_dist_info))
+	                  format( d_next_o_id, d_id, w_id, ol_number, ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_dist_info))
 
   end
 
@@ -255,9 +255,9 @@ function payment()
 
   con:query("BEGIN")
 
-  con:query(([[UPDATE warehouse%d
+  con:query(([[UPDATE warehouse
 	          SET w_ytd = w_ytd + %d 
-	        WHERE w_id = %d]]):format(table_num, h_amount, w_id ))
+	        WHERE w_id = %d]]):format( h_amount, w_id ))
 
 -- SELECT w_street_1, w_street_2, w_city, w_state, w_zip,
 --		w_name
@@ -269,26 +269,26 @@ function payment()
 
   w_street_1, w_street_2, w_city, w_state, w_zip, w_name =
                           con:query_row(([[SELECT w_street_1, w_street_2, w_city, w_state, w_zip, w_name 
-                                             FROM warehouse%d  
-                                            WHERE w_id = %d]]):format(table_num, w_id))
+                                             FROM warehouse
+                                            WHERE w_id = %d]]):format( w_id))
 
 -- UPDATE district SET d_ytd = d_ytd + :h_amount
 --		WHERE d_w_id = :w_id 
 --		AND d_id = :d_id;*/
 
-  con:query(([[UPDATE district%d 
+  con:query(([[UPDATE district
                  SET d_ytd = d_ytd + %d 
                WHERE d_w_id = %d 
-                 AND d_id= %d]]):format(table_num, h_amount, w_id, d_id))
+                 AND d_id= %d]]):format( h_amount, w_id, d_id))
 
 
   local d_street_1,d_street_2, d_city, d_state, d_zip, d_name
 
   d_street_1,d_street_2, d_city, d_state, d_zip, d_name = 
                           con:query_row(([[SELECT d_street_1, d_street_2, d_city, d_state, d_zip, d_name 
-                                             FROM district%d
+                                             FROM district
                                             WHERE d_w_id = %d 
-                                              AND d_id = %d]]):format(table_num, w_id, d_id ))
+                                              AND d_id = %d]]):format( w_id, d_id ))
 
   if byname == 1 then
 
@@ -299,10 +299,10 @@ function payment()
 --	AND c_last = :c_last;*/
   
 	local namecnt = con:query_row(([[SELECT count(c_id) namecnt
-			                   FROM customer%d
+			                   FROM customer
 			                  WHERE c_w_id = %d 
 			                    AND c_d_id= %d
-                                            AND c_last='%s']]):format(table_num, w_id, c_d_id, c_last ))
+                                            AND c_last='%s']]):format( w_id, c_d_id, c_last ))
 --		SELECT c_id
 --		FROM customer
 --		WHERE c_w_id = :c_w_id 
@@ -315,10 +315,10 @@ function payment()
 	end
 
 	rs = con:query(([[SELECT c_id
-		 	    FROM customer%d
+		 	    FROM customer
 			   WHERE c_w_id = %d AND c_d_id= %d
                              AND c_last='%s' ORDER BY c_first]]
-			):format(table_num, w_id, c_d_id, c_last ))
+			):format( w_id, c_d_id, c_last ))
 
 	for i = 1,  (namecnt / 2 ) + 1 do
 		row = rs:fetch_row()
@@ -344,11 +344,11 @@ function payment()
 	 con:query_row(([[SELECT c_first, c_middle, c_last, c_street_1,
                                  c_street_2, c_city, c_state, c_zip, c_phone,
                                  c_credit, c_credit_lim, c_discount, c_balance, c_ytd_payment, c_since
-			    FROM customer%d
+			    FROM customer
 			   WHERE c_w_id = %d 
 			     AND c_d_id= %d
 			     AND c_id=%d FOR UPDATE]])
-			 :format(table_num, w_id, c_d_id, c_id ))
+			 :format( w_id, c_d_id, c_id ))
 
   c_balance = tonumber(c_balance) - h_amount
   c_ytd_payment = tonumber(c_ytd_payment) + h_amount
@@ -363,11 +363,11 @@ function payment()
     
         local c_data
         c_data = con:query_row(([[SELECT c_data
-                                    FROM customer%d
+                                    FROM customer
                                    WHERE c_w_id = %d 
                                      AND c_d_id=%d
                                      AND c_id= %d]]):
-                                  format(table_num, w_id, c_d_id, c_id ))
+                                  format( w_id, c_d_id, c_id ))
 
         local c_new_data=string.sub(string.format("| %4d %2d %4d %2d %4d $%7.2f %12s %24s",
                 c_id, c_d_id, c_w_id, d_id, w_id, h_amount, os.time(), c_data), 1, 500);
@@ -377,19 +377,19 @@ function payment()
     --			WHERE c_w_id = :c_w_id 
     --			AND c_d_id = :c_d_id 
     --			AND c_id = :c_id
-        con:query(([[UPDATE customer%d
+        con:query(([[UPDATE customer
                         SET c_balance=%f, c_ytd_payment=%f, c_data='%s'
                       WHERE c_w_id = %d 
                         AND c_d_id=%d
                         AND c_id=%d]])
-		  :format(table_num, c_balance, c_ytd_payment, c_new_data, w_id, c_d_id, c_id  ))
+		  :format( c_balance, c_ytd_payment, c_new_data, w_id, c_d_id, c_id  ))
   else
-        con:query(([[UPDATE customer%d
+        con:query(([[UPDATE customer
                         SET c_balance=%f, c_ytd_payment=%f
                       WHERE c_w_id = %d 
                         AND c_d_id=%d
                         AND c_id=%d]])
-		  :format(table_num, c_balance, c_ytd_payment, w_id, c_d_id, c_id  ))
+		  :format( c_balance, c_ytd_payment, w_id, c_d_id, c_id  ))
 
   end
 
@@ -400,10 +400,10 @@ function payment()
 --			       :datetime,
 --			       :h_amount, :h_data);*/
 			       
-  con:query(([[INSERT INTO history%d
+  con:query(([[INSERT INTO history
                            (h_c_d_id, h_c_w_id, h_c_id, h_d_id,  h_w_id, h_date, h_amount, h_data)
                     VALUES (%d,%d,%d,%d,%d,NOW(),%d,'%s')]])
-            :format(table_num, c_d_id, c_w_id, c_id, d_id,  w_id, h_amount, string.format("%10s %10s    ",w_name,d_name)))
+            :format( c_d_id, c_w_id, c_id, d_id,  w_id, h_amount, string.format("%10s %10s    ",w_name,d_name)))
 
   con:query("COMMIT")
 
@@ -438,11 +438,11 @@ function orderstatus()
 
         local namecnt
         namecnt = con:query_row(([[SELECT count(c_id) namecnt
-                                     FROM customer%d
+                                     FROM customer
                                     WHERE c_w_id = %d 
                                       AND c_d_id= %d
                                       AND c_last='%s']]):
-                                  format(table_num, w_id, d_id, c_last ))
+                                  format( w_id, d_id, c_last ))
 
 --            SELECT c_balance, c_first, c_middle, c_id
 --            FROM customer
@@ -452,11 +452,11 @@ function orderstatus()
 --        ORDER BY c_first;
 
         rs = con:query(([[SELECT c_balance, c_first, c_middle, c_id
-                            FROM customer%d
+                            FROM customer
                 	   WHERE c_w_id = %d 
                   	     AND c_d_id= %d
                              AND c_last='%s' ORDER BY c_first]])
-		:format(table_num, w_id, d_id, c_last ))
+		:format( w_id, d_id, c_last ))
 
         if namecnt % 2 == 0 then
             namecnt = namecnt + 1
@@ -476,11 +476,11 @@ function orderstatus()
 --			AND c_id = :c_id;*/
         c_balance, c_first, c_middle, c_last = 
                    con:query_row(([[SELECT c_balance, c_first, c_middle, c_last
-                                      FROM customer%d
+                                      FROM customer
                    	             WHERE c_w_id = %d 
                    	               AND c_d_id=%d
                                        AND c_id=%d]])
-                                  :format(table_num, w_id, d_id, c_id ))
+                                  :format( w_id, d_id, c_id ))
     end
 --[=[ Initial query
         SELECT o_id, o_entry_d, COALESCE(o_carrier_id,0) FROM orders 
@@ -490,7 +490,7 @@ function orderstatus()
         rs = con:query(([[SELECT o_id, o_entry_d, COALESCE(o_carrier_id,0) 
                   FROM orders%d WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d AND o_id = 
                   (SELECT MAX(o_id) FROM orders%d WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d)]])
-                  :format(table_num, w_id, d_id, c_id, table_num, w_id, d_id, c_id)) 
+                  :format( w_id, d_id, c_id,  w_id, d_id, c_id)) 
 --]=]
                   
 --[[ Query from tpcc standard
@@ -503,12 +503,12 @@ function orderstatus()
       local o_id
 
       o_id = con:query_row(([[SELECT o_id, o_carrier_id, o_entry_d
-                                FROM orders%d 
+                                FROM oorder
                                WHERE o_w_id = %d 
                                  AND o_d_id = %d 
                                  AND o_c_id = %d 
                                   ORDER BY o_id DESC]]):
-                             format(table_num, w_id, d_id, c_id))
+                             format( w_id, d_id, c_id))
 
 --      rs = con:query(([[SELECT o_id, o_carrier_id, o_entry_d
 --                                FROM orders%d 
@@ -516,7 +516,7 @@ function orderstatus()
 --                                 AND o_d_id = %d 
 --                                 AND o_c_id = %d 
 --                                  ORDER BY o_id DESC]]):
---                             format(table_num, w_id, d_id, c_id))
+--                             format( w_id, d_id, c_id))
 --     if rs.nrows == 0 then
 --	print(string.format("Error o_id %d, %d, %d, %d\n", table_num , w_id , d_id , c_id))
 --     end
@@ -533,8 +533,8 @@ function orderstatus()
 --		AND ol_o_id = :o_id;*/
 
     rs = con:query(([[SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d
-            FROM order_line%d WHERE ol_w_id = %d AND ol_d_id = %d  AND ol_o_id = %d]])
-                  :format(table_num, w_id, d_id, d_id, o_id))
+            FROM order_line WHERE ol_w_id = %d AND ol_d_id = %d  AND ol_o_id = %d]])
+                  :format( w_id, d_id, d_id, o_id))
     for i = 1,  rs.nrows do
         row = rs:fetch_row()
         local ol_i_id = row[1]
@@ -561,16 +561,16 @@ function delivery()
 		                
 --        rs = con:query(([[SELECT COALESCE(MIN(no_o_id),0) no_o_id
 --                 FROM new_orders%d WHERE no_d_id = %d AND no_w_id = %d FOR UPDATE]])
---                      :format(table_num, d_id, w_id))
+--                      :format( d_id, w_id))
 
         local no_o_id
         
         rs = con:query(([[SELECT no_o_id
-                                     FROM new_orders%d 
+                                     FROM new_order
                                     WHERE no_d_id = %d 
                                       AND no_w_id = %d 
                                       ORDER BY no_o_id ASC LIMIT 1 FOR UPDATE]])
-                                   :format(table_num, d_id, w_id))
+                                   :format( d_id, w_id))
 
         if (rs.nrows > 0) then
           no_o_id=unpack(rs:fetch_row(), 1, rs.nfields)
@@ -581,11 +581,11 @@ function delivery()
 --		DELETE FROM new_orders WHERE no_o_id = :no_o_id AND no_d_id = :d_id
 --		  AND no_w_id = :w_id;*/
 
-        con:query(([[DELETE FROM new_orders%d
+        con:query(([[DELETE FROM new_order
                            WHERE no_o_id = %d 
                              AND no_d_id = %d  
                              AND no_w_id = %d]])
-                            :format(table_num, no_o_id, d_id, w_id))
+                            :format( no_o_id, d_id, w_id))
 
 --  SELECT o_c_id INTO :c_id FROM orders
 --		                WHERE o_id = :no_o_id AND o_d_id = :d_id
@@ -593,33 +593,33 @@ function delivery()
 
         local o_c_id
         o_c_id = con:query_row(([[SELECT o_c_id
-                                    FROM orders%d 
+                                    FROM oorder
                                    WHERE o_id = %d 
                                      AND o_d_id = %d 
                                      AND o_w_id = %d]])
-                                  :format(table_num, no_o_id, d_id, w_id))
+                                  :format( no_o_id, d_id, w_id))
 
 --	 UPDATE orders SET o_carrier_id = :o_carrier_id
 --		                WHERE o_id = :no_o_id AND o_d_id = :d_id AND
 --				o_w_id = :w_id;*/
 
-        con:query(([[UPDATE orders%d 
+        con:query(([[UPDATE oorder
                         SET o_carrier_id = %d
                       WHERE o_id = %d 
                         AND o_d_id = %d 
                         AND o_w_id = %d]])
-                      :format(table_num, o_carrier_id, no_o_id, d_id, w_id))
+                      :format( o_carrier_id, no_o_id, d_id, w_id))
 
 --   UPDATE order_line
 --		                SET ol_delivery_d = :datetime
 --		                WHERE ol_o_id = :no_o_id AND ol_d_id = :d_id AND
 --				ol_w_id = :w_id;*/
-        con:query(([[UPDATE order_line%d 
+        con:query(([[UPDATE order_line 
                         SET ol_delivery_d = NOW()
                       WHERE ol_o_id = %d 
                         AND ol_d_id = %d 
                         AND ol_w_id = %d]])
-                      :format(table_num, no_o_id, d_id, w_id))
+                      :format( no_o_id, d_id, w_id))
 
 --	 SELECT SUM(ol_amount) INTO :ol_total
 --		                FROM order_line
@@ -628,24 +628,24 @@ function delivery()
 
         local sm_ol_amount
         sm_ol_amount = con:query_row(([[SELECT SUM(ol_amount) sm
-                                          FROM order_line%d 
+                                          FROM order_line 
                                          WHERE ol_o_id = %d 
                                            AND ol_d_id = %d 
                                            AND ol_w_id = %d]])
-                                      :format(table_num, no_o_id, d_id, w_id))
+                                      :format( no_o_id, d_id, w_id))
 
 --	UPDATE customer SET c_balance = c_balance + :ol_total ,
 --		                             c_delivery_cnt = c_delivery_cnt + 1
 --		                WHERE c_id = :c_id AND c_d_id = :d_id AND
 --				c_w_id = :w_id;*/
---        print(string.format("update customer table %d, cid %d, did %d, wid %d balance %f",table_num, o_c_id, d_id, w_id, sm_ol_amount))  				
-        con:query(([[UPDATE customer%d 
+--        print(string.format("update customer table %d, cid %d, did %d, wid %d balance %f", o_c_id, d_id, w_id, sm_ol_amount))  				
+        con:query(([[UPDATE customer 
                         SET c_balance = c_balance + %f,
                             c_delivery_cnt = c_delivery_cnt + 1
                       WHERE c_id = %d 
                         AND c_d_id = %d 
                         AND c_w_id = %d]])
-                      :format(table_num, sm_ol_amount, o_c_id, d_id, w_id))
+                      :format( sm_ol_amount, o_c_id, d_id, w_id))
         end
         
     end
@@ -675,9 +675,9 @@ function stocklevel()
     
 
     d_next_o_id = con:query_row(([[SELECT d_next_o_id 
-                                     FROM district%d
+                                     FROM district
              	                    WHERE d_id = %d AND d_w_id= %d]])
-		                  :format( table_num, d_id, w_id))
+		                  :format(  d_id, w_id))
 
     if stock_level_queries == "case1" then 
 
@@ -688,7 +688,7 @@ function stocklevel()
 --]]
 
     rs = con:query(([[SELECT COUNT(DISTINCT (s_i_id))
-                        FROM order_line%d, stock%d
+                        FROM order_line, stock
                        WHERE ol_w_id = %d 
                          AND ol_d_id = %d
                          AND ol_o_id < %d 
@@ -696,7 +696,7 @@ function stocklevel()
                          AND s_w_id= %d
                          AND s_i_id=ol_i_id 
                          AND s_quantity < %d ]])
-		:format(table_num, table_num, w_id, d_id, d_next_o_id, d_next_o_id - 20, w_id, level ))
+		:format(  w_id, d_id, d_next_o_id, d_next_o_id - 20, w_id, level ))
 
 
 
@@ -709,10 +709,10 @@ function stocklevel()
 
 
     else
-    rs = con:query(([[SELECT DISTINCT ol_i_id FROM order_line%d
+    rs = con:query(([[SELECT DISTINCT ol_i_id FROM order_line
                WHERE ol_w_id = %d AND ol_d_id = %d
                  AND ol_o_id < %d AND ol_o_id >= %d]])
-                :format(table_num, w_id, d_id, d_next_o_id, d_next_o_id - 20 ))
+                :format( w_id, d_id, d_next_o_id, d_next_o_id - 20 ))
 
     local ol_i_id = {}
 
@@ -728,10 +728,10 @@ function stocklevel()
 --                      AND s_i_id = :ol_i_id
 --                      AND s_quantity < :level;*/
 
-        rs = con:query(([[SELECT count(*) FROM stock%d
+        rs = con:query(([[SELECT count(*) FROM stock
                    WHERE s_w_id = %d AND s_i_id = %d
                    AND s_quantity < %d]])
-                :format(table_num, w_id, ol_i_id[i], level ) )
+                :format( w_id, ol_i_id[i], level ) )
         local cnt
         for i = 1, rs.nrows do
             cnt = unpack(rs:fetch_row(), 1, rs.nfields)
@@ -757,9 +757,9 @@ function purge()
         local m_o_id
         
         rs = con:query(([[SELECT min(no_o_id) mo
-                                     FROM new_orders%d 
+                                     FROM new_order 
                                     WHERE no_w_id = %d AND no_d_id = %d]])
-                                   :format(table_num, w_id, d_id))
+                                   :format( w_id, d_id))
 
         if (rs.nrows > 0) then
           m_o_id=unpack(rs:fetch_row(), 1, rs.nfields)
@@ -768,8 +768,8 @@ function purge()
         if (m_o_id ~= nil ) then 
 -- select o_id,o.o_d_id from orders2 o, (select o_c_id,o_w_id,o_d_id,count(distinct o_id) from orders2 where o_w_id=1  and o_id > 2100 and o_id < 11153 group by o_c_id,o_d_id,o_w_id having count( distinct o_id) > 1 limit 1) t where t.o_w_id=o.o_w_id and t.o_d_id=o.o_d_id and t.o_c_id=o.o_c_id limit 1;
 	-- find an order to delete
-        rs = con:query(([[SELECT o_id FROM orders%d o, (SELECT o_c_id,o_w_id,o_d_id,count(distinct o_id) FROM orders%d WHERE o_w_id=%d AND o_d_id=%d AND o_id > 2100 AND o_id < %d GROUP BY o_c_id,o_d_id,o_w_id having count( distinct o_id) > 1 limit 1) t WHERE t.o_w_id=o.o_w_id and t.o_d_id=o.o_d_id and t.o_c_id=o.o_c_id limit 1 ]])
-                                   :format(table_num, table_num, w_id, d_id, m_o_id))
+        rs = con:query(([[SELECT o_id FROM oorders o, (SELECT o_c_id,o_w_id,o_d_id,count(distinct o_id) FROM oorders WHERE o_w_id=%d AND o_d_id=%d AND o_id > 2100 AND o_id < %d GROUP BY o_c_id,o_d_id,o_w_id having count( distinct o_id) > 1 limit 1) t WHERE t.o_w_id=o.o_w_id and t.o_d_id=o.o_d_id and t.o_c_id=o.o_c_id limit 1 ]])
+                                   :format(  w_id, d_id, m_o_id))
 	
         local del_o_id
         if (rs.nrows > 0) then
@@ -778,12 +778,12 @@ function purge()
 
         if (del_o_id ~= nil ) then 
         
-        con:query(([[DELETE FROM order_line%d where ol_w_id=%d AND ol_d_id=%d AND ol_o_id=%d]])
-                            :format(table_num, w_id, d_id, del_o_id))
-        con:query(([[DELETE FROM orders%d where o_w_id=%d AND o_d_id=%d and o_id=%d]])
-                            :format(table_num, w_id, d_id, del_o_id))
-        con:query(([[DELETE FROM history%d where h_w_id=%d AND h_d_id=%d LIMIT 10]])
-                            :format(table_num, w_id, d_id ))
+        con:query(([[DELETE FROM order_line where ol_w_id=%d AND ol_d_id=%d AND ol_o_id=%d]])
+                            :format( w_id, d_id, del_o_id))
+        con:query(([[DELETE FROM oorder where o_w_id=%d AND o_d_id=%d and o_id=%d]])
+                            :format( w_id, d_id, del_o_id))
+        con:query(([[DELETE FROM history where h_w_id=%d AND h_d_id=%d LIMIT 10]])
+                            :format( w_id, d_id ))
 
 	end
 
