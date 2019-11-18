@@ -158,9 +158,10 @@ def run_oltpbench():
 @task
 def run_sysbench_bg():
     cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} ' \
-          '--time={} --threads=50 --report-interval=300 --forced-shutdown=5 --scale=70 run 2>&1 | tee {} &'. \
+          '--time={} --threads={} --report-interval=300 --forced-shutdown=5 --scale=70 run 2>&1 | tee {} &'. \
         format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],
-               CONF['azure_password'], CONF['database_name'], CONF['sysbench_experiment_time_sec'], str(sysbenchTime), CONF['sysbench_log'])
+               CONF['azure_password'], CONF['database_name'], CONF['sysbench_experiment_time_sec'],
+               CONF['sysbench_experiment_threads'], CONF['sysbench_log'])
 
     LOG.info("Starting sysbench command.")
     subprocess.check_call(cmd, cwd=CONF['sysbench_home'], shell=True)
@@ -376,25 +377,42 @@ def loop():
     # run controller from another process
     p = Process(target=run_controller, args=())
     p.start()
-    LOG.info('Run the controller')
 
-    # run oltpbench as a background job
-    while not _ready_to_start_oltpbench():
-        pass
-    run_oltpbench_bg()
-    LOG.info('Run OLTP-Bench')
+    retrySysbench = True
+    retryCounter = 0  # try sysbench for this configuration 3 times before ending the loop
+    while retrySysbench and retryCounter < 3:
+        retrySysbench = False  # hopefully this is the last/only run of sysbench needed!
+        LOG.info('Run the controller')
 
-    # the controller starts the first collection
-    while not _ready_to_start_controller():
-        pass
-    signal_controller()
-    LOG.info('Start the first collection')
+        # run oltpbench as a background job
+        while not _ready_to_start_oltpbench():
+            pass
+        run_oltpbench_bg()
+        LOG.info('Run OLTP-Bench')
 
-    # stop the experiment
-    while not _ready_to_shut_down_controller():
-        pass
-    signal_controller()
-    LOG.info('Start the second collection, shut down the controller')
+        # the controller starts the first collection
+        while not _ready_to_start_controller():
+            pass
+        signal_controller()
+        LOG.info('Start the first collection')
+
+        # stop the experiment
+        while not _ready_to_shut_down_controller():
+            # check if sysbench failed. If it did let's go ahead and retry the controller processes.
+            try:
+                poll_sysbench_logs()
+            except Exception as e:
+                # FATAL error found in sysbench, need to retry.  Let's kill the sysbench process.
+                LOG.info(e)
+                LOG.info("Attempting to kill sysbench process:")
+                killedProcess = killSysbenchProcess()  # try to kill existing sysbench process
+                LOG.info("Sysbench was killed: " + str(killedProcess))
+                retryCounter += 1
+                retrySysbench = True
+                break  # exit while loop and retry
+            pass
+        signal_controller()
+        LOG.info('Start the second collection, shut down the controller')
 
     p.join()
 
@@ -424,13 +442,14 @@ def run_lhs():
 
     for i, sample in enumerate(samples):
         # reload database periodically
-        #if RELOAD_INTERVAL > 0:
-        #    if i % RELOAD_INTERVAL == 0:
-        #        LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
-        #        if i == 0 and dump is False:
-        #            restore_database()
-        #        elif i > 0:
-        #            restore_database()
+        if RELOAD_INTERVAL > 0:
+           if i % RELOAD_INTERVAL == 0 and i != 0: # don't restore if the first reload
+               LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
+               if i == 0 and dump is False:
+                   restore_database()
+               elif i > 0:
+                   restore_database()
+
         # free cache
         free_cache()
 
@@ -474,6 +493,7 @@ def run_lhs():
             # run oltpbench as a background job
             while not _ready_to_start_oltpbench():
                 pass
+            # run_oltpbench_bg
             run_sysbench_bg()
             LOG.info('Run Sysbench in background')
 
@@ -499,7 +519,6 @@ def run_lhs():
             # stop the experiment
             signal_controller()
             LOG.info('Start the second collection, shut down the controller')
-
 
         p.join()
 

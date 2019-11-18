@@ -136,7 +136,7 @@ function create_tables(drv, con, table_num)
    print(string.format("Creating tables: %d\n", table_num))
 
    query = string.format([[
-	CREATE TABLE IF NOT EXISTS warehouse%d (
+	CREATE TABLE IF NOT EXISTS warehouse (
 	w_id smallint not null,
 	w_name varchar(10), 
 	w_street_1 varchar(20), 
@@ -153,7 +153,7 @@ function create_tables(drv, con, table_num)
    con:query(query)
 
    query = string.format([[
-	create table IF NOT EXISTS district%d (
+	create table IF NOT EXISTS district (
 	d_id ]] .. tinyint_type .. [[ not null, 
 	d_w_id smallint not null, 
 	d_name varchar(10), 
@@ -174,7 +174,7 @@ function create_tables(drv, con, table_num)
 -- CUSTOMER TABLE
 
    query = string.format([[
-	create table IF NOT EXISTS customer%d (
+	create table IF NOT EXISTS customer (
 	c_id int not null, 
 	c_d_id ]] .. tinyint_type .. [[ not null,
 	c_w_id smallint not null, 
@@ -210,7 +210,7 @@ function create_tables(drv, con, table_num)
       hist_pk=",PRIMARY KEY(id)"
    end
    query = string.format([[
-	create table IF NOT EXISTS history%d (
+	create table IF NOT EXISTS history (
         %s
 	h_c_id int, 
 	h_c_d_id ]] .. tinyint_type .. [[, 
@@ -226,7 +226,7 @@ function create_tables(drv, con, table_num)
    con:query(query)
 
    query = string.format([[
-	create table IF NOT EXISTS orders%d (
+	create table IF NOT EXISTS oorder (
 	o_id int not null, 
 	o_d_id ]] .. tinyint_type .. [[ not null, 
 	o_w_id smallint not null,
@@ -244,7 +244,7 @@ function create_tables(drv, con, table_num)
 -- NEW_ORDER table
 
    query = string.format([[
-	create table IF NOT EXISTS new_orders%d (
+	create table IF NOT EXISTS new_order (
 	no_o_id int not null,
 	no_d_id ]] .. tinyint_type .. [[ not null,
 	no_w_id smallint not null,
@@ -255,7 +255,7 @@ function create_tables(drv, con, table_num)
    con:query(query)
 
    query = string.format([[
-	create table IF NOT EXISTS order_line%d ( 
+	create table IF NOT EXISTS order_line ( 
 	ol_o_id int not null, 
 	ol_d_id ]] .. tinyint_type .. [[ not null,
 	ol_w_id smallint not null,
@@ -275,7 +275,7 @@ function create_tables(drv, con, table_num)
 -- STOCK table
 
    query = string.format([[
-	create table IF NOT EXISTS stock%d (
+	create table IF NOT EXISTS stock (
 	s_i_id int not null, 
 	s_w_id smallint not null, 
 	s_quantity smallint, 
@@ -302,7 +302,7 @@ function create_tables(drv, con, table_num)
    local i = table_num
 
    query = string.format([[
-	create table IF NOT EXISTS item%d (
+	create table IF NOT EXISTS item (
 	i_id int not null, 
 	i_im_id int, 
 	i_name varchar(24), 
@@ -338,13 +338,13 @@ function create_tables(drv, con, table_num)
     con:query("CREATE INDEX fkey_history_2"..i.." ON history"..i.." (h_w_id,h_d_id )")
     if sysbench.opt.use_fk == 1 then
         print(string.format("Adding FK %d ... \n", i))
-        con:query("ALTER TABLE new_orders"..i.." ADD CONSTRAINT fkey_new_orders_1_"..table_num.." FOREIGN KEY(no_w_id,no_d_id,no_o_id) REFERENCES orders"..i.."(o_w_id,o_d_id,o_id)")
-        con:query("ALTER TABLE orders"..i.." ADD CONSTRAINT fkey_orders_1_"..table_num.." FOREIGN KEY(o_w_id,o_d_id,o_c_id) REFERENCES customer"..i.."(c_w_id,c_d_id,c_id)")
+        con:query("ALTER TABLE new_order"..i.." ADD CONSTRAINT fkey_new_orders_1_"..table_num.." FOREIGN KEY(no_w_id,no_d_id,no_o_id) REFERENCES oorder"..i.."(o_w_id,o_d_id,o_id)")
+        con:query("ALTER TABLE oorder"..i.." ADD CONSTRAINT fkey_orders_1_"..table_num.." FOREIGN KEY(o_w_id,o_d_id,o_c_id) REFERENCES customer"..i.."(c_w_id,c_d_id,c_id)")
         con:query("ALTER TABLE customer"..i.." ADD CONSTRAINT fkey_customer_1_"..table_num.." FOREIGN KEY(c_w_id,c_d_id) REFERENCES district"..i.."(d_w_id,d_id)")
         con:query("ALTER TABLE history"..i.." ADD CONSTRAINT fkey_history_1_"..table_num.." FOREIGN KEY(h_c_w_id,h_c_d_id,h_c_id) REFERENCES customer"..i.."(c_w_id,c_d_id,c_id)")
         con:query("ALTER TABLE history"..i.." ADD CONSTRAINT fkey_history_2_"..table_num.." FOREIGN KEY(h_w_id,h_d_id) REFERENCES district"..i.."(d_w_id,d_id)")
         con:query("ALTER TABLE district"..i.." ADD CONSTRAINT fkey_district_1_"..table_num.." FOREIGN KEY(d_w_id) REFERENCES warehouse"..i.."(w_id)")
-        con:query("ALTER TABLE order_line"..i.." ADD CONSTRAINT fkey_order_line_1_"..table_num.." FOREIGN KEY(ol_w_id,ol_d_id,ol_o_id) REFERENCES orders"..i.."(o_w_id,o_d_id,o_id)")
+        con:query("ALTER TABLE order_line"..i.." ADD CONSTRAINT fkey_order_line_1_"..table_num.." FOREIGN KEY(ol_w_id,ol_d_id,ol_o_id) REFERENCES oorder"..i.."(o_w_id,o_d_id,o_id)")
         con:query("ALTER TABLE order_line"..i.." ADD CONSTRAINT fkey_order_line_2_"..table_num.." FOREIGN KEY(ol_supply_w_id,ol_i_id) REFERENCES stock"..i.."(s_w_id,s_i_id)")
         con:query("ALTER TABLE stock"..i.." ADD CONSTRAINT fkey_stock_1_"..table_num.." FOREIGN KEY(s_w_id) REFERENCES warehouse"..i.."(w_id)")
         con:query("ALTER TABLE stock"..i.." ADD CONSTRAINT fkey_stock_2_"..table_num.." FOREIGN KEY(s_i_id) REFERENCES item"..i.."(i_id)")
@@ -542,7 +542,7 @@ function load_tables(drv, con, warehouse_num)
    end 
    con:bulk_insert_done()
 
-   con:query(string.format("INSERT INTO new_orders%d (no_o_id, no_d_id, no_w_id) SELECT o_id, o_d_id, o_w_id FROM orders%d WHERE o_id>2100 and o_w_id=%d", table_num, table_num, warehouse_num))
+   con:query(string.format("INSERT INTO new_order (no_o_id, no_d_id, no_w_id) SELECT o_id, o_d_id, o_w_id FROM orders%d WHERE o_id>2100 and o_w_id=%d", table_num, table_num, warehouse_num))
 
    con:bulk_insert_init("INSERT INTO order_line" .. table_num .. [[
 	  (ol_o_id, ol_d_id, ol_w_id, ol_number, ol_i_id, ol_supply_w_id, ol_delivery_d, 
@@ -592,9 +592,9 @@ function cleanup()
    for i = 1, sysbench.opt.tables do
       print(string.format("Dropping tables '%d'...", i))
       con:query("DROP TABLE IF EXISTS history" .. i )
-      con:query("DROP TABLE IF EXISTS new_orders" .. i )
+      con:query("DROP TABLE IF EXISTS new_order" .. i )
       con:query("DROP TABLE IF EXISTS order_line" .. i )
-      con:query("DROP TABLE IF EXISTS orders" .. i )
+      con:query("DROP TABLE IF EXISTS oorder" .. i )
       con:query("DROP TABLE IF EXISTS customer" .. i )
       con:query("DROP TABLE IF EXISTS district" .. i )
       con:query("DROP TABLE IF EXISTS stock" .. i )
