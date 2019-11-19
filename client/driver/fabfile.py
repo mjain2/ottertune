@@ -384,10 +384,10 @@ def loop():
         retrySysbench = False  # hopefully this is the last/only run of sysbench needed!
         LOG.info('Run the controller')
 
-        # run oltpbench as a background job
+        # run sysbench as a background job
         while not _ready_to_start_oltpbench():
             pass
-        run_oltpbench_bg()
+        run_sysbench_bg()
         LOG.info('Run OLTP-Bench')
 
         # the controller starts the first collection
