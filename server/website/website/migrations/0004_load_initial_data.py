@@ -19,7 +19,7 @@ def load_initial_data(apps, schema_editor):
         "postgres-93_metrics.json",
         "postgres-94_knobs.json",
         "postgres-94_metrics.json",
-        "mysql-5.7_knobs_v4.json",
+        "mysql-5.7_knobs_v2.json",
         "mysql-5.7_metrics.json",
         "oracle_knobs.json",
         "oracle_metrics.json"

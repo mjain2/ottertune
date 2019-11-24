@@ -14,7 +14,7 @@
             "minval": 1,
             "maxval": 64
         },
-        "default": 4,
+        "default": 1,
         "type": "integer"
     },
     {
@@ -23,14 +23,14 @@
             "minval": 1,
             "maxval": 64
         },
-        "default": 4,
+        "default": 1,
         "type": "integer"
     },
     {
         "name": "join_buffer_size",
         "tuning_range": {
             "minval": 128,
-            "maxval": 536870912
+            "maxval": 268435455
         },
         "default": 262144,
         "type": "integer"
@@ -57,7 +57,7 @@
         "name": "sort_buffer_size",
         "tuning_range": {
             "minval": 32768,
-            "maxval": 8388608
+            "maxval": 4194304
         },
         "default": 524288,
         "type": "integer"
@@ -66,9 +66,9 @@
         "name": "table_open_cache",
         "tuning_range": {
             "minval": 1,
-            "maxval": 40000
+            "maxval": 20000
         },
-        "default": 2500,
+        "default": 2400,
         "type": "integer"
     },
     {

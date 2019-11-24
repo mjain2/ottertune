@@ -441,14 +441,14 @@ def run_lhs():
     dump = dump_database()
 
     for i, sample in enumerate(samples):
-        # reload database periodically
-        if RELOAD_INTERVAL > 0:
-           if i % RELOAD_INTERVAL == 0 and i != 0: # don't restore if the first reload
-               LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
-               if i == 0 and dump is False:
-                   restore_database()
-               elif i > 0:
-                   restore_database()
+        # reload database periodically; for sysbench don't restart
+        # if RELOAD_INTERVAL > 0:
+        #    if i % RELOAD_INTERVAL == 0 and i != 0: # don't restore if the first reload
+        #        LOG.info("Reload interaval: {}".format(i % RELOAD_INTERVAL))
+        #        if i == 0 and dump is False:
+        #            restore_database()
+        #        elif i > 0:
+        #            restore_database()
 
         # free cache
         free_cache()
@@ -539,12 +539,14 @@ def run_loops(max_iter=1):
     dump = dump_database()
 
     for i in range(int(max_iter)):
-        if RELOAD_INTERVAL > 0:
-            if i % RELOAD_INTERVAL == 0:
-                if i == 0 and dump is False:
-                    restore_database()
-                elif i > 0:
-                    restore_database()
+
+        # # for sysbench scenario, comment out restoring database as it doesn't matter
+        # if RELOAD_INTERVAL > 0:
+        #     if i % RELOAD_INTERVAL == 0 and i != 0: #don't restore on the first loop, assume db is fresh
+        #         if i == 0 and dump is False:
+        #             restore_database()
+        #         elif i > 0:
+        #             restore_database()
 
         LOG.info('The %s-th Loop Starts / Total Loops %s', i + 1, max_iter)
         loop()

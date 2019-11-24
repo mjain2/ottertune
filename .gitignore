@@ -114,3 +114,5 @@ client/driver/next_config_old
 client/driver/configs/
 server/website/celerybeat.pid
 tpcc.dump
+client/controller/build/*
+client/controller/bin/*
