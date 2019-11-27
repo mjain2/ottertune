@@ -1,9 +1,9 @@
 {
   "database_type" : "mysql",
-  "database_url" : "jdbc:mysql://mjtpcc-sysbench-2v.mysql.database.azure.com:3306/tpcc?useSSL=true&amp;requireSSL=false&amp;verifyServerCertificate=true&amp;autoReconnect=true",
-  "username" : "mysqladmin@mjtpcc-sysbench-2v",
+  "database_url" : "jdbc:mysql://mjoltp-sysbench-4v.mysql.database.azure.com:3306/foo?useSSL=true&amp;requireSSL=false&amp;verifyServerCertificate=true&amp;autoReconnect=true",
+  "username" : "mysqladmin@mjoltp-sysbench-4v",
   "password" : "Experiment!23",
   "upload_code" : "DEPRECATED",
   "upload_url" : "DEPRECATED",
-  "workload_name" : "tpcc"
+  "workload_name" : "foo"
 }

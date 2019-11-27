@@ -158,7 +158,7 @@ def run_oltpbench():
 @task
 def run_sysbench_bg():
     cmd = 'sysbench {} --mysql-host={} --mysql-user={} --mysql-password={} --mysql-port=3306 --mysql-db={} ' \
-          '--time={} --threads={} --report-interval=300 --forced-shutdown=5 --scale=70 run 2>&1 | tee {} &'. \
+          '--time={} --threads={} --report-interval=300 --forced-shutdown=5 run 2>&1 | tee {} &'. \
         format(CONF['sysbench_lua_script_path'], CONF['azure_host_name'], CONF['azure_username'],
                CONF['azure_password'], CONF['database_name'], CONF['sysbench_experiment_time_sec'],
                CONF['sysbench_experiment_threads'], CONF['sysbench_log'])
@@ -409,6 +409,7 @@ def loop():
                 LOG.info("Sysbench was killed: " + str(killedProcess))
                 retryCounter += 1
                 retrySysbench = True
+                time.sleep(300)
                 break  # exit while loop and retry
             pass
         signal_controller()
@@ -514,6 +515,7 @@ def run_lhs():
                     LOG.info("Sysbench was killed: " + str(killedProcess))
                     retryCounter += 1
                     retrySysbench = True
+                    time.sleep(300)
                     break # exit while loop and retry
                 pass
             # stop the experiment
